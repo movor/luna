@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Blog Post
+        factory(\App\Models\BlogPost::class, 10)->create();
+
+        // Blog Tag
+        factory(\App\Models\BlogTag::class, 5)->create();
+
+        // Pivot: Blog Posts And Blog Tags
+        seedPivotData('blog_post_blog_tag', 'blog_posts', 'blog_tags');
     }
 }
