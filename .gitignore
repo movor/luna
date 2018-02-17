@@ -1,12 +1,38 @@
+#
+# OS Generated Files
+#
+
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Icon?
+.Trashes
+ehthumbs.db
+*.log
+
+#
+# IDE
+#
+
+/.idea
+
+#
+# Project Ignores
+#
+
+npm-debug.log
+yarn-error.log
+.env
+/.vagrant
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
 /vendor
-/.idea
-/.vagrant
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-.env
+
+#
+# Laravel IDE Helper
+#
+_ide_helper.php
+.phpstorm.meta.php
