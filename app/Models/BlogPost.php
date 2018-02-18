@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BlogPost extends Model
 {
+    use CrudTrait;
+
+    protected $fillable = ['title', 'summary', 'body'];
+
     /**
      * @return BelongsToMany
      */
