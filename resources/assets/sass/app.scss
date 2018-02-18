@@ -1,9 +1,11 @@
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
+// Project specific variables and fonts
 @import "variables";
+@import "fonts";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// Bootstrap functions and variables
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+// Project specific styles and overrides
+@import "style";
