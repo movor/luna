@@ -12,11 +12,11 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Backpack',
+    'project_name' => env('APP_NAME'),
 
     // Menu logos
-    'logo_lg'   => '<b>Back</b>pack',
-    'logo_mini' => '<b>B</b>p',
+    'logo_lg'   => '<b>Mov</b>or',
+    'logo_mini' => '<b>M</b>vr',
 
     // Developer or company name. Shown in footer.
     'developer_name' => 'Movor',

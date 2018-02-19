@@ -16,8 +16,9 @@
 
           {{-- App Specific Links --}}
 
-          <li><a href="{{ backpack_url('blog-post') }}"><i class="fa fa-address-book"></i> <span>Blog Posts</span></a></li>
+          <li><a href="{{ backpack_url('blog-post') }}"><i class="fa fa-book"></i> <span>Blog Posts</span></a></li>
           <li><a href="{{ backpack_url('blog-tag') }}"><i class="fa fa-tag"></i> <span>Blog Tags</span></a></li>
+          <li><a href="{{ backpack_url('user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
 
           {{-- /App Specific Links --}}
 

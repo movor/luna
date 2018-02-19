@@ -2,7 +2,7 @@
 
 use App\Models\BlogPost;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Backpack\CRUD\app\Http\Requests\CrudRequest;
+use Request;
 
 class BlogPostCrudController extends CrudController
 {
@@ -11,7 +11,6 @@ class BlogPostCrudController extends CrudController
     {
         $this->crud->setModel(BlogPost::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-post');
-        $this->crud->setEntityNameStrings('blogPost', 'blogPosts');
 
         // Columns
         $this->crud
@@ -25,7 +24,10 @@ class BlogPostCrudController extends CrudController
             ])
             ->addColumn([
                 'label' => 'User',
-                'name' => 'user_id',
+                'type' => 'related_link',
+                'relationRoute' => 'user',
+                'relation' => 'user',
+                'attribute' => 'name'
             ]);
 
         // Fields
@@ -39,17 +41,29 @@ class BlogPostCrudController extends CrudController
                 'name' => 'summary'
             ])
             ->addField([
+                'label' => 'Body',
+                'name' => 'body',
+                'type' => 'simplemde'
+            ])
+            ->addField([
                 'label' => 'User',
                 'name' => 'user_id'
+            ])
+            ->addField([
+                'name' => 'user_id',
+                'label' => 'User',
+                'type' => 'select',
+                'entity' => 'user',
+                'attribute' => 'name'
             ]);
     }
 
-    public function store(CrudRequest $request)
+    public function store(Request $request)
     {
         return parent::storeCrud();
     }
 
-    public function update(CrudRequest $request)
+    public function update(Request $request)
     {
         return parent::updateCrud();
     }

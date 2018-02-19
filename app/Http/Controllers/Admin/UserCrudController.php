@@ -1,28 +1,36 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Models\BlogTag;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Request;
 
-class BlogTagCrudController extends CrudController
+class UserCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(BlogTag::class);
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-tag');
+        $this->crud->setModel(User::class);
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/user');
 
         // Columns
         $this->crud
             ->addColumn([
                 'label' => 'Name',
                 'name' => 'name',
+            ])
+            ->addColumn([
+                'label' => 'Email',
+                'name' => 'email',
             ]);
 
         // Fields
         $this->crud
             ->addField([
                 'label' => 'Name',
-                'name' => 'name'
+                'name' => 'name',
+            ])
+            ->addField([
+                'label' => 'Email',
+                'name' => 'email',
             ]);
     }
 
