@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function posts()
+    {
+        return $this->hasMany(BlogPost::class);
+    }
 }

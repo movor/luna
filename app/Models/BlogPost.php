@@ -19,4 +19,9 @@ class BlogPost extends Model
     {
         return $this->belongsToMany(BlogTag::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

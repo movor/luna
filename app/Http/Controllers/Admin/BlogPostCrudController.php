@@ -22,6 +22,10 @@ class BlogPostCrudController extends CrudController
             ->addColumn([
                 'label' => 'Summary',
                 'name' => 'summary',
+            ])
+            ->addColumn([
+                'label' => 'User',
+                'name' => 'user_id',
             ]);
 
         // Fields
@@ -33,6 +37,10 @@ class BlogPostCrudController extends CrudController
             ->addField([
                 'label' => 'Summary',
                 'name' => 'summary'
+            ])
+            ->addField([
+                'label' => 'User',
+                'name' => 'user_id'
             ]);
     }
 
