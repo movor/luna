@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BlogPostRequest as StoreRequest;
-use App\Http\Requests\BlogPostRequest as UpdateRequest;
 use App\Models\BlogPost;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Illuminate\Http\Request;
 
 class BlogPostCrudController extends CrudController
 {
@@ -58,15 +57,21 @@ class BlogPostCrudController extends CrudController
             ]);
     }
 
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
         // Artificially add slug to the request object
-        $request->request->add(['slug' => str_slug($request->title)]);
+        $request->merge(['slug' => str_slug($request->title)]);
+
+        $this->validate($request, [
+            'title' => 'required|min:5|max:128',
+            'summary' => 'required|min:15|max:256',
+            'slug' => 'unique:blog_posts,slug'
+        ]);
 
         return parent::storeCrud($request);
     }
 
-    public function update(UpdateRequest $request)
+    public function update(Request $request)
     {
         return parent::updateCrud();
     }
