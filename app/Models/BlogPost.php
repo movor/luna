@@ -11,7 +11,11 @@ class BlogPost extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug'];
+    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'published_at'];
+
+    protected $casts = [
+        'published_at' => 'datetime'
+    ];
 
     /**
      * @return BelongsToMany
@@ -31,5 +35,10 @@ class BlogPost extends Model
         $Parsedown = new Parsedown();
 
         return $Parsedown->text($this->body);
+    }
+
+    public function isPublished()
+    {
+        return (bool) $this->published_at;
     }
 }

@@ -40,20 +40,25 @@ class BlogPostCrudController extends CrudController
                 'name' => 'summary'
             ])
             ->addField([
-                'label' => 'Body',
-                'name' => 'body',
-                'type' => 'simplemde'
-            ])
-            ->addField([
-                'label' => 'User',
-                'name' => 'user_id'
-            ])
-            ->addField([
                 'name' => 'user_id',
                 'label' => 'User',
                 'type' => 'select',
                 'entity' => 'user',
                 'attribute' => 'name'
+            ])
+            ->addField([
+                'name' => 'tags',
+                'label' => 'Tags',
+                'type' => 'select2_multiple',
+                'entity' => 'tags',
+                'attribute' => 'name',
+                'model' => 'App\Models\BlogTag',
+                'pivot' => true,
+            ])
+            ->addField([
+                'label' => 'Body',
+                'name' => 'body',
+                'type' => 'simplemde'
             ]);
     }
 

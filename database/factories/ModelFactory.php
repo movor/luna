@@ -35,7 +35,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
     $title = $faker->sentence;
 
-    $faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($faker));
     return [
         'user_id' => DB::table('users')->inRandomOrder()->pluck('id')->first(),
         'title' => $title,
@@ -43,6 +42,7 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
         // TODO.SOLVE fix body fetching
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'slug' => str_slug($title),
+        'published_at' => \Carbon\Carbon::now(),
     ];
 });
 

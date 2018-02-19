@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User
+        // Generate one Movor Dev user and 3 random ones
+        factory(\App\Models\User::class)->create(['name' => 'Movor Dev', 'email' => 'movor@movor.io']);
         factory(\App\Models\User::class, 3)->create();
 
         // Blog Post
