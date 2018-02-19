@@ -1,8 +1,9 @@
-<?php namespace App\Http\Requests;
+<?php
 
+namespace App\Http\Requests;
 
-class BlogPostRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest {
-
+class BlogPostRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -10,7 +11,7 @@ class BlogPostRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest {
      */
     public function authorize()
     {
-        // only allow updates if the user is logged in
+        // Only allow updates if the user is logged in
         return \Auth::check();
     }
 
@@ -23,7 +24,7 @@ class BlogPostRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest {
     {
         return [
             'title' => 'required|min:5|max:128',
-            'summary' => 'required|min:15|max:256',
+            'summary' => 'required|min:15|max:256'
         ];
     }
 

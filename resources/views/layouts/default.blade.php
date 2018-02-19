@@ -20,7 +20,7 @@
         <meta name="description" content="{{ env('APP_NAME') }}">
         <meta name="keywords" content="{{ env('APP_NAME') }}">
 
-        <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
 
         {{-- Styles --}}
 
