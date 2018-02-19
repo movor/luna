@@ -2,7 +2,9 @@
 
 use App\Models\BlogPost;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Request;
+
+use App\Http\Requests\BlogPostRequest as StoreRequest;
+use App\Http\Requests\BlogPostRequest as UpdateRequest;
 
 class BlogPostCrudController extends CrudController
 {
@@ -58,13 +60,24 @@ class BlogPostCrudController extends CrudController
             ]);
     }
 
-    public function store(Request $request)
+
+    public function store(StoreRequest $request)
     {
-        return parent::storeCrud();
+        // artificially add slug to the request object
+        $request->request->add(['slug' => str_slug($request->title)]);
+
+        return parent::storeCrud($request);
     }
 
-    public function update(Request $request)
+    public function update(UpdateRequest $request)
     {
         return parent::updateCrud();
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
 }
+

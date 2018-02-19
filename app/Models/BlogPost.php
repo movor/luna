@@ -10,7 +10,7 @@ class BlogPost extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body'];
+    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug'];
 
     /**
      * @return BelongsToMany
