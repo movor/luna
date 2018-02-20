@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Models\BlogPost;
+use App\Models\BlogTag;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
@@ -11,6 +13,44 @@ class BlogPostCrudController extends CrudController
         $this->crud->setModel(BlogPost::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-post');
 
+        // Filter: user
+        $this->crud->addFilter([
+            'label' => 'Author',
+            'name' => 'user',
+            'type' => 'dropdown',
+        ], User::all()->pluck('name', 'id')->toArray(), function ($value) {
+            $this->crud->query->where('user_id', $value);
+        });
+
+        // Filter: published
+        $this->crud->addFilter([
+            'label' => 'Published',
+            'name' => 'is_published',
+            'type' => 'dropdown',
+        ], [0 => 'unpublished', 1 => 'published'], function ($value) {
+            if ($value) {
+                $this->crud->query->whereNotNull('published_at');
+            } else {
+                $this->crud->query->whereNull('published_at');
+            }
+        });
+
+        // Filter: tag
+        $this->crud->addFilter([
+            'label' => 'Tag',
+            'name' => 'blog_tag',
+            'type' => 'select2_multiple',
+        ], BlogTag::all()->pluck('name', 'id')->toArray(), function ($values) {
+            $values = json_decode($values);
+            if ($values) {
+                foreach ($values as $key => $value) {
+                    $this->crud->query = $this->crud->query->whereHas('tags', function ($query) use ($value) {
+                        $query->where('blog_tag_id', $value);
+                    });
+                }
+            }
+        });
+
         // Columns
         $this->crud
             ->addColumn([
@@ -18,8 +58,12 @@ class BlogPostCrudController extends CrudController
                 'name' => 'title',
             ])
             ->addColumn([
-                'label' => 'Summary',
-                'name' => 'summary',
+                'label' => 'Tags',
+                'type' => 'select_multiple',
+                'name' => 'tags',
+                'entity' => 'tags',
+                'attribute' => 'name',
+                'model' => BlogTag::class,
             ])
             ->addColumn([
                 'label' => 'User',
@@ -27,6 +71,10 @@ class BlogPostCrudController extends CrudController
                 'relationRoute' => 'user',
                 'relation' => 'user',
                 'attribute' => 'name'
+            ])
+            ->addColumn([
+                'label' => 'Published At',
+                'name' => 'published_at'
             ]);
 
         // Fields
@@ -52,7 +100,7 @@ class BlogPostCrudController extends CrudController
                 'type' => 'select2_multiple',
                 'entity' => 'tags',
                 'attribute' => 'name',
-                'model' => 'App\Models\BlogTag',
+                'model' => BlogTag::class,
                 'pivot' => true,
             ])
             ->addField([
