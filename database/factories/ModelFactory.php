@@ -39,7 +39,6 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
         'user_id' => DB::table('users')->inRandomOrder()->pluck('id')->first(),
         'title' => $title,
         'summary' => $faker->sentence,
-        // TODO.SOLVE fix body fetching
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'slug' => str_slug($title),
         'published_at' => \Carbon\Carbon::now(),
