@@ -1,8 +1,8 @@
-import Example from "./components/ExampleComponent";
+import Disqus from "./components/Disqus";
 
 const app = new Vue({
     components: {
-        'appExample': Example
+        'appDisqus': Disqus
     },
-    el: '.v-app'
+    el: 'main'
 });

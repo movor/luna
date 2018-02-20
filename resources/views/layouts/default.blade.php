@@ -42,7 +42,7 @@
     </head>
     <body>
 
-        <div class="v-app main">
+        <main>
 
             @include('partials.header')
 
@@ -52,7 +52,7 @@
 
             @include('partials.footer')
 
-        </div>
+        </main>
 
         {{-- Bottom Scripts --}}
 
