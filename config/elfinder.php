@@ -10,7 +10,7 @@ return [
     | The dir where to store the images (relative from public)
     |
     */
-    'dir' => ['uploads'],
+    'dir' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -39,8 +39,8 @@ return [
     */
 
     'route' => [
-        'prefix'     => config('backpack.base.route_prefix', 'admin').'/elfinder',
-        'middleware' => ['web', 'admin'], //Set to null to disable middleware filter
+        'prefix' => config('backpack.base.route_prefix', 'admin') . '/elfinder',
+        'middleware' => ['web', 'admin'], //Set to null to disable middleware fcilter
     ],
 
     /*
@@ -64,7 +64,13 @@ return [
     |
     */
 
-    'roots' => null,
+    'roots' => [
+        [
+            'driver' => 'LocalFileSystem',
+            'path' => storage_path('app/uploads'),
+            'URL' => env('APP_URL') . '/uploads',
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------

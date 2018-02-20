@@ -1,8 +1,10 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Models\BlogTag;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-use Request;
+use Illuminate\Http\Request;
 
 class BlogTagCrudController extends CrudController
 {
@@ -28,7 +30,14 @@ class BlogTagCrudController extends CrudController
 
     public function store(Request $request)
     {
-        return parent::storeCrud();
+
+        $request->merge(['name' => strtolower($request->name)]);
+
+        $this->validate($request, [
+            'name' => 'required|min:2|max:32|unique:blog_tags,name'
+        ]);
+
+        return parent::storeCrud($request);
     }
 
     public function update(Request $request)
