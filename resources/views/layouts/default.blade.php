@@ -20,6 +20,8 @@
         <meta name="description" content="{{ env('APP_NAME') }}">
         <meta name="keywords" content="{{ env('APP_NAME') }}">
 
+        @yield('canonical')
+
         <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
 
         {{-- Styles --}}

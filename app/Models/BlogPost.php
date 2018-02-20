@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\CanonicalUrlTrait;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -9,7 +10,7 @@ use Parsedown;
 
 class BlogPost extends Model
 {
-    use CrudTrait;
+    use CrudTrait, CanonicalUrlTrait;
 
     protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'published_at'];
 
@@ -44,6 +45,6 @@ class BlogPost extends Model
 
     public function isPublished()
     {
-        return (bool) $this->published_at;
+        return (bool)$this->published_at;
     }
 }
