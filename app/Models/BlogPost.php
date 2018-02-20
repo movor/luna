@@ -37,6 +37,11 @@ class BlogPost extends Model
         return $Parsedown->text($this->body);
     }
 
+    public function getIsPublishedAttribute()
+    {
+        return $this->isPublished();
+    }
+
     public function isPublished()
     {
         return (bool) $this->published_at;
