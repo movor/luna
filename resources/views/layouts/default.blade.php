@@ -15,14 +15,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ env('APP_NAME') }}</title>
         {{-- TODO better logic for descr and keywords, maybe through webpack --}}
-        <meta name="description" content="{{ env('APP_NAME') }}">
-        <meta name="keywords" content="{{ env('APP_NAME') }}">
 
-        @yield('canonical')
+        {!! SEOMeta::generate() !!}
+        {!! OpenGraph::generate() !!}
+        {!! Twitter::generate() !!}
 
-        <link rel="shortcut icon" href="{{ asset('/img/movor_icon.png') }}">
+        <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
 
         {{-- Styles --}}
 
@@ -40,9 +39,9 @@
         {{-- /Scripts --}}
 
     </head>
-    <body class="mt-5 pt-5">
+    <body>
 
-        <div id="wrapper">
+        <main>
 
             @include('partials.header')
 
@@ -55,7 +54,7 @@
 
             @include('partials.footer')
 
-        </div>
+        </main>
 
         {{-- Bottom Scripts --}}
 
