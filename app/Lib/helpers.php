@@ -3,12 +3,12 @@
 /**
  * Seed pivot table
  *
- * @param string  $pivotTable           Pivot table name
- * @param string  $firstTable           First table name
- * @param string  $secondTable          Second table name
+ * @param string $pivotTable Pivot table name
+ * @param string $firstTable First table name
+ * @param string $secondTable Second table name
  * @param Closure $customColumnCallback Should return array of additional columns and their values to be inserted in
  *                                      pivot table
- * @param bool    $timestamps           Insert timestamps
+ * @param bool $timestamps Insert timestamps
  *
  * @return bool
  */
@@ -59,7 +59,23 @@ function seedPivotData($pivotTable, $firstTable, $secondTable, Closure $customCo
  */
 function ll($var, $level = 'debug')
 {
-    if (is_object($var)) $var = (array) $var;
+    if (is_object($var)) $var = (array)$var;
 
     \Log::$level($var);
+}
+
+/**
+ * Chance to return true
+ *
+ * @param int $percent In case percent not between 0 - 100, return false
+ *
+ * @return bool
+ */
+function chance($percent = 50)
+{
+    if (is_numeric($percent) && $percent >= 0 && $percent <= 100) {
+        return !((bool)rand(0, (int)(100 / $percent - 1)));
+    }
+
+    return false;
 }

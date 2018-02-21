@@ -95,6 +95,13 @@ class BlogPostCrudController extends CrudController
                 'attribute' => 'name'
             ])
             ->addField([
+                'name' => 'blog_tag_id',
+                'label' => 'PrimaryTag',
+                'type' => 'select',
+                'entity' => 'primaryTag',
+                'attribute' => 'name'
+            ])
+            ->addField([
                 'name' => 'tags',
                 'label' => 'Tags',
                 'type' => 'select2_multiple',
@@ -107,7 +114,13 @@ class BlogPostCrudController extends CrudController
                 'label' => 'Body',
                 'name' => 'body',
                 'type' => 'simplemde'
+            ])
+            ->addField([
+                'name' => 'published_at',
+                'label' => 'Publish',
+                'type' => 'date'
             ]);
+
     }
 
     public function store(Request $request)
@@ -118,7 +131,7 @@ class BlogPostCrudController extends CrudController
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:15|max:256',
-            'slug' => 'unique:blog_posts,slug'
+            'slug' => 'unique:blog_posts,slug',
         ]);
 
         return parent::storeCrud($request);

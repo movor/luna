@@ -37,6 +37,7 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 
     return [
         'user_id' => DB::table('users')->inRandomOrder()->pluck('id')->first(),
+        'blog_tag_id' => DB::table('blog_tags')->inRandomOrder()->pluck('id')->first(),
         'title' => $title,
         'summary' => $faker->sentence,
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
