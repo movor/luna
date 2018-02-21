@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "artesaos/seotools": "^0.11.1",
         "backpack/base": "^0.8.9",
         "backpack/crud": "^3.3",
         "erusev/parsedown": "^1.6",

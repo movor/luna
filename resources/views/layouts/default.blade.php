@@ -1,67 +1,66 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-    <head>
+<head>
 
-        @if (App::environment('production'))
+    @if (App::environment('production'))
 
-            // TODO
-            // Google analytics
+        // TODO
+        // Google analytics
 
-        @endif
+    @endif
 
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ env('APP_NAME') }}</title>
-        {{-- TODO better logic for descr and keywords, maybe through webpack --}}
-        <meta name="description" content="{{ env('APP_NAME') }}">
-        <meta name="keywords" content="{{ env('APP_NAME') }}">
+    {{-- TODO better logic for descr and keywords, maybe through webpack --}}
 
-        @yield('canonical')
+    {!! SEOMeta::generate() !!}
+    {!! OpenGraph::generate() !!}
+    {!! Twitter::generate() !!}
 
-        <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
 
-        {{-- Styles --}}
+    {{-- Styles --}}
 
-        {{ Html::style(App::environment('production') ? mix('/css/vendor.css') : '/css/vendor.css') }}
-        {{ Html::style(App::environment('production') ? mix('/css/app.css') : '/css/app.css') }}
+    {{ Html::style(App::environment('production') ? mix('/css/vendor.css') : '/css/vendor.css') }}
+    {{ Html::style(App::environment('production') ? mix('/css/app.css') : '/css/app.css') }}
 
-        @yield('css-head')
+    @yield('css-head')
 
-        {{-- /Styles --}}
+    {{-- /Styles --}}
 
-        {{-- Scripts --}}
+    {{-- Scripts --}}
 
-        @yield('scripts-head')
+    @yield('scripts-head')
 
-        {{-- /Scripts --}}
+    {{-- /Scripts --}}
 
-    </head>
-    <body>
+</head>
+<body>
 
-        <main>
+<main>
 
-            @include('partials.header')
+    @include('partials.header')
 
-            @include('partials.flash')
+    @include('partials.flash')
 
-            @yield('content')
+    @yield('content')
 
-            @include('partials.footer')
+    @include('partials.footer')
 
-        </main>
+</main>
 
-        {{-- Bottom Scripts --}}
+{{-- Bottom Scripts --}}
 
-        {{ Html::script(App::environment('production') ? mix('/js/vendor.js') : '/js/vendor.js') }}
-        {{ Html::script(App::environment('production') ? mix('/js/app.js') : '/js/app.js') }}
+{{ Html::script(App::environment('production') ? mix('/js/vendor.js') : '/js/vendor.js') }}
+{{ Html::script(App::environment('production') ? mix('/js/app.js') : '/js/app.js') }}
 
-        @yield('scripts-bottom')
+@yield('scripts-bottom')
 
-        {{-- /Bottom Scripts --}}
+{{-- /Bottom Scripts --}}
 
-    </body>
+</body>
 </html>
