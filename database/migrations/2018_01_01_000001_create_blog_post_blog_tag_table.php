@@ -16,6 +16,7 @@ class CreateBlogPostBlogTagTable extends Migration
         Schema::create('blog_post_blog_tag', function (Blueprint $table) {
             $table->unsignedInteger('blog_post_id');
             $table->unsignedInteger('blog_tag_id');
+            $table->boolean('primary')->default(false);
 
             $table->primary(['blog_post_id', 'blog_tag_id']);
 

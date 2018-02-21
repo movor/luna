@@ -58,6 +58,13 @@ class BlogPostCrudController extends CrudController
                 'name' => 'title',
             ])
             ->addColumn([
+                'name' => 'primaryTag',
+                'label' => 'Primary Tag',
+                'type' => 'model_function_attribute',
+                'function_name' => 'getPrimaryTag',
+                'attribute' => 'name'
+            ])
+            ->addColumn([
                 'label' => 'Tags',
                 'type' => 'select_multiple',
                 'name' => 'tags',
@@ -84,21 +91,10 @@ class BlogPostCrudController extends CrudController
                 'name' => 'title'
             ])
             ->addField([
-                'label' => 'Summary',
-                'name' => 'summary'
-            ])
-            ->addField([
                 'name' => 'user_id',
                 'label' => 'User',
                 'type' => 'select',
                 'entity' => 'user',
-                'attribute' => 'name'
-            ])
-            ->addField([
-                'name' => 'blog_tag_id',
-                'label' => 'PrimaryTag',
-                'type' => 'select',
-                'entity' => 'primaryTag',
                 'attribute' => 'name'
             ])
             ->addField([
@@ -109,24 +105,47 @@ class BlogPostCrudController extends CrudController
                 'attribute' => 'name',
                 'model' => BlogTag::class,
                 'pivot' => true,
+                'wrapperAttributes' => ['class' => 'form-group col-md-8']
+            ])
+            ->addField([
+                'name' => 'published_at',
+                'label' => 'Published At',
+                'type' => 'date'
+            ])
+            ->addField([
+                'label' => 'Summary',
+                'name' => 'summary',
+                'type' => 'textarea'
             ])
             ->addField([
                 'label' => 'Body',
                 'name' => 'body',
                 'type' => 'simplemde'
-            ])
-            ->addField([
-                'name' => 'published_at',
-                'label' => 'Publish',
-                'type' => 'date'
             ]);
 
+        // TODO.SOLVE
+        if (is_numeric(\Request::segment(3))) {
+            $postId = \Request::segment(3);
+            $post = BlogPost::find($postId);
+
+            $this->crud->addField([
+                'name' => 'primary_tag', // the name of the db column
+                'label' => 'Primary Tag', // the input label
+                'type' => 'select_from_array_with_default',
+                'options' => BlogTag::all()->pluck('name', 'id')->toArray(),
+                'allow_null' => false,
+                'selected' => $post->getPrimaryTag()->id,
+                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
+            ])->beforeField('tags');
+        }
     }
 
     public function store(Request $request)
     {
         // Artificially add slug to the request object
         $request->merge(['slug' => str_slug($request->title)]);
+
+        $this->handlePrimaryTag($request);
 
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
@@ -139,7 +158,33 @@ class BlogPostCrudController extends CrudController
 
     public function update(Request $request)
     {
+        $this->handlePrimaryTag($request);
+
         return parent::updateCrud();
+    }
+
+    /**
+     * Handle primary tag savingg.
+     * Many to many relationship with additional pivot data.
+     *
+     * @param Request $request
+     */
+    private function handlePrimaryTag(Request $request)
+    {
+        $requestTags = $request->tags ?: [];
+        $primaryTag = $request->primary_tag;
+
+        if (!in_array($primaryTag, $requestTags)) {
+            $requestTags[] = $primaryTag;
+        }
+
+        // Transform many to many to accept additional field - "primary"
+        $tags = [];
+        foreach ($requestTags as $tag) {
+            $tags[$tag] = ['primary' => $tag == $primaryTag];
+        }
+
+        $request->request->set('tags', $tags);
     }
 }
 

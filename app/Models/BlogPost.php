@@ -12,7 +12,7 @@ class BlogPost extends Model
 {
     use CrudTrait, CanonicalUrlTrait;
 
-    protected $fillable = ['user_id', 'blog_tag_id', 'title', 'summary', 'body', 'slug', 'published_at'];
+    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'published_at'];
 
     protected $casts = [
         'published_at' => 'datetime'
@@ -23,7 +23,7 @@ class BlogPost extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(BlogTag::class);
+        return $this->belongsToMany(BlogTag::class)->withTimestamps();
     }
 
     public function user()
@@ -31,16 +31,9 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function primaryTag()
-    {
-        return $this->belongsTo(BlogTag::class);
-    }
-
     public function getBodyHtmlAttribute()
     {
-        $Parsedown = new Parsedown();
-
-        return $Parsedown->text($this->body);
+        return (new Parsedown)->text($this->body);
     }
 
     public function getIsPublishedAttribute()
@@ -50,6 +43,11 @@ class BlogPost extends Model
 
     public function isPublished()
     {
-        return (bool)$this->published_at;
+        return (bool) $this->published_at;
+    }
+
+    public function getPrimaryTag()
+    {
+        return $this->tags()->where('primary', true)->first();
     }
 }

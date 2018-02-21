@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         factory(\App\Models\BlogPost::class, 10)->create();
 
         // Pivot: Blog Posts And Blog Tags
-        seedPivotData('blog_post_blog_tag', 'blog_tags', 'blog_posts');
+        seedPivotData('blog_post_blog_tag', 'blog_posts', 'blog_tags');
     }
 }
