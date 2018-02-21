@@ -26,10 +26,10 @@ class BlogPostController extends Controller
         TwitterCard::setTitle('Blog @_movor');
         TwitterCard::setSite('@_movor');
 
-        return view('blog_post.view', ['post' => $posts]);
+        return view('blog_post.index', ['posts' => $posts]);
     }
 
-    public function show($slug)
+    public function view($slug)
     {
         $post = BlogPost::where('slug', $slug)
             ->whereNotNull('published_at')
