@@ -18,7 +18,7 @@
                                     <p class="card-text">
                                         {!! $post->summary !!}
                                     </p>
-                                    <a href="blog/{{ $post->slug }}" class="btn btn-primary">Read More</a>
+                                    <a href="/blog/{{ $post->slug }}" class="btn btn-primary">Read More</a>
                                 </div>
                                 <div class="card-footer text-muted">
                                     Posted on {{ $post->published_at->format('d M Y') }}
