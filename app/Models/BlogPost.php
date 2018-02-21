@@ -12,7 +12,7 @@ class BlogPost extends Model
 {
     use CrudTrait, CanonicalUrlTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'published_at'];
+    protected $fillable = ['user_id', 'blog_tag_id', 'title', 'summary', 'body', 'slug', 'published_at'];
 
     protected $casts = [
         'published_at' => 'datetime'
@@ -29,6 +29,11 @@ class BlogPost extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function primaryTag()
+    {
+        return $this->belongsTo(BlogTag::class);
     }
 
     public function getBodyHtmlAttribute()
