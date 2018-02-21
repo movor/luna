@@ -5,19 +5,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
+            <ul class="navbar-nav ml-auto font-weight-bold">
+                <li class="nav-item {{ Request::segment(1) == '' ? 'active' : '' }}">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::segment(1) == 'about' ? 'active' : '' }}">
                     <a class="nav-link" href="/about">About</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::segment(1) == 'contact' ? 'active' : '' }}">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ Request::segment(1) == 'blog' ? 'active' : '' }}">
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
             </ul>
