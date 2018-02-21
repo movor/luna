@@ -22,7 +22,7 @@
 
         @yield('canonical')
 
-        <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('/img/movor_icon.png') }}">
 
         {{-- Styles --}}
 
@@ -40,19 +40,22 @@
         {{-- /Scripts --}}
 
     </head>
-    <body>
+    <body class="mt-5 pt-5">
 
-        <main>
+        <div id="wrapper">
 
             @include('partials.header')
 
-            @include('partials.flash')
+            {{--
+            TODO
+            @includeWhen($boolean, 'partials.flash', ['some' => 'data'])
+            --}}
 
-            @yield('content')
+            <main class="mb-5">@yield('content')</main>
 
             @include('partials.footer')
 
-        </main>
+        </div>
 
         {{-- Bottom Scripts --}}
 

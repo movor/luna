@@ -2,11 +2,7 @@
 // Colors
 //
 
-$gray-400: #CED4DA;
-$gray-700: #495057;
-$secondary: $gray-400;
-$red: #CC4754;
-$blue: #01579B;
+$primary: #1e9f63;
 
 //
 // Typography
@@ -14,15 +10,13 @@ $blue: #01579B;
 
 $font-size-base: 1rem !default;
 $font-family-sans-serif: 'Open Sans', sans-serif;
-$font-family-monospace: 'Raleway', sans-serif;
-$headings-color: $gray-700;
+$font-family-monospace: 'Lato', sans-serif;
 $headings-font-family: $font-family-monospace;
-$headings-font-weight: 900;
-$h2-font-size: $font-size-base * 1.5 !default;
+$headings-font-weight: bold;
 
 //
 // Inputs
 //
 
-$input-focus-border-color: rgba($blue, .65);
+$input-focus-border-color: rgba($primary, .65);
 $input-focus-box-shadow: none;

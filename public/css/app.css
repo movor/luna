@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Raleway:800);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Lato:400,400i,700,900);@charset "UTF-8";
 
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3051,5 +3051,13 @@
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+
+nav .navbar-brand img {
+  height: 32px;
+}
+
+footer img {
+  height: 50px;
 }
 

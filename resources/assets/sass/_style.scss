@@ -6,6 +6,12 @@
 // Header
 //
 
+nav {
+  .navbar-brand img {
+    height: 32px;
+  }
+}
+
 //
 // Content
 //
@@ -13,3 +19,9 @@
 //
 // Footer
 //
+
+footer {
+  img {
+    height: 50px;
+  }
+}

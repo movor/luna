@@ -4,5 +4,5 @@ const app = new Vue({
     components: {
         'appDisqus': Disqus
     },
-    el: 'main'
+    el: '#wrapper'
 });

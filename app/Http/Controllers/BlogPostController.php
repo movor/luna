@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use App\Models\User;
 
 class BlogPostController extends Controller
 {
@@ -12,7 +11,7 @@ class BlogPostController extends Controller
         // TODO: fail please
         $blogPosts = BlogPost::whereNotNull('published_at')->get();
 
-        return view('posts', ['posts' => $blogPosts]);
+        return view('blog_post.index', ['posts' => $blogPosts]);
     }
 
     public function show($slug)
@@ -21,18 +20,16 @@ class BlogPostController extends Controller
             ->whereNotNull('published_at')
             ->firstOrFail();
 
-        return view('post', ['post' => $blogPost]);
-
+        return view('blog_post.view', ['post' => $blogPost]);
     }
 
     public function showCanonical($id)
     {
-
         $blogPost = BlogPost::where('id', $id)
             ->whereNotNull('published_at')
             ->firstOrFail();
 
         $blogPost->getCanonicalUrl();
-        return view('post', ['post' => $blogPost]);
+        return view('blog_post.view', ['post' => $blogPost]);
     }
 }

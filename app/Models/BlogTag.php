@@ -19,4 +19,11 @@ class BlogTag extends Model
     {
         return $this->belongsToMany(BlogPost::class);
     }
+
+    // TODO.AFTER:sjzcpLBf
+    // Remove this method because slug will be existing db field
+    public function getSlugAttribute()
+    {
+        return str_slug($this->name);
+    }
 }
