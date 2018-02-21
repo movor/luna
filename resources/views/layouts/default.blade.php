@@ -41,7 +41,7 @@
     </head>
     <body class="mt-5 pt-5">
 
-        <main>
+        <div id="wrapper">
 
             @include('partials.header')
 
@@ -54,7 +54,7 @@
 
             @include('partials.footer')
 
-        </main>
+        </div>
 
         {{-- Bottom Scripts --}}
 
