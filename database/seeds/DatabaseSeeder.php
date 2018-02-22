@@ -16,12 +16,22 @@ class DatabaseSeeder extends Seeder
         factory(\App\Models\User::class, 3)->create();
 
         // Blog Tag
-        factory(\App\Models\BlogTag::class, 5)->create();
+        factory(\App\Models\BlogTag::class, 10)->create();
 
         // Blog Post
-        factory(\App\Models\BlogPost::class, 10)->create();
+        factory(\App\Models\BlogPost::class, 20)->create();
 
-        // Pivot: Blog Posts And Blog Tags
-        seedPivotData('blog_post_blog_tag', 'blog_posts', 'blog_tags');
+        // Pivot: Blog posts and blog tags (each post should have exactly one primary tag)
+        seedPivotData('blog_post_blog_tag', 'blog_posts', 'blog_tags', function ($postId) {
+            static $tmpPostId;
+
+            if ($tmpPostId != $postId) {
+                $tmpPostId = $postId;
+
+                return ['primary' => true];
+            }
+
+            return ['primary' => false];
+        });
     }
 }
