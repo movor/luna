@@ -46,7 +46,7 @@ class BlogPost extends Model
         return (bool) $this->published_at;
     }
 
-    public function getPrimaryTag()
+    public function getPrimaryTag(): BlogTag
     {
         return $this->tags()->where('primary', true)->first();
     }

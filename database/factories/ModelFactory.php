@@ -33,15 +33,21 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 //
 
 $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
-    $title = $faker->sentence;
+    $title = rtrim($faker->unique()->sentence, '.');
 
     return [
-        'user_id' => DB::table('users')->inRandomOrder()->pluck('id')->first(),
+        // Give Movor user a better change
+        'user_id' => chance(50, function () {
+            // Movor user id
+            return 1;
+        }, DB::table('users')->inRandomOrder()->pluck('id')->first()),
         'title' => $title,
-        'summary' => $faker->sentence,
+        'summary' => rtrim($faker->realText(255), '.'),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'slug' => str_slug($title),
-        'published_at' => \Carbon\Carbon::now(),
+        'published_at' => chance(70, function () {
+            return \Carbon\Carbon::now();
+        }),
     ];
 });
 
@@ -51,6 +57,6 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 
 $factory->define(App\Models\BlogTag::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->unique()->word,
     ];
 });

@@ -169,7 +169,7 @@ class BlogPostCrudController extends CrudController
      *
      * @param Request $request
      */
-    private function handlePrimaryTag(Request $request)
+    protected function handlePrimaryTag(Request $request)
     {
         $requestTags = $request->tags ?: [];
         $primaryTag = $request->primary_tag;

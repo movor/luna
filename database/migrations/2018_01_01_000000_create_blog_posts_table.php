@@ -17,7 +17,7 @@ class CreateBlogPostsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('title');
-            $table->text('summary');
+            $table->string('summary');
             $table->text('body');
             $table->string('slug')->unique();
             $table->timestamp('published_at')->nullable();
