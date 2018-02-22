@@ -144,14 +144,8 @@ class BlogPostCrudController extends CrudController
     {
         // Artificially add slug to the request object
         $request->merge(['slug' => str_slug($request->title)]);
-
         $this->handlePrimaryTag($request);
-
-        $this->validate($request, [
-            'title' => 'required|min:5|max:128',
-            'summary' => 'required|min:15|max:256',
-            'slug' => 'unique:blog_posts,slug',
-        ]);
+        $this->validateRequest($request);
 
         return parent::storeCrud($request);
     }
@@ -159,12 +153,26 @@ class BlogPostCrudController extends CrudController
     public function update(Request $request)
     {
         $this->handlePrimaryTag($request);
+        $this->validateRequest($request);
 
         return parent::updateCrud();
     }
 
     /**
-     * Handle primary tag savingg.
+     * Validates request object.
+     * @param Request $request
+     */
+    protected function validateRequest(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|min:5|max:128',
+            'summary' => 'required|min:15|max:256',
+            'slug' => 'unique:blog_posts,slug',
+        ]);
+    }
+
+    /**
+     * Handle primary tag saving.
      * Many to many relationship with additional pivot data.
      *
      * @param Request $request
@@ -187,4 +195,3 @@ class BlogPostCrudController extends CrudController
         $request->request->set('tags', $tags);
     }
 }
-

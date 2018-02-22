@@ -30,11 +30,13 @@ class BlogTagCrudController extends CrudController
 
     public function store(Request $request)
     {
-
+        // Tags will always be written with small letters.
+        $request->merge(['slug' => str_slug($request->name)]);
         $request->merge(['name' => strtolower($request->name)]);
 
         $this->validate($request, [
-            'name' => 'required|min:2|max:32|unique:blog_tags,name'
+            'name' => 'required|min:2|max:32|unique:blog_tags,name',
+            'slug' => 'unique:blog_tags,slug'
         ]);
 
         return parent::storeCrud($request);

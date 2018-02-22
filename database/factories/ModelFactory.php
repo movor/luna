@@ -50,7 +50,10 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 //
 
 $factory->define(App\Models\BlogTag::class, function (Faker $faker) {
+    $name = $faker->word;
+
     return [
-        'name' => $faker->word,
+        'name' => $name,
+        'slug' => str_slug($name)
     ];
 });

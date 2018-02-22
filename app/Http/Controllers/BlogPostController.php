@@ -6,21 +6,25 @@ use App\Models\BlogPost;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\TwitterCard;
+use Request;
 
 class BlogPostController extends Controller
 {
     public function index()
     {
+
+        $requestedTags = Request::query('tags');
+
         $posts = BlogPost::whereNotNull('published_at')->get();
 
-        SEOMeta::setTitle(env('APP_NAME') . " - Blog");
-        SEOMeta::setDescription("Writings 'bout different stuff related to Linux, PHP, Javascript and Blockchain technologies");
-        SEOMeta::setCanonical(env('APP_URL') . "/blog/");
+        SEOMeta::setTitle(env('APP_NAME') . ' - Blog');
+        SEOMeta::setDescription('Writings about different stuff related to Linux, PHP, Javascript and Blockchain technologies');
+        SEOMeta::setCanonical(url('/blog'));
 
-        // TODO.? Look for a difference between Description vs OpenGraph description
+
         OpenGraph::setDescription('Writings \'bout different stuff related to Linux, PHP, Javascript and Blockchain technologies');
-        OpenGraph::setTitle(env('APP_NAME') . " - Blog");
-        OpenGraph::setUrl(env('APP_URL') . "/blog/");
+        OpenGraph::setTitle(env('APP_NAME') . ' - Blog');
+        OpenGraph::setUrl(url('/log'));
         OpenGraph::addProperty('type', 'articles');
 
         TwitterCard::setTitle('Blog @_movor');
@@ -36,17 +40,17 @@ class BlogPostController extends Controller
             ->firstOrFail();
 
         SEOMeta::setTitle($post->title);
-        SEOMeta::setDescription($post->summary);
+//        SEOMeta::setDescription($post->summary);
         SEOMeta::addMeta('article:published_time', $post->published_at->toW3CString(), 'property');
         // TODO.SOLVE get single, first tag as a category
-        SEOMeta::setCanonical(env('APP_NAME') . $post->getCanonicalUrl());
-        // SEOMeta::addMeta('article:section', $post->tags->pluck('id', 'name')[1], 'property');
+        SEOMeta::setCanonical(url($post->getCanonicalUrl()));
+//         SEOMeta::addMeta('article:section', $post->getPrimaryTag()->name);
         // TODO.SOLVE set multiple tags as keywords
         // SEOMeta::addKeyword([$post->tags()]);
 
-        OpenGraph::setDescription($post->summary);
+//        OpenGraph::setDescription($post->summary);
         OpenGraph::setTitle($post->title);
-        OpenGraph::setUrl(env('APP_URL') . '/blog/' . $post->slug);
+        OpenGraph::setUrl(url('/blog/') . $post->slug);
         OpenGraph::addProperty('type', 'article');
         OpenGraph::addProperty('locale', 'us-en');
 
@@ -59,13 +63,13 @@ class BlogPostController extends Controller
         return view('blog_post.view', ['post' => $post]);
     }
 
-    public function showCanonical($id)
+    public function viewCanonical($id)
     {
+        // TODO: add SEO tools to the canonical page, currently default
         $blogPost = BlogPost::where('id', $id)
             ->whereNotNull('published_at')
             ->firstOrFail();
 
-        $blogPost->getCanonicalUrl();
-        return view('post', ['post' => $blogPost]);
+        return view('blog_post.view', ['post' => $blogPost]);
     }
 }

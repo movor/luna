@@ -10,7 +10,7 @@ class BlogTag extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
     /**
      * @return BelongsToMany
