@@ -12,25 +12,30 @@ class BlogPostController extends Controller
 {
     public function index()
     {
+        $tags = explode(',', Request::query('tags'));
 
-        $requestedTags = Request::query('tags');
+//        dd($tags);
+        if (!empty([$tags])) {
+            $posts = BlogPost::whereHas('tags', function ($q) use ($tags) {
+                $q->whereIn('slug', explode(',', Request::query('tags')), 'and');
+            })->whereNotNull('published_at')->get();
+        } else {
+            $posts = BlogPost::whereNotNull('published_at')->get();
+        }
 
-        $posts = BlogPost::whereNotNull('published_at')->get();
-
-        SEOMeta::setTitle(env('APP_NAME') . ' - Blog');
-        SEOMeta::setDescription('Writings about different stuff related to Linux, PHP, Javascript and Blockchain technologies');
         SEOMeta::setCanonical(url('/blog'));
+        SEOMeta::setTitle(env('APP_NAME') . ' - Blog');
+        SEOMeta::setDescription("a");
 
-
-        OpenGraph::setDescription('Writings \'bout different stuff related to Linux, PHP, Javascript and Blockchain technologies');
-        OpenGraph::setTitle(env('APP_NAME') . ' - Blog');
         OpenGraph::setUrl(url('/log'));
+        OpenGraph::setDescription('Writings about different stuff related to Linux, PHP, Javascript and Blockchain technologies');
+        OpenGraph::setTitle(env('APP_NAME') . ' - Blog');
         OpenGraph::addProperty('type', 'articles');
 
         TwitterCard::setTitle('Blog @_movor');
         TwitterCard::setSite('@_movor');
 
-        return view('blog_post.index', ['posts' => $posts]);
+        return view('blog_post.index', ['posts' => $posts, 'tags' => $tags]);
     }
 
     public function view($slug)
