@@ -3,12 +3,12 @@
 /**
  * Seed pivot table
  *
- * @param string $pivotTable Pivot table name
- * @param string $firstTable First table name
- * @param string $secondTable Second table name
+ * @param string  $pivotTable           Pivot table name
+ * @param string  $firstTable           First table name
+ * @param string  $secondTable          Second table name
  * @param Closure $customColumnCallback Should return array of additional columns and their values to be inserted in
  *                                      pivot table
- * @param bool $timestamps Insert timestamps
+ * @param bool    $timestamps           Insert timestamps
  *
  * @return bool
  */
@@ -21,18 +21,22 @@ function seedPivotData($pivotTable, $firstTable, $secondTable, Closure $customCo
     foreach ($firstIds as $firstId) {
         $secondIds = [];
         for ($i = 0; $i <= rand(1, ceil($secondCount / 3)); $i++) {
-            if (!$secondIds) $secondIds = DB::table($secondTable)->inRandomOrder()->pluck('id')->toArray();
+            if (!$secondIds) {
+                $secondIds = DB::table($secondTable)->inRandomOrder()->pluck('id')->toArray();
+            }
 
             // TODO
             // Handle table that have no id column
 
             $row = [
                 str_singular($firstTable) . '_id' => $firstId,
-                str_singular($secondTable) . '_id' => array_pop($secondIds)
+                str_singular($secondTable) . '_id' => ($secondId = array_pop($secondIds))
             ];
 
             // Add column => value from callback return array
-            if (is_callable($customColumnCallback)) $row = array_merge($row, $customColumnCallback());
+            if (is_callable($customColumnCallback)) {
+                $row = array_merge($row, $customColumnCallback($firstId, $secondId));
+            }
 
             // Add timestamps
             if ($timestamps) {
