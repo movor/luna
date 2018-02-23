@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('index');
 });
 
+//
+// Static pages
+//
+Route::get('/contact', function () {
+    return view('static_pages.contact');
+});
+
+//
+// Blog
+//
+
 Route::get('/blog', 'BlogPostController@index');
 Route::get('/blog/{slug}', 'BlogPostController@view');
 Route::get('/blog-post/{id}', 'BlogPostController@viewCanonical');
