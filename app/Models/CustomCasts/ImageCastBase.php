@@ -7,9 +7,11 @@ use Storage;
 
 abstract class ImageCastBase extends FileCastBase
 {
+    protected $default = '/img/image_placeholder.svg';
+
     public function castAttribute($value)
     {
-        return $value ?: 'img/image_placeholder.png';
+        return $value ?: $this->default;
     }
 
     public function setAttribute($value)

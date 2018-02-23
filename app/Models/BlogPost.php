@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\Traits\CanonicalUrlTrait;
+use App\Lib\CustomCasts\CustomCastableTrait;
+use App\Models\CustomCasts\ImageCast;
+use App\Models\Traits\PageUrl;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,12 +12,15 @@ use Parsedown;
 
 class BlogPost extends Model
 {
-    use CrudTrait, CanonicalUrlTrait;
+    use CrudTrait, PageUrl, CustomCastableTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'published_at'];
+    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'featured_image', 'published_at'];
+
+    protected $baseUrl = 'blog';
 
     protected $casts = [
-        'published_at' => 'datetime'
+        'published_at' => 'datetime',
+        'featured_image' => ImageCast::class
     ];
 
     /**

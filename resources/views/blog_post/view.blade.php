@@ -13,7 +13,7 @@
                         <small>Posted on {{ $post->published_at->format('d M Y') }}</small>
                     </div>
                 </div>
-                <img class="img-fluid rounded my-3" src="http://placehold.it/900x300" alt="">
+                <img class="img-fluid rounded my-3" src="{{ asset($post->featured_image) }}" alt="">
                 {!! $post->body_html !!}
             </div>
             <div class="col-md-4">
