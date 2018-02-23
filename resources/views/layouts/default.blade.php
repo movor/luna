@@ -3,10 +3,8 @@
     <head>
 
         @if (App::environment('production'))
-
             // TODO
             // Google analytics
-
         @endif
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
