@@ -20,6 +20,7 @@ class CreateBlogPostsTable extends Migration
             $table->string('summary');
             $table->text('body');
             $table->string('slug')->unique();
+            $table->string('featured_image')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

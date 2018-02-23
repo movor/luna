@@ -51,6 +51,12 @@ class BlogPostCrudController extends CrudController
             }
         });
 
+        $this->addColumns();
+        $this->addBasicsTab()->addOtherTab();
+    }
+
+    protected function addColumns()
+    {
         // Columns
         $this->crud
             ->addColumn([
@@ -80,47 +86,52 @@ class BlogPostCrudController extends CrudController
                 'attribute' => 'name'
             ])
             ->addColumn([
+                'label' => 'Link',
+                'type' => 'front_link',
+                'method_name' => 'getPageUrl',
+                'name' => 'url'
+            ])
+            ->addColumn([
                 'label' => 'Published At',
                 'name' => 'published_at'
             ]);
+    }
 
+    protected function addBasicsTab()
+    {
         // Fields
         $this->crud
             ->addField([
+                'label' => 'Link',
+                'type' => 'front_link',
+                'method_name' => 'getPageUrl',
+                'tab' => 'Basics',
+                'name' => 'url'
+            ])
+            ->addField([
                 'label' => 'Title',
-                'name' => 'title'
+                'name' => 'title',
+                'tab' => 'Basics'
             ])
             ->addField([
                 'name' => 'user_id',
                 'label' => 'User',
                 'type' => 'select',
                 'entity' => 'user',
-                'attribute' => 'name'
-            ])
-            ->addField([
-                'name' => 'tags',
-                'label' => 'Tags',
-                'type' => 'select2_multiple',
-                'entity' => 'tags',
                 'attribute' => 'name',
-                'model' => BlogTag::class,
-                'pivot' => true,
-                'wrapperAttributes' => ['class' => 'form-group col-md-8']
-            ])
-            ->addField([
-                'name' => 'published_at',
-                'label' => 'Published At',
-                'type' => 'date'
+                'tab' => 'Basics'
             ])
             ->addField([
                 'label' => 'Summary',
                 'name' => 'summary',
-                'type' => 'textarea'
+                'type' => 'textarea',
+                'tab' => 'Basics'
             ])
             ->addField([
                 'label' => 'Body',
                 'name' => 'body',
-                'type' => 'simplemde'
+                'type' => 'simplemde',
+                'tab' => 'Basics'
             ]);
 
         // TODO.SOLVE
@@ -135,17 +146,62 @@ class BlogPostCrudController extends CrudController
                 'options' => BlogTag::all()->pluck('name', 'id')->toArray(),
                 'allow_null' => false,
                 'selected' => $post->getPrimaryTag()->id,
-                'wrapperAttributes' => ['class' => 'form-group col-md-4'],
-            ])->beforeField('tags');
+                //'wrapperAttributes' => ['class' => 'form-group col-md-4'],
+                'tab' => 'Basics'
+            ])->afterField('title');
         }
+
+        return $this;
+    }
+
+    protected function addOtherTab()
+    {
+        // Fields
+        $this->crud
+            ->addField([
+                'label' => 'Slug',
+                'name' => 'slug',
+                'attributes' => ['disabled' => 'disabled'],
+                'tab' => 'Other'
+            ])
+            ->addField([
+                'name' => 'featured_image',
+                'label' => 'Featured Image',
+                'type' => 'image',
+                'crop' => 'true',
+                'tab' => 'Other'
+            ])
+            ->addField([
+                'name' => 'tags',
+                'label' => 'Tags',
+                'type' => 'select2_multiple',
+                'entity' => 'tags',
+                'attribute' => 'name',
+                'model' => BlogTag::class,
+                'pivot' => true,
+                //'wrapperAttributes' => ['class' => 'form-group col-md-8'],
+                'tab' => 'Other'
+            ])
+            ->addField([
+                'name' => 'published_at',
+                'label' => 'Published At',
+                'type' => 'date',
+                'tab' => 'Other'
+            ]);
     }
 
     public function store(Request $request)
     {
         // Artificially add slug to the request object
         $request->merge(['slug' => str_slug($request->title)]);
+
         $this->handlePrimaryTag($request);
-        $this->validateRequest($request);
+
+        $this->validate($request, [
+            'title' => 'required|min:5|max:128',
+            'summary' => 'required|min:15|max:256',
+            'slug' => 'unique:blog_posts,slug',
+        ]);
 
         return parent::storeCrud($request);
     }
@@ -153,26 +209,12 @@ class BlogPostCrudController extends CrudController
     public function update(Request $request)
     {
         $this->handlePrimaryTag($request);
-        $this->validateRequest($request);
 
         return parent::updateCrud();
     }
 
     /**
-     * Validates request object.
-     * @param Request $request
-     */
-    protected function validateRequest(Request $request)
-    {
-        $this->validate($request, [
-            'title' => 'required|min:5|max:128',
-            'summary' => 'required|min:15|max:256',
-            'slug' => 'unique:blog_posts,slug',
-        ]);
-    }
-
-    /**
-     * Handle primary tag saving.
+     * Handle primary tag savingg.
      * Many to many relationship with additional pivot data.
      *
      * @param Request $request
@@ -195,3 +237,4 @@ class BlogPostCrudController extends CrudController
         $request->request->set('tags', $tags);
     }
 }
+
