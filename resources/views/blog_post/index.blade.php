@@ -5,11 +5,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <!-- TODO: return selected tags -->
                 <h1 class="mb-4">All Blog Posts</h1>
                 <div class="row">
-
                     @foreach($posts as $post)
-
                         <div class="col-md-6">
                             <div class="card mb-4">
                                 <img class="card-img-top" src="http://placehold.it/500x200" alt="Card image cap">
