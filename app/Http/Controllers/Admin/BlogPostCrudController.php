@@ -169,6 +169,7 @@ class BlogPostCrudController extends CrudController
                 'label' => 'Featured Image',
                 'type' => 'image',
                 'crop' => 'true',
+                'aspect_ratio' => 1.7777777778,
                 'tab' => 'Other'
             ])
             ->addField([
