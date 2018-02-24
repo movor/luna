@@ -48,11 +48,16 @@ class BlogPost extends Model
 
     public function isPublished()
     {
-        return (bool)$this->published_at;
+        return (bool) $this->published_at;
     }
 
     public function getPrimaryTag(): BlogTag
     {
         return $this->tags()->where('primary', true)->first();
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = ucwords($value);
     }
 }

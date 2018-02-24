@@ -108,3 +108,19 @@ function chance($percent = 50, Closure $callback = null, $default = null)
         return $default;
     }
 }
+
+/**
+ * Get placeholder image (and cache it for further use) from picsum.photos service
+ *
+ * @param        $name
+ * @param string $width  Width in pixels
+ * @param string $height Height in pixels
+ *
+ * @return mixed
+ */
+function getPlaceholderImage($name, $width = '1280', $height = '720')
+{
+    return \Cache::rememberForever("placeholderImage.$name", function () use ($width, $height) {
+        return file_get_contents("https://picsum.photos/$width/$height?random");
+    });
+}

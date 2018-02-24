@@ -12,6 +12,15 @@
                     <div>
                         <small>Posted on {{ $post->published_at->format('d M Y') }}</small>
                     </div>
+                    <div>
+
+                        @foreach($post->tags->pluck('name')->toArray() as $tag)
+
+                            <a href="{{ url("blog?tags=$tag") }}" class="badge badge-primary">{{ $tag }}</a>
+
+                        @endforeach
+
+                    </div>
                 </div>
                 <img class="img-fluid rounded my-3" src="{{ asset($post->featured_image) }}" alt="">
                 {!! $post->body_html !!}
@@ -56,16 +65,8 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <hr>
-                <app-disqus></app-disqus>
-            </div>
-        </div>
+        <hr class="mt-5">
+        <app-disqus></app-disqus>
     </div>
 
-@endsection
-
-@section('canonical')
-    <link rel="canonical" href="{{url($post->getCanonicalUrl())}}">
 @endsection

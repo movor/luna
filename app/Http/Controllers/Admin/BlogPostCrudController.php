@@ -64,13 +64,6 @@ class BlogPostCrudController extends CrudController
                 'name' => 'title',
             ])
             ->addColumn([
-                'name' => 'primaryTag',
-                'label' => 'Primary Tag',
-                'type' => 'model_function_attribute',
-                'function_name' => 'getPrimaryTag',
-                'attribute' => 'name'
-            ])
-            ->addColumn([
                 'label' => 'Tags',
                 'type' => 'select_multiple',
                 'name' => 'tags',
@@ -135,18 +128,27 @@ class BlogPostCrudController extends CrudController
             ]);
 
         // TODO.SOLVE
-        if (is_numeric(\Request::segment(3))) {
-            $postId = \Request::segment(3);
-            $post = BlogPost::find($postId);
+        if (\Request::segment(3)) {
+            $segment = \Request::segment(3);
+            $options = BlogTag::all()->pluck('name', 'id')->toArray();
+
+            // Edit
+            if (is_numeric($segment)) {
+                $postId = $segment;
+                $post = BlogPost::find($postId);
+                $selected = $post->getPrimaryTag()->id;
+            } // Create
+            else {
+                $selected = BlogTag::first()->id;
+            }
 
             $this->crud->addField([
                 'name' => 'primary_tag', // the name of the db column
                 'label' => 'Primary Tag', // the input label
                 'type' => 'select_from_array_with_default',
-                'options' => BlogTag::all()->pluck('name', 'id')->toArray(),
+                'options' => $options,
+                'selected' => $selected,
                 'allow_null' => false,
-                'selected' => $post->getPrimaryTag()->id,
-                //'wrapperAttributes' => ['class' => 'form-group col-md-4'],
                 'tab' => 'Basics'
             ])->afterField('title');
         }
@@ -200,7 +202,7 @@ class BlogPostCrudController extends CrudController
 
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
-            'summary' => 'required|min:15|max:256',
+            'summary' => 'required|min:30|max:255',
             'slug' => 'unique:blog_posts,slug',
         ]);
 

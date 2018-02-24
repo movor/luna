@@ -10,19 +10,44 @@
 
                     @foreach($posts as $post)
 
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                             <div class="card mb-4">
-                                <img class="card-img-top" src="{{ asset($post->featured_image) }}">
+
+                                {{-- Inner card --}}
+
+                                <div class="card card-inner text-white">
+                                    <img class="card-img-top" src="{{ asset($post->featured_image) }}">
+                                    <div class="card-img-overlay d-flex align-items-end justify-content-end">
+
+                                        @foreach($post->tags->pluck('name')->toArray() as $tag)
+
+                                            <a href="{{ url("blog?tags=$tag") }}"
+                                               class="badge badge-primary ml-1"
+                                            >
+                                                {{ $tag }}
+                                            </a>
+
+                                        @endforeach
+
+                                    </div>
+                                </div>
+
+                                {{-- /Inner card --}}
+
                                 <div class="card-body">
-                                    <h2 class="card-title">{{ $post->title }}</h2>
-                                    <p class="card-text">
-                                        {!! $post->summary !!}
+                                    <h2 class="card-title text-truncate-2">{{ $post->title }}</h2>
+                                    <p class="card-text text-justify text-truncate-3">
+                                        {{ $post->summary }}
                                     </p>
                                     <a href="/blog/{{ $post->slug }}" class="btn btn-primary">Read More</a>
                                 </div>
                                 <div class="card-footer text-muted">
-                                    Posted on {{ $post->published_at->format('d M Y') }}
                                     <a href="#">{{ $post->user->name }}</a>
+                                    <span class="float-right">
+                                        <small class="align-text-bottom">
+                                            {{ $post->published_at->format('d M Y') }}
+                                        </small>
+                                    </span>
                                 </div>
                             </div>
                         </div>

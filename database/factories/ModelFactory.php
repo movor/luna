@@ -36,13 +36,13 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
     $title = rtrim($faker->unique()->sentence, '.');
 
     return [
-        // Give Movor user a better change
+        // Give Movor user a better chance
         'user_id' => chance(50, function () {
             // Movor user id
             return 1;
         }, DB::table('users')->inRandomOrder()->pluck('id')->first()),
-        'title' => $title,
-        'summary' => rtrim($faker->realText(255), '.'),
+        'title' => ucwords($title),
+        'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'slug' => str_slug($title),
         'published_at' => chance(70, function () {

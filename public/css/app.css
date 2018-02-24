@@ -3053,6 +3053,44 @@
   clip: auto;
 }
 
+.text-truncate-2,
+.text-truncate-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.text-truncate-3 {
+  -webkit-line-clamp: 3;
+}
+
+.card .card-inner {
+  border: none;
+}
+
+.card .card-body .card-title {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  min-height: 62px;
+}
+
+@media (max-width: 991.98px) {
+  .card .card-body .card-title {
+    min-height: auto;
+  }
+}
+
+.card .card-body .card-text {
+  min-height: 71px;
+}
+
+@media (max-width: 991.98px) {
+  .card .card-body .card-text {
+    min-height: auto;
+  }
+}
+
 nav .navbar-brand img {
   height: 32px;
 }

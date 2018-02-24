@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Artesaos\SEOTools\Facades\SEOMeta;
-use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\TwitterCard;
-
 use App\Models\BlogPost;
-use App\Models\Traits\SeoTrait;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\TwitterCard;
 use Request;
 
 class BlogPostController extends Controller
@@ -45,23 +43,26 @@ class BlogPostController extends Controller
         $post = BlogPost::where('slug', $slug)
             ->whereNotNull('published_at')
             ->firstOrFail();
-        SEOMeta::setTitle($post->title);
-        SEOMeta::setDescription($post->summary);
-        SEOMeta::setDescription('lol');
-        SEOMeta::addMeta('article:published_time', $post->published_at->toW3CString(), 'property');
 
-        OpenGraph::setTitle($post->title);
-        OpenGraph::setDescription($post->summary);
-        OpenGraph::addProperty('type', 'articles');
-        OpenGraph::setUrl(url('/blog/') . $post->slug);
-        OpenGraph::addProperty('type', 'article');
-        OpenGraph::addProperty('locale', 'us-en');
+        SEOMeta::setTitle($post->title)
+            ->setDescription($post->summary)
+            ->setCanonical(url($post->getCanonicalUrl()))
+            ->addMeta('article:published_time', $post->published_at->toW3CString(), 'property')
+            ->addMeta('article:section', $post->getPrimaryTag()->name);
 
-        TwitterCard::setTitle('Blog @_movor');
-        TwitterCard::setSite('@_movor');
+        OpenGraph::setTitle($post->title)
+            ->setDescription($post->summary)
+            ->setUrl(url($post->getPageUrl()))
+            ->addImage($post->featured_img)
+            ->addProperty('type', 'articles')
+            ->addProperty('type', 'article')
+            ->addProperty('locale', 'us-en');
+
+        TwitterCard::setTitle('Blog @_movor')
+            ->setSite('@_movor');
+
         // TODO.SOLVE get single, first tag as a category
-        SEOMeta::setCanonical(url('/blogs' . $post->getCanonicalUrl()));
-        SEOMeta::addMeta('article:section', $post->getPrimaryTag()->name);
+
         // TODO.SOLVE set multiple tags as keywords
 //      $this->seo()->metatags()->addKeyword(implode(",", $post->tags));
 
@@ -71,8 +72,6 @@ class BlogPostController extends Controller
         // TODO.SOLVE: Check does everyblog has it's own cover url and bind it to element
         // OpenGraph::addImage($post->cover->url);
         // TODO.SOLVE: Learn more about open graph
-
-        OpenGraph::addImage('http://image.url.com/cover.jpg', ['height' => 300, 'width' => 300]);
 
         return view('blog_post.view', ['post' => $post]);
     }
