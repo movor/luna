@@ -4,18 +4,28 @@
     use Artesaos\SEOTools\Facades\OpenGraph;
     use Artesaos\SEOTools\Facades\TwitterCard;
 
-    $name = Request::segment(1);
-    $url = Request::url();
-    $title = $name . ' | ' . env('APP_NAME');
+    // TODO: if static page has more than a word in the name - title pages returns error. fix
 
-    SEOMeta::setTitle($name . ' | ' . env('APP_NAME'));
-    SEOMeta::setDescription('A plethora of blog posts about web-development');
+        $url = url(Request::url());
+    // if variable title isn't provided at route create it
+    if (!isset($title)) {
+        $name = ucfirst(Request::segment(1));
+        $title = $name . ' | ' . env('APP_NAME');
+    // if variable provided at route as empty
+    } else if (empty($title)){
+        $title = env('APP_NAME');
+    } else {
+        $title = $title . ' | ' . env('APP_NAME');
+    }
+
+    SEOMeta::setTitle($title);
+    SEOMeta::setDescription($description);
     SEOMeta::setCanonical($url);
 
     OpenGraph::setUrl($url);
     OpenGraph::setTitle($title);
 
-    TwitterCard::setTitle('Blog @_movor');
+    TwitterCard::setTitle($title);
     TwitterCard::setSite('@_movor');
 
 @endphp

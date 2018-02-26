@@ -24,7 +24,7 @@ class BlogPostController extends Controller
         $title = 'Blog Posts';
         $description = 'Checkout out our cool blog posts';
 
-        SEOMeta::setTitle($title)->setDescription($description);
+        SEOMeta::setTitle($title . ' | ' . env('APP_NAME'))->setDescription($description);
         OpenGraph::setDescription($description);
 
         return view('blog_post.index')->with([
@@ -45,7 +45,7 @@ class BlogPostController extends Controller
         $keywords = $post->tags->pluck('name')->toArray();
         $image = $post->featured_image;
 
-        SEOMeta::setTitle($title)
+        SEOMeta::setTitle($title . ' | ' . env('APP_NAME'))
             ->setDescription($description)
             ->setKeywords($keywords);
 

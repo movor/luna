@@ -12,7 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index', [
+        'title' => '',
+        'description' => 'Main page of Movor, Belgrade based, software development team.',
+    ]);
 });
 
 //
@@ -21,7 +24,9 @@ Route::get('/', function () {
 
 Route::get('contact', function () {
     //asset($post->featured_image);
-    return view('static_pages.contact');
+    return view('static_pages.contact', [
+        'description' => 'Feel free to contact us using webform or mail!'
+    ]);
 });
 
 //
