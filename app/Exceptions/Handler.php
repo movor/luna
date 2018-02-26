@@ -5,7 +5,9 @@ namespace App\Exceptions;
 use App\Exceptions\AppExceptions\AppErrorException;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -61,12 +63,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // Render custom exceptions page in case of error
-        if ($exception instanceof AppErrorException) {
+        // Handle different type of exceptions here
+        if ($exception instanceof NotFoundHttpException) {
             return response()->view('errors.error', [
-                'title' => 'Error',
+                'title' => 'Page Not Found',
+                'body' => "We can't find the page you're looking for",
+            ], 404);
+        } elseif ($exception instanceof ModelNotFoundException) {
+            return response()->view('errors.error', [
+                'title' => 'Record Not Found',
+                'body' => "We can't find the record you're looking for",
+            ], 404);
+        } elseif ($exception instanceof AppErrorException) {
+            return response()->view('errors.error', [
                 'body' => $exception->getMessage(),
             ], $exception->getCode());
+        } elseif ($exception instanceof Exception) {
+            return response()->view('errors.error', [], 500);
         }
 
         return parent::render($request, $exception);
