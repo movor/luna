@@ -9,36 +9,32 @@ use Storage;
 abstract class FileCastBase extends CustomCastableBase
 {
     /**
-     * Storage disk dir
-     *
-     * @var string
-     */
-    protected $storageDir;
-
-    /**
      * Callback
      *
      * @var
      */
     protected $callback;
 
+    /**
+     * Storage dir (relative to app/storage)
+     *
+     * @return mixed
+     */
+    abstract function storageDir();
+
     public function setAttribute($value)
     {
-        if (is_null($this->storageDir)) {
-            throw new \Exception('Needs to specify $dir attrib. in ' . get_class($this));
-        }
-
         $newValue = null;
 
         if ($value instanceof UploadedFile) {
             $extension = $value->extension();
             $filename = str_random(40) . '.' . $extension;
-            $newValue = $this->storageDir . '/' . $filename;
+            $newValue = $this->storageDir() . '/' . $filename;
 
             // Make sure image is saved when model is saved,
             // not when attribute is set
             $this->callback = function () use ($value, $filename) {
-                $value->storeAs($this->storageDir, $filename);
+                $value->storeAs($this->storageDir(), $filename);
             };
         }
 

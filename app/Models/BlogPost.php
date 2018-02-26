@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Lib\CustomCasts\CustomCastableTrait;
-use App\Models\CustomCasts\ImageCast;
+use App\Models\CustomCasts\BlogPostFeaturedImageCast;
 use App\Models\Traits\PageUrl;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +20,7 @@ class BlogPost extends Model
 
     protected $casts = [
         'published_at' => 'datetime',
-        'featured_image' => ImageCast::class
+        'featured_image' => BlogPostFeaturedImageCast::class
     ];
 
     /**

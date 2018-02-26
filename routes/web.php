@@ -33,11 +33,11 @@ Route::get('blog/{slug}', 'BlogPostController@view');
 Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 //
-// Temp
+// Placeholder images
 //
 
-Route::get('img/remote/{name}.jpg', function ($name) {
-    $image = getPlaceholderImage($name);
+Route::get('img/placeholders/{name}.jpg', function ($model) {
+    $image = getPlaceholderImage($model);
 
     return Image::make($image)->response();
 });

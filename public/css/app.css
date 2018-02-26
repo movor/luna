@@ -3091,6 +3091,10 @@
   }
 }
 
+.card .card-footer {
+  font-family: "Lato", sans-serif;
+}
+
 nav .navbar-brand img {
   height: 32px;
 }

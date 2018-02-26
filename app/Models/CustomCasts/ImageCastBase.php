@@ -18,7 +18,7 @@ abstract class ImageCastBase extends FileCastBase
 
             // Make image object from base64 string
             $image = Image::make($value);
-            $newValue = $this->storageDir . '/' . $filename;
+            $newValue = $this->storageDir() . '/' . $filename;
 
             // Make sure image is saved when model is saved,
             // not here (when attribute is set)
