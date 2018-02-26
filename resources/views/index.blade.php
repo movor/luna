@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+@include('static_pages.partials.seo')
+
 @section('content')
 
     <div class="container text-light">

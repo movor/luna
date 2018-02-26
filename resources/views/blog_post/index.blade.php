@@ -5,7 +5,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4">All Blog Posts</h1>
+                @if (empty($tags[0]))
+                    <h1 class="mb-4">All Blog Posts</h1>
+                @else
+                    <h1 class="mb-4">Blog Posts containing tags: {{implode(',',$tags)}}</h1>
+                @endif
                 <div class="row">
 
                     @foreach($posts as $post)
