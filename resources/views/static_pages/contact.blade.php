@@ -21,7 +21,7 @@
                 <h1 class="">Contact Us</h1>
                 <p class="mb-4 pb-4">
                     Feel free to contact us any time using web form or email! Contact form is below, so don't hesitate,
-                    contact us about everything you want to know. If, from some reason you find easier to send us a mail
+                    contact us about everything you want to know. If form some reason you find easier to send us a mail
                     you can click <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">here</a> or use this email address:
                     <span class="text-primary">{{ env('APP_CONTACT_EMAIL') }}</span>
                 </p>
