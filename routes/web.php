@@ -38,8 +38,8 @@ Route::match(['post', 'get'], '/about', 'PagesController@about');
 //
 
 Route::get('img/placeholders/{name}.jpg', function ($model) {
-    $height = Request::query('height', 1280);
-    $width = Request::query('height', 720);
+    $width = Request::query('height', 1280);
+    $height = Request::query('height', 720);
 
     $image = getPlaceholderImage($model, $width, $height);
     return Image::make($image)->response();

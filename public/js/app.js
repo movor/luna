@@ -86,7 +86,7 @@ var app = new Vue({
     components: {
         'appDisqus': __WEBPACK_IMPORTED_MODULE_0__components_Disqus___default.a
     },
-    el: '#wrapper'
+    el: '#app'
 });
 
 /***/ }),

@@ -35,15 +35,18 @@
         {{-- /Scripts --}}
 
     </head>
-    <body class="mt-5 pt-5">
+    <body>
+        <div id="app">
 
-        <div id="wrapper">
+            <div class="py-5"></div>
 
             @include('partials.header')
 
             @includeWhen(Session::has('message'), 'partials.flash')
 
-            <main class="mb-5">@yield('content')</main>
+            <main>@yield('content')</main>
+
+            <div class="py-3"></div>
 
             @include('partials.footer')
 

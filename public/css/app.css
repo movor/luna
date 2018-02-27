@@ -3070,7 +3070,7 @@
 }
 
 .card .card-body .card-title {
-  min-height: 62px;
+  min-height: 52px;
 }
 
 @media (max-width: 991.98px) {
@@ -3080,7 +3080,7 @@
 }
 
 .card .card-body .card-text {
-  min-height: 71px;
+  min-height: 64px;
 }
 
 @media (max-width: 991.98px) {
@@ -3093,8 +3093,29 @@
   font-family: "Lato", sans-serif;
 }
 
+html {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 100%;
+  position: relative;
+  margin: 0;
+  padding-bottom: 183px;
+}
+
 nav .navbar-brand img {
   height: 32px;
+}
+
+footer {
+  height: 183px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 footer img {

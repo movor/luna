@@ -9,7 +9,7 @@
 
   .card-body {
     .card-title {
-      min-height: 62px;
+      min-height: 52px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
@@ -17,7 +17,7 @@
     }
 
     .card-text {
-      min-height: 71px;
+      min-height: 64px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
