@@ -63,7 +63,11 @@ function seedPivotData($pivotTable, $firstTable, $secondTable, Closure $customCo
  */
 function ll($var, $level = 'debug')
 {
-    if (is_object($var)) $var = (array) $var;
+    if (is_object($var)) {
+        $var = (array) $var;
+    } elseif (is_bool($var)) {
+        $var = $var ? 'TRUE' : 'FALSE';
+    }
 
     \Log::$level($var);
 }

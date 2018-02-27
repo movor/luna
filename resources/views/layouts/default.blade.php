@@ -41,10 +41,7 @@
 
             @include('partials.header')
 
-            {{--
-            TODO
-            @includeWhen($boolean, 'partials.flash', ['some' => 'data'])
-            --}}
+            @includeWhen(Session::has('message'), 'partials.flash')
 
             <main class="mb-5">@yield('content')</main>
 

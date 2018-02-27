@@ -19,17 +19,6 @@ Route::get('/', function () {
 });
 
 //
-// Static pages
-//
-
-Route::get('contact', function () {
-    //asset($post->featured_image);
-    return view('static_pages.contact', [
-        'description' => 'Feel free to contact us using webform or mail!'
-    ]);
-});
-
-//
 // Blog
 //
 
@@ -38,7 +27,14 @@ Route::get('blog/{slug}', 'BlogPostController@view');
 Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 //
-// Placeholder images
+// Static pages
+//
+
+Route::match(['post', 'get'], '/contact', 'PagesController@contact');
+Route::match(['post', 'get'], '/about', 'PagesController@about');
+
+//
+// Placeholder images (from external source, but server as internal)
 //
 
 Route::get('img/placeholders/{name}.jpg', function ($model) {

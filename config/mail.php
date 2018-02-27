@@ -120,4 +120,18 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Force Recipient
+    |--------------------------------------------------------------------------
+    |
+    | Force sending to single address only. Suitable for development.
+    |
+    */
+
+    'to' =>  [
+        'address' => env('MAIL_FORCE_RECIPIENT'),
+        'name' => env('MAIL_FORCE_RECIPIENT_NAME')
+    ],
+
 ];
