@@ -50,6 +50,14 @@ class BlogPostCrudController extends CrudController
                 }
             }
         });
+        // Filter: featured
+        $this->crud->addFilter([
+            'type' => 'simple',
+            'name' => 'featured',
+            'label' => 'Featured',
+        ], false, function () {
+            $this->crud->addClause('featured');
+        });
 
         $this->addColumns();
         $this->addBasicsTab()->addOtherTab();
@@ -172,6 +180,12 @@ class BlogPostCrudController extends CrudController
                 'type' => 'image',
                 'crop' => 'true',
                 'aspect_ratio' => 1.7777777778,
+                'tab' => 'Other'
+            ])
+            ->addField([
+                'name' => 'featured',
+                'label' => 'Featured Post',
+                'type' => 'checkbox',
                 'tab' => 'Other'
             ])
             ->addField([
