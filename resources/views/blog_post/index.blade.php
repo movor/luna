@@ -52,7 +52,7 @@
                                     <p class="card-text text-justify text-truncate-3">
                                         {{ $post->summary }}
                                     </p>
-                                    <a href="/blog/{{ $post->slug }}" class="btn btn-primary">Read More</a>
+                                    <a href="{{ $post->getPageUrl() }}" class="btn btn-primary">Read More</a>
                                 </div>
                                 <div class="card-footer text-muted">
                                     <a href="/about">{{ $post->user->name }}</a>

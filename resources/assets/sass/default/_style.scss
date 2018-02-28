@@ -49,6 +49,22 @@ nav {
   }
 }
 
+// Blog view
+.blog-post-view .featured-posts .card-body {
+  @include media-breakpoint-between(sm, md) {
+    height: 104px;
+  }
+
+  .card-title {
+    @include media-breakpoint-between(sm, md) {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
 //
 // Footer
 //
