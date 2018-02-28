@@ -65,16 +65,16 @@
 
                     @foreach($featuredPosts as $post)
 
-                        <a href="{{ $post->getPageUrl() }}">
-                            <div class="col-sm-6 col-md-4 col-lg-12">
+                        <div class="col-sm-6 col-md-4 col-lg-12">
+                            <a href="{{ $post->getPageUrl() }}">
                                 <div class="card mb-4">
                                     <img class="card-img-top" src="{{ asset($post->featured_image) }}">
                                     <div class="card-body">
                                         <p class="card-title font-weight-bold mb-0 text-muted">{{ $post->title }}</p>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
 
                     @endforeach
 

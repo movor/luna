@@ -213,6 +213,7 @@ class BlogPostCrudController extends CrudController
         $request->merge(['slug' => str_slug($request->title)]);
 
         $this->handlePrimaryTag($request);
+        $this->handleEmptyImages($request);
 
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
@@ -226,6 +227,7 @@ class BlogPostCrudController extends CrudController
     public function update(Request $request)
     {
         $this->handlePrimaryTag($request);
+        $this->handleEmptyImages($request);
 
         return parent::updateCrud();
     }
@@ -252,6 +254,26 @@ class BlogPostCrudController extends CrudController
         }
 
         $request->request->set('tags', $tags);
+    }
+
+    /**
+     * If image is not set for upload, request attribute
+     * will not contain base 64 (data:image) prefix
+     * so remove value from request to avoid errors
+     *
+     * @param Request $request
+     */
+    private function handleEmptyImages(Request $request)
+    {
+        $imageAttributes = [
+            'featured_image',
+        ];
+
+        foreach ($imageAttributes as $attribute) {
+            if (strpos($request->get($attribute), 'data:image') === false) {
+                $request->request->remove($attribute);
+            }
+        }
     }
 }
 
