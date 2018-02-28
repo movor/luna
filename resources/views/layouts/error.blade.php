@@ -16,7 +16,7 @@
         {{-- Styles --}}
 
         {{ Html::style(App::environment('production') ? mix('/css/vendor.css') : '/css/vendor.css') }}
-        {{ Html::style(App::environment('production') ? mix('/css/app.css') : '/css/app.css') }}
+        {{ Html::style(App::environment('production') ? mix('/css/error.css') : '/css/error.css') }}
 
         @yield('css-head')
 
@@ -30,8 +30,7 @@
 
     </head>
     <body>
-
-        <div id="wrapper">
+        <div id="app">
             <main>@yield('content')</main>
         </div>
 
