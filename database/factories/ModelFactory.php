@@ -43,7 +43,8 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
         }, DB::table('users')->inRandomOrder()->pluck('id')->first()),
         'title' => ucwords($title),
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
-        'featured_image' => chance(70, function() {
+        'featured' => chance(20),
+        'featured_image' => chance(70, function () {
             return 'img/placeholders/blog_post_' . str_random(8) . '.jpg';
         }),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),

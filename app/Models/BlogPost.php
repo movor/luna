@@ -14,13 +14,14 @@ class BlogPost extends Model
 {
     use CrudTrait, PageUrl, CustomCastableTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'featured_image', 'published_at'];
+    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'featured_image', 'published_at', 'featured'];
 
     protected $baseUrl = 'blog';
 
     protected $casts = [
         'published_at' => 'datetime',
-        'featured_image' => BlogPostFeaturedImageCast::class
+        'featured' => 'boolean',
+        'featured_image' => BlogPostFeaturedImageCast::class,
     ];
 
     /**
@@ -59,5 +60,10 @@ class BlogPost extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = ucwords($value);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', true);
     }
 }
