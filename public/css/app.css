@@ -3069,26 +3069,6 @@
   border: none;
 }
 
-.card .card-body .card-title {
-  min-height: 52px;
-}
-
-@media (max-width: 991.98px) {
-  .card .card-body .card-title {
-    min-height: auto;
-  }
-}
-
-.card .card-body .card-text {
-  min-height: 64px;
-}
-
-@media (max-width: 991.98px) {
-  .card .card-body .card-text {
-    min-height: auto;
-  }
-}
-
 .card .card-footer {
   font-family: "Lato", sans-serif;
 }
@@ -3108,6 +3088,26 @@ body {
 
 nav .navbar-brand img {
   height: 32px;
+}
+
+.blog-post-index .card-body .card-title {
+  min-height: 52px;
+}
+
+@media (max-width: 991.98px) {
+  .blog-post-index .card-body .card-title {
+    min-height: auto;
+  }
+}
+
+.blog-post-index .card-body .card-text {
+  min-height: 64px;
+}
+
+@media (max-width: 991.98px) {
+  .blog-post-index .card-body .card-text {
+    min-height: auto;
+  }
 }
 
 footer {

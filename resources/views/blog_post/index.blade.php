@@ -2,14 +2,23 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container blog-post-index">
         <div class="row">
             <div class="col-md-12">
+
                 @if (empty($tags[0]))
+
                     <h1 class="mb-4">All Blog Posts</h1>
+
                 @else
-                    <h1 class="mb-4">Blog Posts containing tags: {{implode(',',$tags)}}</h1>
+
+                    <h1 class="mb-4">
+                        Blog Posts
+                        <span class="text-muted">Containing Tags: ate, tet</span>
+                    </h1>
+
                 @endif
+
                 <div class="row">
 
                     @foreach($posts as $post)
@@ -23,12 +32,12 @@
                                     <img class="card-img-top" src="{{ asset($post->featured_image) }}">
                                     <div class="card-img-overlay d-flex align-items-end justify-content-end">
 
-                                        @foreach($post->tags->pluck('name')->toArray() as $tag)
+                                        @foreach($post->tags as $tag)
 
-                                            <a href="{{ url("blog?tags=$tag") }}"
+                                            <a href="{{ url("blog?tags=$tag->slug") }}"
                                                class="badge badge-primary ml-1"
                                             >
-                                                {{ $tag }}
+                                                {{ $tag->name }}
                                             </a>
 
                                         @endforeach
@@ -46,7 +55,7 @@
                                     <a href="/blog/{{ $post->slug }}" class="btn btn-primary">Read More</a>
                                 </div>
                                 <div class="card-footer text-muted">
-                                    <a href="#">{{ $post->user->name }}</a>
+                                    <a href="/about">{{ $post->user->name }}</a>
                                     <span class="float-right">
                                         <small class="align-text-bottom">
                                             {{ $post->published_at->format('d M Y') }}

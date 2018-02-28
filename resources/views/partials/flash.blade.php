@@ -1,5 +1,5 @@
-<div class="container mb-5">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+<div class="container">
+    <div class="alert alert-success alert-dismissible mb-5 fade show" role="alert">
 
         {{ Session::get('message') }}
 

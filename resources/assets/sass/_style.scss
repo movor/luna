@@ -28,6 +28,27 @@ nav {
 // Content
 //
 
+// Blog Index
+.blog-post-index {
+  .card-body {
+    .card-title {
+      min-height: 52px;
+
+      @include media-breakpoint-down(md) {
+        min-height: auto;
+      }
+    }
+
+    .card-text {
+      min-height: 64px;
+
+      @include media-breakpoint-down(md) {
+        min-height: auto;
+      }
+    }
+  }
+}
+
 //
 // Footer
 //

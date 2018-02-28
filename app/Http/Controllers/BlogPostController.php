@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\BlogTag;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Request;
@@ -52,7 +53,8 @@ class BlogPostController extends Controller
         OpenGraph::addImage($image);
 
         return view('blog_post.view')->with([
-            'post' => $post
+            'post' => $post,
+            'featuredPosts' => BlogPost::inRandomOrder()->limit(3)->get() // TODO
         ]);
     }
 
