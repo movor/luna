@@ -50,6 +50,8 @@ nav {
 }
 
 // Blog view
+@import "~prismjs/plugins/toolbar/prism-toolbar";
+
 .blog-post-view .featured-posts .card-body {
   @include media-breakpoint-between(sm, md) {
     height: 104px;
