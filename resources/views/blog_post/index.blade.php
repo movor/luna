@@ -30,7 +30,7 @@
 
                                 <div class="card card-inner text-white">
                                     <img class="card-img-top" src="{{ asset($post->featured_image) }}">
-                                    <div class="card-img-overlay d-flex align-items-end justify-content-end">
+                                    <div class="lead card-img-overlay d-flex align-items-end justify-content-end">
 
                                         @foreach($post->tags as $tag)
 

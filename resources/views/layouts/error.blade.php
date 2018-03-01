@@ -16,7 +16,7 @@
         {{-- Styles --}}
 
         {{ Html::style(App::environment('production') ? mix('/css/vendor.css') : '/css/vendor.css') }}
-        {{ Html::style(App::environment('production') ? mix('/css/error.css') : '/css/error.css') }}
+        {{ Html::style(App::environment('production') ? mix('/css/layout_error.css') : '/css/layout_error.css') }}
 
         @yield('css-head')
 

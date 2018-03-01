@@ -6,5 +6,11 @@
 
 require('./bootstrap');
 
+// Syntax highlighting - Prism
+require('prismjs');
+require('prismjs/components/prism-bash');
+require('prismjs/components/prism-javascript');
+require('prismjs/components/prism-php');
+
 // Vue
 window.Vue = require('vue');

@@ -6,18 +6,19 @@
         <div class="row">
             <div class="col-lg-9">
                 <h1 class="mb-4">{{ $post->title }}</h1>
-                <div class="lead">
+                <div class="lead mb-3">
                     <div>
                         <span class="text-muted">Author:</span>
                         <a href="/about">{{ $post->user->name }}</a>
                     </div>
-                    <div>
+                    <div class="mb-3">
                         <small>
                             <span class="text-muted">Posted on</span>
-                            <span>{{ $post->published_at->format('d M Y') }}</span>
+                            {{ $post->published_at->format('d M Y') }}
                         </small>
                     </div>
                     <div>
+                        <small class="text-muted">Tags:</small>
 
                         @foreach($post->tags as $tag)
 
@@ -27,9 +28,9 @@
 
                     </div>
                 </div>
-                <img class="img-fluid rounded my-3" src="{{ asset($post->featured_image) }}" alt="">
+                <img class="img-fluid rounded mb-4" src="{{ asset($post->featured_image) }}" alt="">
 
-                {!! $post->body_html !!}
+                <div class="post-body">{!! $post->body_html !!}</div>
 
             </div>
             <div class="col-lg-3 col-md-12">

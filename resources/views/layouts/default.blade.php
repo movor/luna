@@ -22,7 +22,7 @@
         {{-- Styles --}}
 
         {{ Html::style(App::environment('production') ? mix('/css/vendor.css') : '/css/vendor.css') }}
-        {{ Html::style(App::environment('production') ? mix('/css/default.css') : '/css/default.css') }}
+        {{ Html::style(App::environment('production') ? mix('/css/layout_default.css') : '/css/layout_default.css') }}
 
         @yield('css-head')
 

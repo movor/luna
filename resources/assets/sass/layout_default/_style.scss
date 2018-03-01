@@ -50,19 +50,30 @@ nav {
 }
 
 // Blog view
-@import "~prismjs/plugins/toolbar/prism-toolbar";
+.blog-post-view {
+  .post-body {
+    img {
+      margin: $paragraph-margin-bottom 0;
+      max-width: 100%;
+    }
 
-.blog-post-view .featured-posts .card-body {
-  @include media-breakpoint-between(sm, md) {
-    height: 104px;
+    table {
+      margin-bottom: $paragraph-margin-bottom;
+    }
   }
 
-  .card-title {
+  .featured-posts .card-body {
     @include media-breakpoint-between(sm, md) {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
+      height: 104px;
+    }
+
+    .card-title {
+      @include media-breakpoint-between(sm, md) {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
     }
   }
 }

@@ -1,0 +1,69 @@
+code[class*=language-],
+pre[class*=language-] {
+  color: $gray-800;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: $font-size-base;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: $line-height-base * 1.2;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-base * 0.8;
+    line-height: $line-height-base;
+  }
+}
+
+pre[class*=language-] {
+  border-left: 2px solid rgba($primary, .7);
+  padding: 1rem 2rem;
+  margin-bottom: $paragraph-margin-bottom * 2;
+  overflow: auto;
+}
+
+:not(pre) > code[class*=language-] {
+  padding: .1em;
+  white-space: normal;
+}
+
+.token.function {
+  color: $primary;
+}
+
+.token.boolean,
+.token.keyword {
+  color: invert($primary);
+}
+
+.token.attr-name,
+.token.scope,
+.token.class-name,
+.token.package,
+.token.operator,
+.token.punctuation,
+.token.tag,
+.token.property,
+.token.this,
+.token.variable,
+.token.number,
+.token.attr-value,
+.token.char,
+.token.string {
+  color: $gray-800;
+}
+
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+  color: $gray-500;
+}
