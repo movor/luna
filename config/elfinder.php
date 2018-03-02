@@ -40,7 +40,7 @@ return [
 
     'route' => [
         'prefix' => config('backpack.base.route_prefix', 'admin') . '/elfinder',
-        'middleware' => ['web', 'admin'], //Set to null to disable middleware fcilter
+        'middleware' => ['web', 'admin'], // Set to null to disable middleware
     ],
 
     /*
@@ -69,6 +69,28 @@ return [
             'driver' => 'LocalFileSystem',
             'path' => storage_path('app/uploads'),
             'URL' => env('APP_URL') . '/uploads',
+            'attributes' => [
+                // Ignore all files starting with dot (.)
+                ['pattern' => '!^/[.]!', 'hidden' => true],
+                // Prevent deletion of project folders
+                ['pattern' => '!^/blog_post$!', 'locked' => true, 'write' => false],
+            ],
+            'accessControl' => function ($attr, $path, $data, $volume, $isDir) {
+                // Lock only folders (not files in them)
+                if ($isDir) {
+                    $lockDirs = [
+                        storage_path('app/uploads') . '/' . 'locked_folder',
+                    ];
+
+                    if (in_array($path, $lockDirs)) {
+                        if ($attr == 'locked') {
+                            return true;
+                        }
+                    }
+                }
+
+                return null;
+            }
         ]
     ],
 
@@ -82,6 +104,13 @@ return [
     |
     */
 
-    'options' => [],
-
+    'options' => [
+        'bind' => [
+            'upload.presave' => function (&$path, &$name, $tmpname, $context, $volume) {
+                // Sanitize uploaded file name
+                $fileInfo = pathinfo($name);
+                $name = str_slug($fileInfo['filename'], '_') . '.' . $fileInfo['extension'];
+            },
+        ],
+    ],
 ];

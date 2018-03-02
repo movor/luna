@@ -6,7 +6,7 @@ class BlogPostFeaturedImageCast extends ImageCastBase
 {
     public function storageDir()
     {
-        return 'uploads';
+        return 'uploads/blog_post';
     }
 
     public function castAttribute($value)

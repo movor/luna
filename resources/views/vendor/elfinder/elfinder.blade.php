@@ -32,7 +32,30 @@
                 customData: {
                     _token: '<?= csrf_token() ?>'
                 },
-                url : '<?= route("elfinder.connector") ?>'  // connector URL
+                url: '<?= route("elfinder.connector") ?>',  // connector URL
+                //
+                sound: false,
+                contextmenu: {
+                    // Click on tree
+                    navbar: ['rm'],
+                    // Click on empty space
+                    cwd: ['upload', 'mkdir', 'reload'],
+                    // Click on file
+                    files: ['rename', 'edit', 'resize', 'rm']
+                },
+                ui: ['toolbar', 'tree'],
+                commandsOptions: {
+                    resize: {
+                        presetSize: [[320, 240], [400, 400], [640, 480], [800, 600], [1280, 720]]
+                    },
+                },
+                uiOptions: {
+                    toolbar: [
+                        ['upload'],
+                        ['download', 'open'],
+                        ['back', 'forward']
+                    ]
+                }
             });
         });
     </script>
