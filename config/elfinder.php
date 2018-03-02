@@ -70,26 +70,69 @@ return [
             'path' => storage_path('app/uploads'),
             'URL' => env('APP_URL') . '/uploads',
             'attributes' => [
-                // Ignore all files starting with dot (.)
-                ['pattern' => '!^/[.]!', 'hidden' => true],
+                // Ignore .gitignore, .tmb and .quarantine
+                // ['pattern' => '/.(.gitignore|.tmb|.quarantine)/', 'hidden' => true],
                 // Prevent deletion of project folders
-                ['pattern' => '!^/blog_post$!', 'locked' => true, 'write' => false],
+                // ['pattern' => '!^/blog_post$!', 'locked' => true, 'write' => false],
             ],
             'accessControl' => function ($attr, $path, $data, $volume, $isDir) {
-                // Lock only folders (not files in them)
+                $storagePath = storage_path('app/uploads') . '/';
+
+                //
+                // Detect directories
+                //
+
                 if ($isDir) {
+
+                    //
+                    // Read Only (lock and prevent write)
+                    //
+
                     $lockDirs = [
-                        storage_path('app/uploads') . '/' . 'locked_folder',
+                        $storagePath . 'blog_post',
                     ];
 
                     if (in_array($path, $lockDirs)) {
-                        if ($attr == 'locked') {
+                        if ($attr == 'locked') return true;
+                        if ($attr == 'write') return false;
+                    }
+
+                    //
+                    // Hide
+                    //
+
+                    $hideDirs = [
+                        $storagePath . '.tmb',
+                        $storagePath . '.quarantine',
+                    ];
+
+                    if ($attr == 'hidden' && in_array($path, $hideDirs)) {
+                        return true;
+                    }
+                }
+
+                //
+                // Detect files
+                //
+
+                else {
+
+                    //
+                    // Hide recursive
+                    //
+
+                    $hideFilesRecursive = [
+                        '.gitignore'
+                    ];
+
+                    if ($attr == 'hidden') {
+                        $fileInfo = pathinfo($path);
+
+                        if (in_array($fileInfo['basename'], $hideFilesRecursive)) {
                             return true;
                         }
                     }
                 }
-
-                return null;
             }
         ]
     ],

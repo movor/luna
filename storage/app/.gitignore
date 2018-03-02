@@ -1,5 +1,6 @@
+# Ignore everything
 *
-!public/
-!uploads/
-!uploads/blog_post/
+
+# Except directories and .gitignore
+!*/
 !.gitignore
