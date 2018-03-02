@@ -6,16 +6,16 @@
         <div class="row">
             <div class="col-md-12">
 
-                @if (empty($tags[0]))
-
-                    <h1 class="mb-4">All Blog Posts</h1>
-
-                @else
+                @if ($tags)
 
                     <h1 class="mb-4">
                         Blog Posts
-                        <span class="text-muted">Containing Tags: ate, tet</span>
+                        <span class="text-muted">Containing Tags: {{ implode(', ', $tags) }}</span>
                     </h1>
+
+                @else
+
+                    <h1 class="mb-4">All Blog Posts</h1>
 
                 @endif
 

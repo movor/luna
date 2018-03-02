@@ -22,13 +22,13 @@
                 <p class="mb-4 pb-4">
                     Feel free to contact us any time using web form or email! Contact form is below, so don't hesitate,
                     contact us about everything you want to know. If form some reason you find easier to send us a mail
-                    you can click <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">here</a> or use this email address:
-                    <span class="text-primary">{{ env('APP_CONTACT_EMAIL') }}</span>
+                    directly you can click <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">here</a> or use this email
+                    address: <span class="text-primary">{{ env('APP_CONTACT_EMAIL') }}</span>
                 </p>
 
                 {{ Form::open() }}
 
-                <div class="form-group row mb-5">
+                <div class="form-group row mb-md-5">
                     <label for="email" class="col-sm-3 col-form-label form-control-lg">Email</label>
                     <div class="col-sm-9">
 
@@ -47,7 +47,7 @@
                     </div>
 
                 </div>
-                <div class="form-group row mb-5">
+                <div class="form-group row mb-md-5">
                     <label for="message" class="col-sm-3 col-form-label form-control-lg">Message</label>
                     <div class="col-sm-9">
 
