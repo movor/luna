@@ -29,9 +29,9 @@ class BlogPostCrudController extends CrudController
             'type' => 'dropdown',
         ], [0 => 'unpublished', 1 => 'published'], function ($value) {
             if ($value) {
-                $this->crud->query->whereNotNull('published_at');
+                $this->crud->query->published();
             } else {
-                $this->crud->query->whereNull('published_at');
+                $this->crud->query->published(false);
             }
         });
 

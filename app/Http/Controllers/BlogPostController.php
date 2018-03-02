@@ -3,33 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use App\Models\BlogTag;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Illuminate\Database\Eloquent\Builder;
 use Request;
 
 class BlogPostController extends Controller
 {
     public function index()
     {
-        // TODO.SOLVE: fix this
-        $tags = explode(',', Request::query('tags'));
-        if (!empty($tags[0])) {
-            $posts = BlogPost::whereHas('tags', function ($q) use ($tags) {
-                $q->whereIn('slug', explode(',', Request::query('tags')), 'and');
-            })->whereNotNull('published_at')->get();
-        } else {
-            $posts = BlogPost::whereNotNull('published_at')->get();
+        /* @var Builder $query */
+        $query = BlogPost::published();
+
+        $tags = Request::query('tags');
+
+        if ($tags) {
+            $tags = explode(',', $tags);
+            $query->whereHas('tags', function (Builder $query) use ($tags) {
+                $query->whereIn('slug', explode(',', Request::query('tags')), 'and');
+            });
         }
 
+        // SEO
         $title = 'Blog Posts';
-        $description = 'Checkout out our cool blog posts';
-
-        SEOMeta::setTitle($title . ' | ' . env('APP_NAME'))->setDescription($description);
-        OpenGraph::setDescription($description);
+        $description = 'Checkout out our cool blog posts. We are really proud of them.';
+        SEOMeta::setTitle($title)->setDescription($description);
 
         return view('blog_post.index')->with([
-            'posts' => $posts,
+            'posts' => $query->get(),
             'tags' => $tags
         ]);
     }
@@ -41,20 +42,19 @@ class BlogPostController extends Controller
             ->whereNotNull('published_at')
             ->firstOrFail();
 
+        // SEO
         $title = $post->title;
         $description = $post->summary;
         $keywords = $post->tags->pluck('name')->toArray();
         $image = $post->featured_image;
-
-        SEOMeta::setTitle($title . ' | ' . env('APP_NAME'))
+        SEOMeta::setTitle($title)
             ->setDescription($description)
             ->setKeywords($keywords);
-
         OpenGraph::addImage($image);
 
         return view('blog_post.view')->with([
             'post' => $post,
-            'featuredPosts' => BlogPost::inRandomOrder()->limit(3)->get() // TODO
+            'featuredPosts' => BlogPost::published()->featured()->inRandomOrder()->limit(3)->get() // TODO
         ]);
     }
 

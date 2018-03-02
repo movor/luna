@@ -29,7 +29,7 @@ class BlogPost extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(BlogTag::class)->withTimestamps();
+        return $this->belongsToMany(BlogTag::class)->orderBy('primary', 'desc')->withTimestamps();
     }
 
     public function user()
@@ -37,24 +37,26 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getBodyHtmlAttribute()
-    {
-        return (new Parsedown)->text($this->body);
-    }
-
     public function getIsPublishedAttribute()
     {
-        return $this->isPublished();
+        return (bool) $this->published_at;
     }
 
-    public function isPublished()
-    {
-        return (bool)$this->published_at;
-    }
-
-    public function getPrimaryTag(): BlogTag
+    public function getPrimaryTag()
     {
         return $this->tags()->where('primary', true)->first();
+    }
+
+    public function scopeFeatured($query, $featured = true)
+    {
+        return $query->where('featured', $featured);
+    }
+
+    public function scopePublished($query, $published = true)
+    {
+        return $published
+            ? $query->whereNotNull('published_at')
+            : $query->whereNull('published_at');
     }
 
     public function setTitleAttribute($value)
@@ -62,8 +64,8 @@ class BlogPost extends Model
         $this->attributes['title'] = ucwords($value);
     }
 
-    public function scopeFeatured($query)
+    public function getBodyHtmlAttribute()
     {
-        return $query->where('featured', true);
+        return (new Parsedown)->text($this->body);
     }
 }
