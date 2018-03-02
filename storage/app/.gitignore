@@ -1,6 +1,4 @@
-# Ignore everything
 *
-
-# Except directories and .gitignore
-!*/
+!public/
+!uploads/
 !.gitignore
