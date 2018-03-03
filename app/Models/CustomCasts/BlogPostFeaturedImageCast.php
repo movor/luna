@@ -12,7 +12,8 @@ class BlogPostFeaturedImageCast extends ImageCastBase
     public function castAttribute($value)
     {
         return $value
-            ? asset($value)
-            : asset('img/placeholders/blog_post.jpg');
+            ? new ImageVariations($value)
+            // ImageVariation object for placeholder
+            : new ImageVariationsPlaceholder('img/placeholders/blog_post.jpg');
     }
 }

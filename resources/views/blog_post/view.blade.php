@@ -28,7 +28,7 @@
 
                     </div>
                 </div>
-                <img class="img-fluid rounded mb-4" src="{{ asset($post->featured_image) }}" alt="">
+                <img class="img-fluid rounded mb-4" src="{{ asset($post->featured_image->xl()) }}" alt="">
 
                 <div class="post-body">{!! $post->body_html !!}</div>
 
@@ -69,7 +69,7 @@
                         <div class="col-sm-6 col-md-4 col-lg-12">
                             <a href="{{ $post->getPageUrl() }}">
                                 <div class="card mb-4">
-                                    <img class="card-img-top" src="{{ asset($post->featured_image) }}">
+                                    <img class="card-img-top" src="{{ asset($post->featured_image->lg()) }}">
                                     <div class="card-body">
                                         <p class="card-title font-weight-bold mb-0 text-muted">{{ $post->title }}</p>
                                     </div>

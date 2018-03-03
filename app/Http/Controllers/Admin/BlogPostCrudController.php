@@ -175,7 +175,7 @@ class BlogPostCrudController extends CrudController
                 'tab' => 'Other'
             ])
             ->addField([
-                'name' => 'featured_image',
+                'name' => 'featured_image_raw',
                 'label' => 'Featured Image',
                 'type' => 'image',
                 'crop' => 'true',
@@ -210,15 +210,17 @@ class BlogPostCrudController extends CrudController
     public function store(Request $request)
     {
         // Artificially add slug to the request object
-        $request->merge(['slug' => str_slug($request->title)]);
+        $request->request->set('slug', str_slug($request->title));
 
         $this->handlePrimaryTag($request);
         $this->handleEmptyImages($request);
+        $this->handleCustomCastableFeaturedImage($request);
 
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
             'slug' => 'unique:blog_posts,slug',
+            'body' => 'required'
         ]);
 
         return parent::storeCrud($request);
@@ -228,6 +230,7 @@ class BlogPostCrudController extends CrudController
     {
         $this->handlePrimaryTag($request);
         $this->handleEmptyImages($request);
+        $this->handleCustomCastableFeaturedImage($request);
 
         return parent::updateCrud();
     }
@@ -263,7 +266,7 @@ class BlogPostCrudController extends CrudController
      *
      * @param Request $request
      */
-    private function handleEmptyImages(Request $request)
+    protected function handleEmptyImages(Request $request)
     {
         $imageAttributes = [
             'featured_image',
@@ -273,6 +276,16 @@ class BlogPostCrudController extends CrudController
             if (strpos($request->get($attribute), 'data:image') === false) {
                 $request->request->remove($attribute);
             }
+        }
+    }
+
+    protected function handleCustomCastableFeaturedImage(Request $request)
+    {
+        $imageBase64 = object_get($request, 'featured_image_raw');
+
+        if ($imageBase64 && starts_with($imageBase64, 'data:image')) {
+            $request->request->remove('featured_image_raw');
+            $request->request->set('featured_image', $imageBase64);
         }
     }
 }

@@ -29,7 +29,7 @@
                                 {{-- Inner card --}}
 
                                 <div class="card card-inner text-white">
-                                    <img class="card-img-top" src="{{ asset($post->featured_image) }}">
+                                    <img class="card-img-top" src="{{ asset($post->featured_image->original()) }}">
                                     <div class="lead card-img-overlay d-flex align-items-end justify-content-end">
 
                                         @foreach($post->tags as $tag)

@@ -126,9 +126,9 @@ return [
                     ];
 
                     if ($attr == 'hidden') {
-                        $fileInfo = pathinfo($path);
+                        $pathInfo = pathinfo($path);
 
-                        if (in_array($fileInfo['basename'], $hideFilesRecursive)) {
+                        if (in_array($pathInfo['basename'], $hideFilesRecursive)) {
                             return true;
                         }
                     }
@@ -151,8 +151,8 @@ return [
         'bind' => [
             'upload.presave' => function (&$path, &$name, $tmpname, $context, $volume) {
                 // Sanitize uploaded file name
-                $fileInfo = pathinfo($name);
-                $name = str_slug($fileInfo['filename'], '_') . '.' . $fileInfo['extension'];
+                $pathInfo = pathinfo($name);
+                $name = str_slug($pathInfo['filename'], '_') . '.' . $pathInfo['extension'];
             },
         ],
     ],

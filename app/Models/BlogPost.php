@@ -42,6 +42,11 @@ class BlogPost extends Model
         return (bool) $this->published_at;
     }
 
+    public function getFeaturedImageRawAttribute()
+    {
+        return $this->getOriginal('featured_image');
+    }
+
     public function getPrimaryTag()
     {
         return $this->tags()->where('primary', true)->first();
@@ -61,7 +66,7 @@ class BlogPost extends Model
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title'] = ucwords($value);
+        $this->attributes['title'] = title_case($value);
     }
 
     public function getBodyHtmlAttribute()

@@ -46,7 +46,7 @@ class BlogPostController extends Controller
         $title = $post->title;
         $description = $post->summary;
         $keywords = $post->tags->pluck('name')->toArray();
-        $image = $post->featured_image;
+        $image = $post->featured_image->original();
         SEOMeta::setTitle($title)
             ->setDescription($description)
             ->setKeywords($keywords);

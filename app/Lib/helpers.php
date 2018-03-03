@@ -66,7 +66,9 @@ function ll($var, $level = 'debug')
     if (is_object($var)) {
         $var = (array) $var;
     } elseif (is_bool($var)) {
-        $var = $var ? 'TRUE' : 'FALSE';
+        $var = $var ? '~TRUE~' : '~FALSE~';
+    } elseif (is_null($var)) {
+        $var = '~NULL~';
     }
 
     \Log::$level($var);
