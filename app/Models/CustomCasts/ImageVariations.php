@@ -67,7 +67,7 @@ class ImageVariations
         return $this->dir . '/' . $this->filename . '-' . $size . '.' . $this->extension;
     }
 
-    public function original()
+    public function source()
     {
         return $this->absolutePath;
     }

@@ -137,12 +137,16 @@ abstract class ImageCastBase extends CustomCastableBase
      */
     protected function deleteImages()
     {
-        $pathInfo = pathinfo($this->model->getOriginal($this->attribute));
-        $dir = $pathInfo['dirname'];
-        $filename = $pathInfo['filename'];
+        $sourceImagePath = $this->model->getOriginal($this->attribute);
 
-        $pattern = storage_path('app/' . $dir) . '/' . $filename . '*';
+        if ($sourceImagePath && File::exists(storage_path('app/' . $sourceImagePath))) {
+            $pathInfo = pathinfo($sourceImagePath);
+            $dir = $pathInfo['dirname'];
+            $filename = $pathInfo['filename'];
 
-        File::delete(File::glob($pattern));
+            $pattern = storage_path('app/' . $dir) . '/' . $filename . '*';
+
+            File::delete(File::glob($pattern));
+        }
     }
 }

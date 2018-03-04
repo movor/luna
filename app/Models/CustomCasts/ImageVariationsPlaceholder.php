@@ -25,9 +25,4 @@ class ImageVariationsPlaceholder extends ImageVariations
 
         return $this->absolutePath;
     }
-
-    public function original()
-    {
-        return $this->absolutePath;
-    }
 }
