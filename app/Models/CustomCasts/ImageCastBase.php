@@ -98,7 +98,9 @@ abstract class ImageCastBase extends CustomCastableBase
      */
     public function created()
     {
-        ($this->storeImagesCallback)();
+        if (is_callable($this->storeImagesCallback)) {
+            ($this->storeImagesCallback)();
+        }
     }
 
     /**
