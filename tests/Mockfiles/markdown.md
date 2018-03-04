@@ -1,11 +1,34 @@
-## Medium header
+## Header 2
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae contraria sunt his, malane? Inde sermone vario <i>[redacted]</i> illa a Dipylo stadia confecimus. Duo Reges: constructio interrete. Hinc ceteri particulas arripere conati suam quisque videro voluit afferre sententiam. In quibus doctissimi illi veteres inesse quiddam caeleste et divinum putaverunt.
 
 Hoc non est positum in nostra actione. Audeo dicere, inquit. Bestiarum vero nullum iudicium puto. Materiam vero rerum et copiam apud hos exilem, apud illos uberrimam reperiemus. Et nemo nimium beatus est; Idemne potest esse dies saepius, qui semel fuit? Et certamen honestum et disputatio splendida! omnis est enim de virtutis dignitate contentio.
 
 Quo modo autem optimum, si bonum praeterea nullum est? Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint. Pauca mutat vel plura sane; Sed tempus est, si videtur, et recta quidem ad me. Illud non continuo, ut aeque incontentae. Iam in altera philosophiae parte. Minime vero istorum quidem, inquit. Virtutibus igitur rectissime mihi videris et ad consuetudinem nostrae orationis vitia posuisse contraria. Ego vero volo in virtute vim esse quam maximam; Quaerimus enim finem bonorum.
 
+### Header 3
 
+Some cool php code below
+
+```php
+
+namespace App\Lib\Mine;
+
+/**
+ * Calculate profitability in all prices coin has
+ *
+ * @param int $period
+ *
+ * @return array
+ */
+public function profitability($period = 1)
+{
+    return $this->calcProfit($period, $this->data);
+}
+
+```
+
+Hoc non est positum in nostra actione. Audeo dicere, inquit. Bestiarum vero nullum iudicium puto. Materiam vero rerum et copiam apud hos exilem, apud illos uberrimam reperiemus. Et nemo nimium beatus est; Idemne potest esse dies saepius, qui semel fuit? Et certamen honestum et disputatio splendida! omnis est enim de virtutis dignitate contentio.
 
 [Who are we?](http://movor.io/about)
 

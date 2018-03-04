@@ -32,7 +32,7 @@ nav {
 .blog-post-index {
   .card-body {
     .card-title {
-      min-height: 52px;
+      min-height: 58px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
@@ -40,7 +40,7 @@ nav {
     }
 
     .card-text {
-      min-height: 64px;
+      min-height: 78px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
@@ -64,7 +64,7 @@ nav {
 
   .featured-posts .card-body {
     @include media-breakpoint-between(sm, md) {
-      height: 104px;
+      height: 119px;
     }
 
     .card-title {

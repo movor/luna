@@ -17,7 +17,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 offset-lg-3">
+            <div class="col-lg-8 offset-lg-2">
                 <h1 class="">Contact Us</h1>
                 <p class="mb-4 pb-4">
                     Feel free to contact us any time using web form or email! Contact form is below, so don't hesitate,

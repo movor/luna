@@ -30,7 +30,7 @@
                 </div>
                 <img class="img-fluid rounded mb-4" src="{{ asset($post->featured_image->xl()) }}" alt="">
 
-                <div class="post-body">{!! $post->body_html !!}</div>
+                <div class="post-body text-justify">{!! $post->body_html !!}</div>
 
             </div>
             <div class="col-lg-3 col-md-12">
