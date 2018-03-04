@@ -10,7 +10,7 @@ pre[class*=language-] {
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  line-height: $line-height-base;
+  line-height: $line-height-base * 0.9;
   tab-size: 4;
   -moz-tab-size: 4;
   -o-tab-size: 4;

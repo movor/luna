@@ -1,5 +1,7 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/vendor.js": "/js/vendor.js",
+    "/css/vendor.css": "/css/vendor.css",
     "/css/layout_default.css": "/css/layout_default.css",
-    "/css/layout_error.css": "/css/layout_error.css"
+    "/css/layout_error.css": "/css/layout_error.css",
+    "/js/app.js": "/js/app.js"
 }

@@ -11,6 +11,7 @@ class BlogPostCrudController extends CrudController
     public function setup()
     {
         $this->crud->setModel(BlogPost::class);
+        $this->crud->orderBy('created_at', 'desc');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-post');
 
         // Filter: user

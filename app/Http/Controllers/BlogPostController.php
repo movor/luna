@@ -6,6 +6,7 @@ use App\Models\BlogPost;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Request;
 
 class BlogPostController extends Controller
@@ -37,10 +38,22 @@ class BlogPostController extends Controller
 
     public function view($slug)
     {
+        $query = BlogPost::where('slug', $slug);
+
+        // If admin is logged in, allow view of all posts,
+        // not only published ones
+        if (!Auth::check()) {
+            $query->published();
+        }
+
         /* @var BlogPost $post */
-        $post = BlogPost::where('slug', $slug)
-            ->whereNotNull('published_at')
-            ->firstOrFail();
+        $post = $query->firstOrFail();
+
+        // Featured posts
+        $featuredPosts = BlogPost::where('slug', '!=', $slug)
+            ->published()
+            ->featured()->inRandomOrder()
+            ->limit(3)->get();
 
         // SEO
         $title = $post->title;
@@ -54,7 +67,7 @@ class BlogPostController extends Controller
 
         return view('blog_post.view')->with([
             'post' => $post,
-            'featuredPosts' => BlogPost::published()->featured()->inRandomOrder()->limit(3)->get() // TODO
+            'featuredPosts' => $featuredPosts
         ]);
     }
 
