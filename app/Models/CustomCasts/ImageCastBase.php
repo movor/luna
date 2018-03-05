@@ -20,7 +20,7 @@ abstract class ImageCastBase extends CustomCastableBase
      *
      * @return mixed
      */
-    abstract function storageDir();
+    abstract static function storageDir();
 
     /**
      * @param $value
@@ -41,7 +41,7 @@ abstract class ImageCastBase extends CustomCastableBase
 
             // Make image object from base64 string
             $image = Image::make($value);
-            $newValue = $this->storageDir() . '/' . $filename . '.' . $extension;
+            $newValue = static::storageDir() . '/' . $filename . '.' . $extension;
 
             // Make sure images are saved when after model is saved,
             // not here (when attribute is set)
@@ -50,21 +50,23 @@ abstract class ImageCastBase extends CustomCastableBase
                 $originalImage = clone $image;
 
                 // Store original
-                $image->save($newValue, $imageQuality);
+                $image->save(storage_path_app($newValue), $imageQuality);
 
                 // Store other image sizes
                 foreach (config('custom_castable.image_sizes') as $imageSize) {
                     list($width, $height) = explode('x', $imageSize);
-                    $absolutePah = $this->storageDir() . '/' . $filename . '-' . $imageSize . '.' . $extension;
 
-                    // Save image with 75% quality
+                    // Variant image name and path
+                    $variantName = $filename . '-' . $imageSize . '.' . $extension;
+                    $variantRelPath = static::storageDir() . '/' . $variantName;
+
+                    // Save image with defined quality
                     (clone $originalImage)->fit($width, $height)
-                        ->save($absolutePah, $imageQuality);
+                        ->save(storage_path_app($variantRelPath), $imageQuality);
                 }
             };
-        } // Handle other types
-        else {
-            $newValue = $value;
+        } elseif (!is_null($newValue)) {
+            throw new \InvalidArgumentException('Image needs to be base64 encoded string');
         }
 
         return $newValue;

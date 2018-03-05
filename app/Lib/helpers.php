@@ -116,17 +116,18 @@ function chance($percent = 50, Closure $callback = null, $default = null)
 }
 
 /**
- * Get placeholder image (and cache it for further use) from picsum.photos service
+ * Storage path including prefix app dir
  *
- * @param        $name
- * @param string $width  Width in pixels
- * @param string $height Height in pixels
+ * @param string $path
  *
- * @return mixed
+ * @return string
  */
-function getPlaceholderImage($name, $width = '1280', $height = '720')
+function storage_path_app($path = '')
 {
-    return \Cache::rememberForever("placeholderImage.$name", function () use ($width, $height) {
-        return file_get_contents("https://picsum.photos/$width/$height?random");
-    });
+    // Make sure we do not have leading slash in path
+    if (str_start($path, '/')) {
+        $path = ltrim($path, '/');
+    }
+
+    return storage_path('app' . ($path ? '/' . $path : ''));
 }

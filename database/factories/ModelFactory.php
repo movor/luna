@@ -45,7 +45,10 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'featured' => chance(20),
         'featured_image' => chance(70, function () {
-            return 'img/placeholders/blog_post_' . str_random(8) . '.jpg';
+            $image = file_get_contents("https://picsum.photos/1280/720?random");
+            $base64Image = base64_encode($image);
+
+            return 'data:image/jpg;base64,' . $base64Image;
         }),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'slug' => str_slug($title),

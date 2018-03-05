@@ -4,7 +4,7 @@ namespace App\Models\CustomCasts;
 
 class BlogPostFeaturedImageCast extends ImageCastBase
 {
-    public function storageDir()
+    public static function storageDir()
     {
         return 'uploads/blog_post';
     }

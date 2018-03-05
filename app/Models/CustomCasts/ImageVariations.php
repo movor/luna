@@ -5,11 +5,11 @@ namespace App\Models\CustomCasts;
 class ImageVariations
 {
     /**
-     * Full path to image (path + file name + extension)
+     * Path to image relative to /storage/app (path + file name + extension)
      *
      * @var string
      */
-    protected $absolutePath;
+    protected $relPath;
 
     /**
      * Image base name (no path, no extension)
@@ -35,7 +35,7 @@ class ImageVariations
 
     public function __construct($imagePath)
     {
-        $this->absolutePath = $imagePath;
+        $this->relPath = $imagePath;
 
         $pathInfo = pathinfo($imagePath);
         $this->dir = $pathInfo['dirname'];
@@ -67,8 +67,14 @@ class ImageVariations
         return $this->dir . '/' . $this->filename . '-' . $size . '.' . $this->extension;
     }
 
+    /**
+     * Get the uploaded version of image,
+     * before resize (source version)
+     *
+     * @return string
+     */
     public function source()
     {
-        return $this->absolutePath;
+        return $this->relPath;
     }
 }
