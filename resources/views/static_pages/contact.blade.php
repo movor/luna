@@ -1,7 +1,5 @@
 @extends('layouts.default')
 
-@include('static_pages.partials.seo')
-
 @section('content')
 
     @php

@@ -19,7 +19,7 @@ class BlogPostCrudController extends CrudController
             'label' => 'Author',
             'name' => 'user',
             'type' => 'dropdown',
-        ], User::all()->pluck('name', 'id')->toArray(), function ($value) {
+        ], User::pluck('name', 'id')->toArray(), function ($value) {
             $this->crud->query->where('user_id', $value);
         });
 
@@ -41,7 +41,7 @@ class BlogPostCrudController extends CrudController
             'label' => 'Tag',
             'name' => 'blog_tag',
             'type' => 'select2_multiple',
-        ], BlogTag::all()->pluck('name', 'id')->toArray(), function ($values) {
+        ], BlogTag::pluck('name', 'id')->toArray(), function ($values) {
             $values = json_decode($values);
             if ($values) {
                 foreach ($values as $key => $value) {
@@ -139,7 +139,7 @@ class BlogPostCrudController extends CrudController
         // TODO.SOLVE
         if (\Request::segment(3)) {
             $segment = \Request::segment(3);
-            $options = BlogTag::all()->pluck('name', 'id')->toArray();
+            $options = BlogTag::pluck('name', 'id')->toArray();
 
             // Edit
             if (is_numeric($segment)) {

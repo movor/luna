@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\BlogTag;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Auth;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 use Request;
 
 class BlogPostController extends Controller
@@ -23,14 +24,23 @@ class BlogPostController extends Controller
             $query->whereHas('tags', function (Builder $query) use ($tags) {
                 $query->whereIn('slug', explode(',', Request::query('tags')), 'and');
             });
+
+            $title = 'Blog Posts Containing Tags: ' . implode(', ', $tags);
+        } else {
+            $title = "All Blog Posts";
         }
 
+        $posts = $query->get();
+
         // SEO
-        $title = 'Blog Posts';
-        $description = 'Checkout out our cool blog posts. We are really proud of them.';
-        SEOMeta::setTitle($title)->setDescription($description);
+        SEOMeta::setTitle($title)
+            ->setDescription('Checkout out our awesome blog posts. We wrote them with soul!')
+            ->setKeywords(BlogTag::pluck('name')->toArray())
+            ->setCanonical(url('blog'));
+        OpenGraph::addImage(asset($posts->first()->featured_image->xl()));
 
         return view('blog_post.index')->with([
+            'title' => $title,
             'posts' => $query->get(),
             'tags' => $tags
         ]);
@@ -49,21 +59,13 @@ class BlogPostController extends Controller
         /* @var BlogPost $post */
         $post = $query->firstOrFail();
 
-        // Featured posts
+        // Featured posts (exclude current)
         $featuredPosts = BlogPost::where('slug', '!=', $slug)
             ->published()
             ->featured()->inRandomOrder()
             ->limit(3)->get();
 
-        // SEO
-        $title = $post->title;
-        $description = $post->summary;
-        $keywords = $post->tags->pluck('name')->toArray();
-        $image = $post->featured_image->source();
-        SEOMeta::setTitle($title)
-            ->setDescription($description)
-            ->setKeywords($keywords);
-        OpenGraph::addImage($image);
+        $this->setMeta($post);
 
         return view('blog_post.view')->with([
             'post' => $post,
@@ -73,11 +75,31 @@ class BlogPostController extends Controller
 
     public function viewCanonical($id)
     {
-        // TODO: add SEO tools to the canonical page, currently default
-        $blogPost = BlogPost::where('id', $id)
-            ->whereNotNull('published_at')
+        $post = BlogPost::published()
+            ->where('id', $id)
             ->firstOrFail();
 
-        return view('blog_post.view', ['post' => $blogPost]);
+        // Featured posts (exclude current)
+        $featuredPosts = BlogPost::where('id', '!=', $id)
+            ->published()
+            ->featured()->inRandomOrder()
+            ->limit(3)->get();
+
+        $this->setMeta($post);
+
+        return view('blog_post.view')->with([
+            'post' => $post,
+            'featuredPosts' => $featuredPosts
+        ]);
+    }
+
+    protected function setMeta(BlogPost $post)
+    {
+        SEOMeta::setTitle($post->title)
+            ->setDescription($post->summary)
+            ->setKeywords($post->tags->pluck('name')->toArray())
+            ->setCanonical(url('blog-post/' . $post->id));
+
+        OpenGraph::addImage(asset($post->featured_image->xl()));
     }
 }

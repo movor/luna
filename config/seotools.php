@@ -6,7 +6,8 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults' => [
-            'title' => false, // set false to total remove
+            'separator' => ' | ',
+            'title' => env('APP_NAME'), // set false to total remove
             'description' => false, // set false to total remove
             'keywords' => [],
             'canonical' => false, // Set null for using Url::current(), set false to total remove
@@ -28,12 +29,14 @@ return [
          * The default configurations to be used by the opengraph generator.
          */
         'defaults' => [
-            'title' => env('APP_NAME'), // set false to total remove
+            'title' => false, // set false to total remove
             'description' => false, // set false to total remove
             'url' => false, // Set null for using Url::current(), set false to total remove
             'type' => false,
             'site_name' => false,
-            'images' => [],
+            'images' => [
+                env('APP_URL') . '/img/movor_icon.png'
+            ],
         ],
     ],
     'twitter' => [
@@ -41,8 +44,8 @@ return [
          * The default values to be used by the twitter cards generator.
          */
         'defaults' => [
-            //'card'        => 'summary',
-            //'site'        => '@LuizVinicius73',
+            // 'card'        => 'summary',
+            'site'        => '@_movor',
         ],
     ],
 ];

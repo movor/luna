@@ -60,7 +60,7 @@ class BlogPost extends Model
     public function scopePublished($query, $published = true)
     {
         return $published
-            ? $query->whereNotNull('published_at')
+            ? $query->whereNotNull('published_at')->orderBy('published_at')
             : $query->whereNull('published_at');
     }
 

@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index', [
-        'title' => '',
-        'description' => 'Main page of Movor, Belgrade based, software development team.',
-    ]);
-});
+//
+// Static pages
+//
+
+Route::get('/', 'StaticPageController@index');
+Route::get('/about', 'StaticPageController@about');
+Route::match(['post', 'get'], '/contact', 'StaticPageController@contact');
 
 //
 // Blog
@@ -27,20 +28,18 @@ Route::get('blog/{slug}', 'BlogPostController@view');
 Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 //
-// Static pages
+// Cached placeholder images (from external source, but served as internal)
 //
 
-Route::match(['post', 'get'], '/contact', 'PagesController@contact');
-Route::match(['post', 'get'], '/about', 'PagesController@about');
-
-//
-// Placeholder images (from external source, but server as internal)
-//
-
-Route::get('img/placeholders/{name}.jpg', function ($model) {
-    $width = Request::query('height', 1280);
+Route::get('img/placeholders/{name}.jpg', function ($name) {
+    $width = Request::query('width', 1280);
     $height = Request::query('height', 720);
 
-    $image = getPlaceholderImage($model, $width, $height);
+    $cacheKey = 'placeholderImage.' . $name . '-' . $width . 'x' . $height;
+
+    $image = \Cache::rememberForever($cacheKey, function () use ($width, $height) {
+        return file_get_contents("https://picsum.photos/$width/$height?random");
+    });
+
     return Image::make($image)->response();
 });
