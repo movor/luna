@@ -47,7 +47,7 @@
                                     <a href="/about">{{ $post->user->name }}</a>
                                     <span class="float-right">
                                         <small class="align-text-bottom">
-                                            {{ $post->published_at->format('d M Y') }}
+                                            {{ $post->published_at->format('d F, Y') }}
                                         </small>
                                     </span>
                                 </div>

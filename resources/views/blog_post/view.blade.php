@@ -14,7 +14,7 @@
                     <div class="mb-3">
                         <small>
                             <span class="text-muted">Posted on</span>
-                            {{ $post->published_at ? $post->published_at->format('d M Y') : '' }}
+                            {{ $post->published_at ? $post->published_at->format('d F, Y') : '' }}
                         </small>
                     </div>
                     <div>
