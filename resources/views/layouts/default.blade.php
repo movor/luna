@@ -2,10 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
 
-        @if (App::environment('production'))
-            // TODO
-            // Google analytics
-        @endif
+        @includeWhen(App::environment('production') && env('GOOGLE_ANALYTICS_KEY'), 'partials.google_analytics')
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 

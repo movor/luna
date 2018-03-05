@@ -52,6 +52,10 @@ nav {
 // Blog view
 .blog-post-view {
   .post-body {
+    p {
+      font-size: 1.2rem;
+    }
+
     img {
       margin: $paragraph-margin-bottom 0;
       max-width: 100%;

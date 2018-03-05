@@ -37,49 +37,53 @@
 
                 {{-- All Tags --}}
 
-                <h5 class="text-muted">All Tags</h5>
+                @if($allTags->isNotEmpty())
 
-                <div class="card mb-4">
+                    <h5 class="text-muted">All Tags</h5>
 
-                    <div class="card-body">
-                        <div class="row">
+                    <div class="card mb-4">
 
-                            @foreach(\App\Models\BlogTag::all() as $tag)
+                        <div class="card-body">
 
-                                <div class="col-6 col-sm-4 col-md-3 col-lg-6 text-truncate text-primary mb-1">
-                                    <a href="/blog?tags={{ $tag->slug }}">{{ $tag->name }}</a>
-                                </div>
+                            @foreach($allTags as $tag)
+
+                                <a class="badge badge-primary mr-1 mb-1" href="/blog?tags={{ $tag->slug }}">{{ $tag->name }}</a>
 
                             @endforeach
 
                         </div>
                     </div>
-                </div>
+
+                @endif
 
                 {{-- /All Tags --}}
 
                 {{-- Featured Posts --}}
 
-                <h5 class="text-muted">Featured Posts</h5>
+                @if($featuredPosts->isNotEmpty())
 
-                <div class="row featured-posts">
+                    <h5 class="text-muted">Featured Posts</h5>
 
-                    @foreach($featuredPosts as $post)
+                    <div class="row featured-posts">
 
-                        <div class="col-sm-6 col-md-4 col-lg-12">
-                            <a href="{{ $post->getPageUrl() }}">
-                                <div class="card mb-4">
-                                    <img class="card-img-top" src="{{ asset($post->featured_image->lg()) }}">
-                                    <div class="card-body">
-                                        <p class="card-title font-weight-bold mb-0 text-muted">{{ $post->title }}</p>
+                        @foreach($featuredPosts as $post)
+
+                            <div class="col-sm-6 col-md-4 col-lg-12">
+                                <a href="{{ $post->getPageUrl() }}">
+                                    <div class="card mb-4">
+                                        <img class="card-img-top" src="{{ asset($post->featured_image->lg()) }}">
+                                        <div class="card-body">
+                                            <p class="card-title font-weight-bold mb-0 text-muted">{{ $post->title }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
-                    @endforeach
+                        @endforeach
 
-                </div>
+                    </div>
+
+                @endif
 
                 {{-- /Featured Posts --}}
 

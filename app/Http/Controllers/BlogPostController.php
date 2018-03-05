@@ -17,32 +17,33 @@ class BlogPostController extends Controller
         /* @var Builder $query */
         $query = BlogPost::published();
 
-        $tags = Request::query('tags');
+        $filterTags = Request::query('tags');
 
-        if ($tags) {
-            $tags = explode(',', $tags);
-            $query->whereHas('tags', function (Builder $query) use ($tags) {
+        if ($filterTags) {
+            $filterTags = explode(',', $filterTags);
+            $query->whereHas('tags', function (Builder $query) use ($filterTags) {
                 $query->whereIn('slug', explode(',', Request::query('tags')), 'and');
             });
 
-            $title = 'Blog Posts Containing Tags: ' . implode(', ', $tags);
+            $title = 'Blog Posts Containing Tags: ' . implode(', ', $filterTags);
         } else {
             $title = "All Blog Posts";
         }
 
         $posts = $query->get();
 
-        // SEO
         SEOMeta::setTitle($title)
             ->setDescription('Checkout out our awesome blog posts. We wrote them with soul!')
             ->setKeywords(BlogTag::pluck('name')->toArray())
             ->setCanonical(url('blog'));
-        OpenGraph::addImage(asset($posts->first()->featured_image->xl()));
+
+        if ($posts->isNotEmpty()) {
+            OpenGraph::addImage(asset($posts->first()->featured_image->xl()));
+        }
 
         return view('blog_post.index')->with([
             'title' => $title,
-            'posts' => $query->get(),
-            'tags' => $tags
+            'posts' => $query->get()
         ]);
     }
 
@@ -69,7 +70,8 @@ class BlogPostController extends Controller
 
         return view('blog_post.view')->with([
             'post' => $post,
-            'featuredPosts' => $featuredPosts
+            'featuredPosts' => $featuredPosts,
+            'allTags' => BlogTag::all()
         ]);
     }
 
@@ -89,7 +91,8 @@ class BlogPostController extends Controller
 
         return view('blog_post.view')->with([
             'post' => $post,
-            'featuredPosts' => $featuredPosts
+            'featuredPosts' => $featuredPosts,
+            'allTags' => BlogTag::all()
         ]);
     }
 

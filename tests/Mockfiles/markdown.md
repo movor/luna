@@ -11,7 +11,6 @@ Quo modo autem optimum, si bonum praeterea nullum est? Parvi enim primo ortu sic
 Some cool php code below
 
 ```php
-
 namespace App\Lib\Mine;
 
 /**
@@ -25,7 +24,6 @@ public function profitability($period = 1)
 {
     return $this->calcProfit($period, $this->data);
 }
-
 ```
 
 Hoc non est positum in nostra actione. Audeo dicere, inquit. Bestiarum vero nullum iudicium puto. Materiam vero rerum et copiam apud hos exilem, apud illos uberrimam reperiemus. Et nemo nimium beatus est; Idemne potest esse dies saepius, qui semel fuit? Et certamen honestum et disputatio splendida! omnis est enim de virtutis dignitate contentio.

@@ -3119,6 +3119,10 @@ nav .navbar-brand img {
   }
 }
 
+.blog-post-view .post-body p {
+  font-size: 1.2rem;
+}
+
 .blog-post-view .post-body img {
   margin: 1rem 0;
   max-width: 100%;
