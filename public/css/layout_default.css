@@ -3095,8 +3095,25 @@ body {
   padding-bottom: 183px;
 }
 
-nav .navbar-brand img {
+.navbar {
+  border-bottom: 2px solid rgba(30, 159, 99, 0.3);
+}
+
+.navbar .navbar-brand img {
   height: 32px;
+}
+
+blockquote {
+  border-radius: 0.25rem;
+  background-color: rgba(30, 159, 99, 0.1);
+  padding: 1rem 1.5rem;
+  border: 1px solid #1E9F63;
+}
+
+blockquote p {
+  margin-bottom: 0;
+  font-size: 1.1rem !important;
+  font-family: "Lato", sans-serif;
 }
 
 .blog-post-index .card-body .card-title {
@@ -3119,12 +3136,20 @@ nav .navbar-brand img {
   }
 }
 
+.blog-post-view .post-body h1,
+.blog-post-view .post-body h2,
+.blog-post-view .post-body h3,
+.blog-post-view .post-body h4,
+.blog-post-view .post-body h5 {
+  margin-bottom: 1rem;
+}
+
 .blog-post-view .post-body p {
   font-size: 1.2rem;
 }
 
 .blog-post-view .post-body img {
-  margin: 1rem 0;
+  margin-bottom: 1rem;
   max-width: 100%;
 }
 

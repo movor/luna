@@ -3,15 +3,22 @@
 @section('content')
 
     <div class="container">
-        <h1 class="">About Us</h1>
-        <p class="mb-4 pb-4">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias amet aperiam culpa,
-            doloribus excepturi facilis illum inventore labore mollitia nisi non officia porro quam quasi qui quis
-            voluptatibus?
-        </p>
+        <div class="row mb-5">
+            <div class="col-lg-10 offset-lg-1">
+                <h1 class="">About Us</h1>
+                <p class="mb-4 pb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias amet aperiam
+                    culpa,
+                    doloribus excepturi facilis illum inventore labore mollitia nisi non officia porro quam quasi qui
+                    quis
+                    voluptatibus?
+                </p>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-4 text-center mb-5 px-md-5">
-                <img class="rounded-circle mb-3" src="/img/placeholders/person_1.jpg?height=140&width=140">
+                <img class="rounded-circle mb-5" src="/img/placeholders/person_1.jpg?height=140&width=140">
                 <h2 class="mb-3">Person One</h2>
                 <p class="text-justify">
                     Alias assumenda autem consectetur corporis
@@ -23,7 +30,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-center mb-5 px-md-5">
-                <img class="rounded-circle mb-3" src="/img/placeholders/person_2.jpg?height=140&width=140">
+                <img class="rounded-circle mb-5" src="/img/placeholders/person_2.jpg?height=140&width=140">
                 <h2 class="mb-3">Person Two</h2>
                 <p class="text-justify">
                     Consectetur deleniti dignissimos dolorem, doloremque doloribus
@@ -34,7 +41,7 @@
                 </p>
             </div>
             <div class="col-lg-4 text-center mb-5 px-md-5">
-                <img class="rounded-circle mb-3" src="/img/placeholders/person_3.jpg?height=140&width=140">
+                <img class="rounded-circle mb-5" src="/img/placeholders/person_3.jpg?height=140&width=140">
                 <h2 class="mb-3">Person Three</h2>
                 <p class="text-justify">
                     A ad aliquam animi assumenda consequatur culpa dignissimos dolor dolorum eligendi eos et fugit hic

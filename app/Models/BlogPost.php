@@ -71,6 +71,11 @@ class BlogPost extends Model
 
     public function getBodyHtmlAttribute()
     {
-        return (new Parsedown)->text($this->body);
+        $rendered = (new Parsedown)->text($this->body);
+
+        // Customizations (Bootstrap classes)
+        $rendered = str_replace('<table>', '<table class="table">', $rendered);
+
+        return $rendered;
     }
 }

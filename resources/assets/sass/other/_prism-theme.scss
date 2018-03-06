@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+$font-family-code: 'Ubuntu Mono', monospace;
 
 code[class*=language-],
 pre[class*=language-] {
+  background-color: $gray-100;
   color: $body-color;
-  font-family: 'Ubuntu Mono', monospace;
+  font-family: $font-family-code;
   font-size: $font-size-base;
   text-align: left;
   white-space: pre;
@@ -25,10 +27,18 @@ pre[class*=language-] {
   }
 }
 
+code {
+  @include border-radius();
+  font-family: $font-family-code;
+  color: invert($primary);
+  background-color: $gray-100;
+  padding: 3px 6px;
+}
+
 pre[class*=language-] {
   border-left: 2px solid rgba($primary, .7);
-  padding: 1rem 2rem;
-  margin-bottom: $paragraph-margin-bottom * 2;
+  padding: 1rem 1.5rem;
+  margin-bottom: $paragraph-margin-bottom;
   overflow: auto;
 }
 

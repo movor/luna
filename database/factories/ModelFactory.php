@@ -44,7 +44,7 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
         'title' => ucwords($title),
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'featured' => chance(20),
-        'featured_image' => chance(70, function () {
+        'featured_image' => chance(90, function () {
             $image = file_get_contents("https://picsum.photos/1280/720?random");
             $base64Image = base64_encode($image);
 

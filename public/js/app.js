@@ -262,7 +262,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         shortname: {
             type: String,
             required: false,
-            default: "movor-dev"
+            default: "test"
         },
         identifier: {
             type: String,
@@ -277,7 +277,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         title: {
             type: String,
             required: false,
-            default: Object({"MIX_DISQS_WEBSITE":"movor-dev","NODE_ENV":"local"}).APP_NAME
+            default: Object({"MIX_DISQS_WEBSITE":"test","NODE_ENV":"local"}).APP_NAME
         }
     },
     mounted: function mounted() {

@@ -18,7 +18,9 @@ body {
 // Header
 //
 
-nav {
+.navbar {
+  border-bottom: 2px solid rgba($primary, .3);
+
   .navbar-brand img {
     height: 32px;
   }
@@ -27,6 +29,20 @@ nav {
 //
 // Content
 //
+
+// Block quotes
+blockquote {
+  @include border-radius();
+  background-color: rgba($primary, .1);
+  padding: 1rem 1.5rem;
+  border: 1px solid $primary;
+
+  p {
+    margin-bottom: 0;
+    font-size: $font-size-base !important;
+    font-family: $font-family-monospace;
+  }
+}
 
 // Blog Index
 .blog-post-index {
@@ -52,12 +68,16 @@ nav {
 // Blog view
 .blog-post-view {
   .post-body {
+    h1, h2, h3, h4, h5 {
+      margin-bottom: $paragraph-margin-bottom;
+    }
+
     p {
       font-size: 1.2rem;
     }
 
     img {
-      margin: $paragraph-margin-bottom 0;
+      margin-bottom: $paragraph-margin-bottom;
       max-width: 100%;
     }
 

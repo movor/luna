@@ -2,11 +2,10 @@
 
 @section('content')
 
-    <div class="container text-light">
-
+    <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="my-5 px-lg-5">
+            <div class="col-lg-10 offset-lg-1">
+                <div class="my-5">
                     <h1 class="text-center pb-5">Main content </h1>
                     <p class="text-justify">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur cumque esse odio
@@ -52,15 +51,5 @@
             </div>
         </div>
     </div>
-
-@endsection
-
-@section('css-head')
-
-    <style>
-        body {
-            background-color: #343a40 !important;
-        }
-    </style>
 
 @endsection
