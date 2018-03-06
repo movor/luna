@@ -1,5 +1,7 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/layout_default.css": "/css/layout_default.css",
-    "/css/layout_error.css": "/css/layout_error.css"
+    "/js/vendor.js": "/js/vendor.js?id=9e507782c35abb1a5ab6",
+    "/css/vendor.css": "/css/vendor.css?id=d39fe360fc88a3eff038",
+    "/css/layout_default.css": "/css/layout_default.css?id=81ac6ac3b07e6f1aff59",
+    "/css/layout_error.css": "/css/layout_error.css?id=b01d90de2612b6561b29",
+    "/js/app.js": "/js/app.js?id=c799b9866cd59a847a94"
 }
