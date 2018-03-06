@@ -11,6 +11,7 @@ class BlogTagCrudController extends CrudController
     public function setup()
     {
         $this->crud->setModel(BlogTag::class);
+        $this->crud->orderBy('name', 'asc');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-tag');
 
         // Columns
@@ -30,20 +31,28 @@ class BlogTagCrudController extends CrudController
 
     public function store(Request $request)
     {
-        // Tags will always be written with small letters.
-        $request->merge(['slug' => str_slug($request->name)]);
-        $request->merge(['name' => strtolower($request->name)]);
+        // Name will always be slugified
+        $request->merge(['name' => str_slug($request->name)]);
 
-        $this->validate($request, [
-            'name' => 'required|min:2|max:32|unique:blog_tags,name',
-            'slug' => 'unique:blog_tags,slug'
-        ]);
+        $this->validateFields($request);
 
         return parent::storeCrud($request);
     }
 
     public function update(Request $request)
     {
+        // Name will always be converted to slug
+        $request->merge(['name' => str_slug($request->name)]);
+
+        $this->validateFields($request);
+
         return parent::updateCrud();
+    }
+
+    protected function validateFields(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:2|max:32|unique'
+        ]);
     }
 }

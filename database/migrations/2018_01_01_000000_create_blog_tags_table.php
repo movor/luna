@@ -16,7 +16,6 @@ class CreateBlogTagsTable extends Migration
         Schema::create('blog_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

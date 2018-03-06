@@ -65,8 +65,11 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 $factory->define(App\Models\BlogTag::class, function (Faker $faker) {
     $name = $faker->unique()->word;
 
+    $name = chance(30, function () use ($faker, $name) {
+        return $name . ' ' . $faker->unique()->word;
+    }, $name);
+
     return [
-        'name' => $name,
-        'slug' => str_slug($name)
+        'name' => str_slug($name),
     ];
 });

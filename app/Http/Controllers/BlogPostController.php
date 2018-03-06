@@ -22,7 +22,7 @@ class BlogPostController extends Controller
         if ($filterTags) {
             $filterTags = explode(',', $filterTags);
             $query->whereHas('tags', function (Builder $query) use ($filterTags) {
-                $query->whereIn('slug', explode(',', Request::query('tags')), 'and');
+                $query->whereIn('name', explode(',', Request::query('tags')), 'and');
             });
 
             $title = 'Blog Posts Containing Tags: ' . implode(', ', $filterTags);

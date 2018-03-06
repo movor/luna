@@ -10,7 +10,7 @@ class BlogTag extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['name', 'slug'];
+    protected $fillable = ['name'];
 
     /**
      * @return BelongsToMany
@@ -18,5 +18,10 @@ class BlogTag extends Model
     public function posts()
     {
         return $this->belongsToMany(BlogPost::class);
+    }
+
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('name', 'asc');
     }
 }

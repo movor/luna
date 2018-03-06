@@ -49,7 +49,9 @@ class BlogPost extends Model
 
     public function getPrimaryTag()
     {
-        return $this->tags()->where('primary', true)->first();
+        $tag = $this->tags()->where('primary', true)->first();
+
+        return $tag ?: $this->tags()->first();
     }
 
     public function scopeFeatured($query, $featured = true)

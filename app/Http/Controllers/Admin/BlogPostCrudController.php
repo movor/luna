@@ -139,7 +139,7 @@ class BlogPostCrudController extends CrudController
         // TODO.SOLVE
         if (\Request::segment(3)) {
             $segment = \Request::segment(3);
-            $options = BlogTag::pluck('name', 'id')->toArray();
+            $options = BlogTag::ordered()->pluck('name', 'id')->toArray();
 
             // Edit
             if (is_numeric($segment)) {
@@ -148,7 +148,7 @@ class BlogPostCrudController extends CrudController
                 $selected = $post->getPrimaryTag()->id;
             } // Create
             else {
-                $selected = BlogTag::first()->id;
+                $selected = BlogTag::ordered()->first()->id;
             }
 
             $this->crud->addField([
@@ -171,7 +171,7 @@ class BlogPostCrudController extends CrudController
         $this->crud
             ->addField([
                 'label' => 'Slug',
-                'name' => 'slug',
+                'name' => 'name',
                 'attributes' => ['disabled' => 'disabled'],
                 'tab' => 'Other'
             ])
@@ -213,22 +213,32 @@ class BlogPostCrudController extends CrudController
         // Artificially add slug to the request object
         $request->request->set('slug', str_slug($request->title));
 
-        $this->handlePrimaryTag($request);
-        $this->handleEmptyImages($request);
-        $this->handleCustomCastableFeaturedImage($request);
-
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
-            'slug' => 'unique:blog_posts,slug',
+            'slug' => 'required|unique:blog_posts,slug',
             'body' => 'required'
         ]);
+
+        $this->handlePrimaryTag($request);
+        $this->handleEmptyImages($request);
+        $this->handleCustomCastableFeaturedImage($request);
 
         return parent::storeCrud($request);
     }
 
     public function update(Request $request)
     {
+        // Artificially add slug to the request object
+        $request->request->set('slug', str_slug($request->title));
+
+        $this->validate($request, [
+            'title' => 'required|min:5|max:128',
+            'summary' => 'required|min:30|max:255',
+            'slug' => 'required',
+            'body' => 'required'
+        ]);
+
         $this->handlePrimaryTag($request);
         $this->handleEmptyImages($request);
         $this->handleCustomCastableFeaturedImage($request);

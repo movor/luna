@@ -22,7 +22,7 @@
 
                         @foreach($post->tags as $tag)
 
-                            <a href="{{ url("blog?tags=$tag->slug") }}" class="badge badge-primary">{{ $tag->name }}</a>
+                            <a href="{{ url("blog?tags=$tag->name") }}" class="badge badge-primary">{{ $tag->name }}</a>
 
                         @endforeach
 
@@ -47,7 +47,7 @@
 
                             @foreach($allTags as $tag)
 
-                                <a class="badge badge-primary mr-1 mb-1" href="/blog?tags={{ $tag->slug }}">{{ $tag->name }}</a>
+                                <a class="badge badge-primary mr-1 mb-1" href="/blog?tags={{ $tag->name }}">{{ $tag->name }}</a>
 
                             @endforeach
 

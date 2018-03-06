@@ -30,7 +30,9 @@ class StaticPageController extends Controller
             ]);
 
             Mail::raw($request->message, function (Message $mail) use ($request) {
-                $mail->to($request->email);
+                $mail->subject(env('APP_NAME') . ' Contact Form')
+                    ->from($request->email)
+                    ->to(env('APP_CONTACT_EMAIL'));
             });
 
             return redirect()
