@@ -141,25 +141,27 @@ class BlogPostCrudController extends CrudController
             $segment = \Request::segment(3);
             $options = BlogTag::ordered()->pluck('name', 'id')->toArray();
 
-            // Edit
-            if (is_numeric($segment)) {
-                $postId = $segment;
-                $post = BlogPost::find($postId);
-                $selected = $post->getPrimaryTag()->id;
-            } // Create
-            else {
-                $selected = BlogTag::ordered()->first()->id;
-            }
+            if ($options) {
+                // Edit
+                if (is_numeric($segment)) {
+                    $postId = $segment;
+                    $post = BlogPost::find($postId);
+                    $selected = $post->getPrimaryTag()->id;
+                } // Create
+                else {
+                    $selected = BlogTag::ordered()->first()->id;
+                }
 
-            $this->crud->addField([
-                'name' => 'primary_tag', // the name of the db column
-                'label' => 'Primary Tag', // the input label
-                'type' => 'select_from_array_with_default',
-                'options' => $options,
-                'selected' => $selected,
-                'allow_null' => false,
-                'tab' => 'Basics'
-            ])->afterField('title');
+                $this->crud->addField([
+                    'name' => 'primary_tag',
+                    'label' => 'Primary Tag',
+                    'type' => 'select_from_array_with_default',
+                    'options' => $options,
+                    'selected' => $selected,
+                    'allow_null' => false,
+                    'tab' => 'Basics'
+                ])->afterField('title');
+            }
         }
 
         return $this;

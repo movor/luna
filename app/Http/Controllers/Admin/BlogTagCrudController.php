@@ -52,7 +52,7 @@ class BlogTagCrudController extends CrudController
     protected function validateFields(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:2|max:32|unique'
+            'name' => 'required|min:2|max:32|unique:blog_tags,name',
         ]);
     }
 }
