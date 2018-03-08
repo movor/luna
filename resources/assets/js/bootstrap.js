@@ -14,8 +14,18 @@ try {
     // (see customize_bootstrap.js file)
     //window.Popper = require('popper.js').default;
 
-    // Bootstrap separate js components inclusion can be defined in the file below
-    require('./customize_bootstrap');
+    // Bootstrap (separate js components)
+    require ('../../../node_modules/bootstrap/js/src/alert');
+    //require ('../../../node_modules/bootstrap/js/src/button');
+    //require ('../../../node_modules/bootstrap/js/src/carousel');
+    //require ('../../../node_modules/bootstrap/js/src/collapse');
+    //require ('../../../node_modules/bootstrap/js/src/dropdown');
+    //require ('../../../node_modules/bootstrap/js/src/modal');
+    //require ('../../../node_modules/bootstrap/js/src/popover');
+    //require ('../../../node_modules/bootstrap/js/src/scrollspy');
+    //require ('../../../node_modules/bootstrap/js/src/tab');
+    //require ('../../../node_modules/bootstrap/js/src/tooltip');
+    //require ('../../../node_modules/bootstrap/js/src/util');
 } catch (e) {}
 
 /**
