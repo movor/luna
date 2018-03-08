@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/type";
+
+blockquote {
+  border-left: $paragraph-margin-bottom solid rgba($primary, .3);
+  background-color: $gray-100;
+  padding: 1rem 1.5rem;
+
+  font-size: $font-size-base * .9 !important;
+  font-family: $font-family-monospace;
+
+  p {
+    margin-bottom: 0;
+    font-size: $font-size-base * .9 !important;
+    font-family: $font-family-monospace;
+  }
+}

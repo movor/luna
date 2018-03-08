@@ -14,18 +14,21 @@ try {
     // (see customize_bootstrap.js file)
     //window.Popper = require('popper.js').default;
 
+    require('bootstrap');
+    // TODO.WHEN:bootstrap solves bug with "Util is not defined"
     // Bootstrap (separate js components)
-    require ('../../../node_modules/bootstrap/js/src/alert');
-    //require ('../../../node_modules/bootstrap/js/src/button');
-    //require ('../../../node_modules/bootstrap/js/src/carousel');
-    //require ('../../../node_modules/bootstrap/js/src/collapse');
-    //require ('../../../node_modules/bootstrap/js/src/dropdown');
-    //require ('../../../node_modules/bootstrap/js/src/modal');
-    //require ('../../../node_modules/bootstrap/js/src/popover');
-    //require ('../../../node_modules/bootstrap/js/src/scrollspy');
-    //require ('../../../node_modules/bootstrap/js/src/tab');
-    //require ('../../../node_modules/bootstrap/js/src/tooltip');
-    //require ('../../../node_modules/bootstrap/js/src/util');
+    //require('../../../node_modules/bootstrap/js/dist/alert');
+    //require('../../../node_modules/bootstrap/js/dist/button');
+    //require('../../../node_modules/bootstrap/js/dist/carousel');
+    //require('../../../node_modules/bootstrap/js/dist/collapse');
+    //require('../../../node_modules/bootstrap/js/dist/dropdown');
+    //require('../../../node_modules/bootstrap/js/dist/modal');
+    //require('../../../node_modules/bootstrap/js/dist/popover');
+    //require('../../../node_modules/bootstrap/js/dist/scrollspy');
+    //require('../../../node_modules/bootstrap/js/dist/tab');
+    //require('../../../node_modules/bootstrap/js/dist/tooltip');
+    //require('../../../node_modules/bootstrap/js/dist/util');
+
 } catch (e) {}
 
 /**

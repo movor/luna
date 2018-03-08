@@ -1,0 +1,11 @@
+@import "~bootstrap/scss/utilities/text";
+
+//
+// Text truncate multiline
+//
+
+@for $i from 1 through 3 {
+  .text-truncate-#{$i} {
+    @include text-truncate-multiline($i);
+  }
+}

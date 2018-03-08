@@ -1,0 +1,9 @@
+@import "~bootstrap/scss/mixins/text-truncate";
+
+// Custom mixin form multiline text truncate
+@mixin text-truncate-multiline($lines-no) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines-no;
+  -webkit-box-orient: vertical;
+}

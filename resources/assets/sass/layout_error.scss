@@ -1,6 +1,9 @@
-// Project specific variables and fonts
-@import "variables";
+// Project specific fonts
 @import "fonts";
 
-// Project specific styles, utilities, bootstrap components overrides ...
+// Bootstrap functionality
+@import "~bootstrap/scss/functions";
+@import "bootstrap/variables";
+
+// Project specific styles
 @import "layout_error/style";

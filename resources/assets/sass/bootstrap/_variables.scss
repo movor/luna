@@ -9,6 +9,7 @@ $enable-print-styles: false;
 //
 
 $primary: #1E9F63;
+$success: $primary;
 $light: rgba(#FFF, 0.9);
 $body-color: #434343;
 
@@ -42,3 +43,5 @@ $link-hover-decoration: none;
 
 $input-focus-border-color: rgba($primary, .65);
 $input-focus-box-shadow: none;
+
+@import "~bootstrap/scss/variables";

@@ -1,15 +1,11 @@
-// Project specific variables and fonts
-@import "variables";
+// Project specific fonts
 @import "fonts";
 
-// Bootstrap functions and variables
+// Bootstrap functionality
 @import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import "bootstrap/variables";
 @import "~bootstrap/scss/mixins/breakpoints";
 @import "~bootstrap/scss/mixins/border-radius";
 
-// Project specific styles, mixins, utilities, bootstrap components overrides ...
-@import "mixins/text-truncate";
-@import "utilities";
-@import "components";
+// Project specific styles
 @import "layout_default/style";
