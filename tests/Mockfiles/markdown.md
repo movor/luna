@@ -114,3 +114,44 @@ Click on the link to see [who are we?](/about)
 ## Image link
 
 [alt text goes here](https://picsum.photos/800/600?random)
+
+## Alerts
+
+<div class="alert alert-primary">
+  This is a primary alert—check it out!
+</div>
+<div class="alert alert-secondary">
+  This is a secondary alert—check it out!
+  <br>
+  With multiline spread (with br)
+</div>
+<div class="alert alert-success">
+  This is a success alert—check it out!
+</div>
+<div class="alert alert-danger">
+  This is a danger alert—check it out!
+</div>
+<div class="alert alert-warning">
+  This is a warning alert—check it out!
+</div>
+<div class="alert alert-info">
+  This is a info alert—check it out!
+</div>
+<div class="alert alert-light">
+  This is a light alert—check it out!
+</div>
+<div class="alert alert-dark">
+  This is a dark alert—check it out!
+</div>
+
+## Blockquotes
+
+> Default markdown blockquote multiline #1
+>
+> Default markdown blockquote multiline #2
+>
+> Default markdown blockquote multiline #3
+
+<blockquote>
+  Blockquote written in html
+</blockquote>

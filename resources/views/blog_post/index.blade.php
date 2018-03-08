@@ -36,13 +36,15 @@
 
                                 {{-- /Inner card --}}
 
-                                <div class="card-body">
-                                    <h2 class="card-title text-truncate-2">{{ $post->title }}</h2>
-                                    <p class="card-text text-justify text-truncate-3">
-                                        {{ $post->summary }}
-                                    </p>
-                                    <a href="{{ $post->getPageUrl() }}" class="btn btn-primary">Read More</a>
-                                </div>
+                                <a href="{{ $post->getPageUrl() }}">
+                                    <div class="card-body">
+                                        <h2 class="card-title text-truncate-2">{{ $post->title }}</h2>
+                                        <p class="card-text text-justify text-truncate-3">
+                                            {{ $post->summary }}
+                                        </p>
+                                        <span class="btn btn-primary">Read More</span>
+                                    </div>
+                                </a>
                                 <div class="card-footer text-muted">
                                     <a href="/about">{{ $post->user->name }}</a>
                                     <span class="float-right">

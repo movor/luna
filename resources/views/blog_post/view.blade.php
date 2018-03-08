@@ -69,7 +69,7 @@
                         @foreach($featuredPosts as $post)
 
                             <div class="col-sm-6 col-md-4 col-lg-12">
-                                <a href="{{ $post->getPageUrl() }}">
+                                <a href="{{ url('blog/' . $post->slug) }}">
                                     <div class="card mb-4">
                                         <img class="card-img-top" src="{{ asset($post->featured_image->lg()) }}">
                                         <div class="card-body">

@@ -19,7 +19,7 @@ body {
 //
 
 .navbar {
-  border-bottom: 2px solid rgba($primary, .3);
+  border-bottom: 1px solid rgba($primary, .1);
 
   .navbar-brand img {
     height: 32px;
@@ -30,23 +30,11 @@ body {
 // Content
 //
 
-// Block quotes
-blockquote {
-  @include border-radius();
-  background-color: rgba($primary, .1);
-  padding: 1rem 1.5rem;
-  border: 1px solid $primary;
-
-  p {
-    margin-bottom: 0;
-    font-size: $font-size-base !important;
-    font-family: $font-family-monospace;
-  }
-}
-
 // Blog Index
 .blog-post-index {
   .card-body {
+    color: $body-color;
+
     .card-title {
       min-height: 58px;
 
@@ -69,7 +57,8 @@ blockquote {
 .blog-post-view {
   .post-body {
     h1, h2, h3, h4, h5 {
-      margin-bottom: $paragraph-margin-bottom;
+      padding-top: $paragraph-margin-bottom;
+      margin-bottom: 2 * $paragraph-margin-bottom;
     }
 
     p {
