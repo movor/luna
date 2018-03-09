@@ -58,12 +58,19 @@ class UserCrudController extends CrudController
 
     public function update(Request $request)
     {
+        // Remove password if null to allow validation via "sometimes" rule
+        if (is_null($request->password) && is_null($request->password_confirmation)) {
+            $request->request->remove('password');
+        }
+
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             // TODO.SOLVE
-            // Unique email is omitted to allow user to update pass only.
-            // There is a problem in case user changes email to already existing one.
+            // Email "unique" rule is omitted to allow user to update pass only.
+            // If user sets another email that is already in the database (some other user has it)
+            // table unique key will prevent update, so only the output is nasty, and database
+            // stays cool
             'password' => 'sometimes|string|min:6|confirmed'
         ]);
 
