@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/type";
 
 blockquote {
-  border-left: $paragraph-margin-bottom solid rgba($primary, .3);
+  border-left: $paragraph-margin-bottom solid $gray-400;
   background-color: $gray-100;
   padding: $alert-padding-y $alert-padding-x;
 

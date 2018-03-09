@@ -37,7 +37,7 @@ code {
 }
 
 pre[class*=language-] {
-  padding: $alert-padding-y $alert-padding-x;
+  padding: 2 * $alert-padding-y 2 *  $alert-padding-x;
   margin-bottom: $paragraph-margin-bottom;
   overflow: auto;
 }

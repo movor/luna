@@ -56,9 +56,9 @@ body {
 // Blog view
 .blog-post-view {
   .post-body {
-    h1, h2, h3, h4, h5 {
+    h2, h3, h4, h5 {
       padding-top: $paragraph-margin-bottom;
-      margin-bottom: 2 * $paragraph-margin-bottom;
+      margin-bottom: $paragraph-margin-bottom;
     }
 
     p {

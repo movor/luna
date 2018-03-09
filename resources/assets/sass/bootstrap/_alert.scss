@@ -7,6 +7,7 @@
 .alert {
   font-family: $font-family-monospace;
   font-size: $font-size-base * .9;
-
+  padding: 2 * $alert-padding-y 2 *  $alert-padding-x;
+  border: none;
   border-radius: 0;
 }

@@ -9,7 +9,7 @@
                 <div class="lead mb-3">
                     <div>
                         <span class="text-muted">Author:</span>
-                        <a href="/about">{{ $post->user->name }}</a>
+                        <a href="{{ url('about') }}">{{ $post->user->name }}</a>
                     </div>
                     <div class="mb-3">
                         <small>
@@ -28,9 +28,16 @@
 
                     </div>
                 </div>
-                <img class="img-fluid rounded mb-4" src="{{ asset($post->featured_image->xl()) }}" alt="">
+
+                {{-- Image, summary and body --}}
+
+                <img class="img-fluid rounded" src="{{ asset($post->featured_image->xl()) }}" alt="">
+
+                <div class="alert alert-lite">{{ $post->summary }}</div>
 
                 <div class="post-body text-justify">{!! $post->body_html !!}</div>
+
+                {{-- /Image, summary and body --}}
 
             </div>
             <div class="col-lg-3 col-md-12">
