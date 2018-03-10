@@ -77,9 +77,16 @@ class BlogPostController extends Controller
 
     public function viewCanonical($id)
     {
-        $post = BlogPost::published()
-            ->where('id', $id)
-            ->firstOrFail();
+        $query = BlogPost::where('id', $id);
+
+        // If admin is logged in, allow view of all posts,
+        // not only published ones
+        if (!Auth::check()) {
+            $query->published();
+        }
+
+        /* @var BlogPost $post */
+        $post = $query->firstOrFail();
 
         // Featured posts (exclude current)
         $featuredPosts = BlogPost::where('id', '!=', $id)

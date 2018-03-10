@@ -192,6 +192,12 @@ class BlogPostCrudController extends CrudController
                 'tab' => 'Other'
             ])
             ->addField([
+                'name' => 'commentable',
+                'label' => 'Enable Comments',
+                'type' => 'checkbox',
+                'tab' => 'Other'
+            ])
+            ->addField([
                 'name' => 'tags',
                 'label' => 'Tags',
                 'type' => 'select2_multiple',
@@ -215,6 +221,9 @@ class BlogPostCrudController extends CrudController
         // Artificially add slug to the request object
         $request->request->set('slug', str_slug($request->title));
 
+        // Set title case
+        $request->request->set('title', title_case($request->title));
+
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
@@ -233,6 +242,9 @@ class BlogPostCrudController extends CrudController
     {
         // Artificially add slug to the request object
         $request->request->set('slug', str_slug($request->title));
+
+        // Set title case
+        $request->request->set('title', title_case($request->title));
 
         $this->validate($request, [
             'title' => 'required|min:5|max:128',

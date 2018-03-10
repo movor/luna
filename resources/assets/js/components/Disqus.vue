@@ -6,25 +6,20 @@
 
     export default {
         props: {
-            shortname: {
-                type: String,
-                required: false,
-                default: process.env.MIX_DISQS_WEBSITE
+            website: {
+                required: true,
             },
-            identifier: {
-                type: String,
-                required: false,
-                default: window.location.pathname
-            },
-            url: {
-                type: String,
-                required: false,
-                default: document.baseURI
-            },
+            // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables#thispagetitle
             title: {
-                type: String,
-                required: false,
-                default: process.env.APP_NAME
+                required: true,
+            },
+            // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables#thispageidentifier
+            identifier: {
+                required: true,
+            },
+            // https://help.disqus.com/customer/portal/articles/472098-javascript-configuration-variables#thispageurl
+            url: {
+                required: true,
             }
         },
         mounted() {
@@ -46,7 +41,7 @@
                 s.setAttribute('data-timestamp', +new Date());
                 s.type = 'text/javascript';
                 s.async = true;
-                s.src = `//${this.shortname}.disqus.com/embed.js`;
+                s.src = `//${this.website}.disqus.com/embed.js`;
                 (d.head || d.body).appendChild(s);
             },
             setBaseConfig(disqusConfig) {

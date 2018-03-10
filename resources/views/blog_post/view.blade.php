@@ -73,14 +73,14 @@
 
                     <div class="row featured-posts">
 
-                        @foreach($featuredPosts as $post)
+                        @foreach($featuredPosts as $featuredPost)
 
                             <div class="col-sm-6 col-md-4 col-lg-12">
-                                <a href="{{ url('blog/' . $post->slug) }}">
+                                <a href="{{ url('blog/' . $featuredPost->slug) }}">
                                     <div class="card mb-4">
-                                        <img class="card-img-top" src="{{ asset($post->featured_image->lg()) }}">
+                                        <img class="card-img-top" src="{{ asset($featuredPost->featured_image->lg()) }}">
                                         <div class="card-body">
-                                            <p class="card-title font-weight-bold mb-0 text-muted">{{ $post->title }}</p>
+                                            <p class="card-title font-weight-bold mb-0 text-muted">{{ $featuredPost->title }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -100,7 +100,19 @@
 
     <div class="container">
         <hr class="mt-5">
-        <app-disqus></app-disqus>
+
+        {{-- Load Disqs Vue component if post is commentable --}}
+        @if($post->commentable)
+
+            <app-disqus
+                    website="{{ env('DISQS_WEBSITE') }}"
+                    title="{{ env('APP_NAME') }}"
+                    identifier="{{ '/blog-post/' . $post->id }}"
+                    url="{{ url('/blog-post/' . $post->id) }}"
+            ></app-disqus>
+
+        @endif
+
     </div>
 
 @endsection

@@ -41,8 +41,10 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
             // Movor user id
             return 1;
         }, DB::table('users')->inRandomOrder()->pluck('id')->first()),
-        'title' => ucwords($title),
+        'title' => title_case($title),
+        'slug' => str_slug($title),
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
+        'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'featured' => chance(20),
         'featured_image' => chance(90, function () {
             $image = file_get_contents("https://picsum.photos/1280/720?random");
@@ -50,8 +52,7 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 
             return 'data:image/jpg;base64,' . $base64Image;
         }),
-        'body' => file_get_contents('tests/Mockfiles/markdown.md'),
-        'slug' => str_slug($title),
+        'commentable' => chance(70),
         'published_at' => chance(70, function () {
             return \Carbon\Carbon::now();
         }),

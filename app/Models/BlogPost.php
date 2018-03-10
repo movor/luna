@@ -13,7 +13,17 @@ class BlogPost extends Model
 {
     use CrudTrait, CustomCastableTrait;
 
-    protected $fillable = ['user_id', 'title', 'summary', 'body', 'slug', 'featured_image', 'published_at', 'featured'];
+    protected $fillable = [
+        'user_id',
+        'title',
+        'summary',
+        'body',
+        'slug',
+        'featured',
+        'featured_image',
+        'commentable',
+        'published_at'
+    ];
 
     protected $baseUrl = 'blog';
 
@@ -21,6 +31,7 @@ class BlogPost extends Model
         'published_at' => 'datetime',
         'featured' => 'boolean',
         'featured_image' => BlogPostFeaturedImageCast::class,
+        'commentable' => 'boolean',
     ];
 
     /**
@@ -84,6 +95,4 @@ class BlogPost extends Model
             ? $query->whereNotNull('published_at')->orderBy('published_at')
             : $query->whereNull('published_at');
     }
-
-
 }
