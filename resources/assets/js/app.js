@@ -1,3 +1,4 @@
+// App components
 import Disqus from "./components/Disqus";
 
 const app = new Vue({

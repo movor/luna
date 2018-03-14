@@ -11,5 +11,10 @@
 |
 */
 
+// Authentication
+Route::post('/user/register', 'Api\UserController@register');
+Route::get('/user/current', 'Api\UserController@current')->middleware('auth:api');
+
+// Blog
 Route::get('/blog-post', 'Api\BlogPostController@index');
 Route::get('/blog-post/{id}', 'Api\BlogPostController@show');

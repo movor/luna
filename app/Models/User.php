@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\CrudTrait;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Backpack\Base\app\Notifications\ResetPasswordNotification as ResetPasswordNotification;
+use Backpack\CRUD\CrudTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, CrudTrait;
+    use Notifiable, CrudTrait, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
