@@ -13,9 +13,6 @@ pre[class*=language-] {
   word-break: normal;
   word-wrap: normal;
   line-height: $line-height-base * 0.9;
-  tab-size: 2;
-  -moz-tab-size: 2;
-  -o-tab-size: 2;
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
@@ -33,7 +30,23 @@ code {
   font-size: $font-size-base * .9;
   color: invert($primary);
   background-color: $gray-100;
-  padding: 3px 6px;
+}
+
+.code-header,
+.code-footer {
+  color: $gray-600;
+  text-align: center;
+  font-size: $font-size-base * .75;
+  font-family: $font-family-monospace;
+  padding: $alert-padding-y 2 *  $alert-padding-x;
+  background-color: $gray-300;
+}
+
+.code-footer {
+  text-align: left;
+  margin-top: -$paragraph-margin-bottom;
+  background-color: $gray-200;
+  margin-bottom: $paragraph-margin-bottom;
 }
 
 pre[class*=language-] {

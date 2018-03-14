@@ -35,6 +35,9 @@ Here are some cool code examples
 
 Some cool php code below
 
+<div class="code-header">
+File: application_root/app/Controllers/TestController.php
+</div>
 ```php
 namespace App\Lib\Mine;
 
@@ -47,9 +50,13 @@ namespace App\Lib\Mine;
  */
 public function profitability($period = 1)
 {
-    return $this->calcProfit($period, $this->data);
+    echo $this->calcProfit($period, $this->data);
 }
 ```
+<div class="code-footer">
+Result:<br>
+98283.88
+</div>
 
 ### JS Code
 
