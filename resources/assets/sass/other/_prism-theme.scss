@@ -24,12 +24,13 @@ pre[class*=language-] {
   }
 }
 
-code {
+code:not([class]) {
   @include border-radius();
   font-family: $font-family-code;
   font-size: $font-size-base * .9;
   color: invert($primary);
   background-color: $gray-100;
+  padding: 3px 6px;
 }
 
 .code-header,
