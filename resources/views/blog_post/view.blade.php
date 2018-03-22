@@ -9,7 +9,7 @@
                 <div class="lead mb-3">
                     <div>
                         <span class="text-muted">Author:</span>
-                        <a href="{{ url('about') }}">{{ $post->user->name }}</a>
+                        <strong><a class="bold" href="{{ url('about') }}">{{ $post->user->name }}</a></strong>
                     </div>
                     <div class="mb-3">
                         <small>
