@@ -30,6 +30,10 @@ class DropMigrateSeed extends Command
      */
     public function handle()
     {
+        // Create db (from env) if not exists
+        $this->call('movor:createdb');
+
+        // Drop tables
         $this->call('movor:dropdb');
 
         // Migrate
@@ -39,6 +43,6 @@ class DropMigrateSeed extends Command
         $this->call('db:seed');
 
         // Success message
-        $this->comment(PHP_EOL . 'Database dropped, migrated and seeded successfully' . PHP_EOL);
+        $this->info(PHP_EOL . 'Database dropped, migrated and seeded successfully' . PHP_EOL);
     }
 }
