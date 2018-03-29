@@ -15,7 +15,7 @@ class BlogPostController extends Controller
     public function index()
     {
         /* @var Builder $query */
-        $query = BlogPost::published();
+        $query = BlogPost::published()->orderBy('published_at', 'desc');
 
         $filterTags = Request::query('tags');
 

@@ -14,7 +14,7 @@
         {!! OpenGraph::generate() !!}
         {!! Twitter::generate() !!}
 
-        <link rel="shortcut icon" href="{{ asset('/img/movor_logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('/img/movor_icon.png') }}">
 
         {{-- Styles --}}
 

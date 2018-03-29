@@ -1,7 +1,7 @@
-<footer class="py-4 bg-light">
+<footer class="py-4">
     <div class="container">
         <div class="text-center">
-            <img src="{{ asset('img/movor_icon.svg') }}">
+            <img class="movor-icon" src="{{ asset('img/movor_icon.svg') }}">
         </div>
         <div class="text-center">
             <small class="text-muted">
@@ -9,4 +9,10 @@
             </small>
         </div>
     </div>
+    <a href="https://movor.io" target="_blank" class="movor-with-love">
+        <small class="text-muted">
+            <em>Made with <i class="fa fa-heart"></i> by</em>
+        </small>
+        <img src="{{ url('img/movor_logo.svg') }}">
+    </a>
 </footer>
