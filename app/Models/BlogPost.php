@@ -69,6 +69,9 @@ class BlogPost extends Model
         // Customizations (Bootstrap classes)
         $rendered = str_replace('<table>', '<table class="table">', $rendered);
 
+        // Resolve curly braces ("{{") Vue rendering
+        $rendered = str_replace('<code', '<code v-pre', $rendered);
+
         return $rendered;
     }
 
