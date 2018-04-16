@@ -117,7 +117,7 @@ body {
     color: $body-color;
 
     .card-title {
-      min-height: 58px;
+      height: 62px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
@@ -125,7 +125,7 @@ body {
     }
 
     .card-text {
-      min-height: 78px;
+      height: 78px;
 
       @include media-breakpoint-down(md) {
         min-height: auto;
