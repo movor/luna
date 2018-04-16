@@ -66,13 +66,16 @@ class BlogPost extends Model
     {
         $rendered = (new Parsedown)->text($this->body);
 
-        // Customizations (Bootstrap classes)
-        $rendered = str_replace('<table>', '<table class="table">', $rendered);
+        $replace = [
+            // Customizations (Bootstrap classes)
+            '<table>' => '<table class="table">',
+            // Resolve curly braces ("{{") Vue rendering
+            '<code' => '<code v-pre',
+            // Links always in new tab
+            '<a href="' => '<a target="_blank" href="',
+        ];
 
-        // Resolve curly braces ("{{") Vue rendering
-        $rendered = str_replace('<code', '<code v-pre', $rendered);
-
-        return $rendered;
+        return str_replace(array_keys($replace), $replace, $rendered);
     }
 
     public function getPageUrl()
