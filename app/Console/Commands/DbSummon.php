@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 
-class DropMigrateSeed extends Command
+class DbSummon extends Command
 {
     use ConfirmableTrait;
 
@@ -14,14 +14,14 @@ class DropMigrateSeed extends Command
      *
      * @var string
      */
-    protected $signature = 'movor:drop-migrate-seed {--force : Force the operation to run when in production.}';
+    protected $signature = 'db:summon {--force : Force the operation to run when in production.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Drop all tables, than perform migrate and seed';
+    protected $description = 'Empty DB, than perform migrate and seed';
 
     /**
      * Execute the console command.
@@ -31,10 +31,10 @@ class DropMigrateSeed extends Command
     public function handle()
     {
         // Create db (from env) if not exists
-        $this->call('movor:createdb');
+        $this->call('db:create');
 
         // Drop tables
-        $this->call('movor:dropdb');
+        $this->call('db:drop');
 
         // Migrate
         $this->call('migrate');

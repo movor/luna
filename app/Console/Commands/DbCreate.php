@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use PDO;
 
-class CreateDB extends Command
+class DbCreate extends Command
 {
     use ConfirmableTrait;
 
@@ -22,7 +22,7 @@ class CreateDB extends Command
      *
      * @var string
      */
-    protected $signature = 'movor:createdb {--force : Force the operation to run when in production.}';
+    protected $signature = 'db:create {--force : Force the operation to run when in production.}';
 
     /**
      * The console command description.

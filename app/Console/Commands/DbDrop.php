@@ -6,7 +6,7 @@ use DB;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 
-class DropDB extends Command
+class DbDrop extends Command
 {
     use ConfirmableTrait;
 
@@ -22,14 +22,14 @@ class DropDB extends Command
      *
      * @var string
      */
-    protected $signature = 'movor:dropdb {--force : Force the operation to run when in production.}';
+    protected $signature = 'db:drop {--force : Force the operation to run when in production.}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Drop all tables and functions in current DB (migration table also)';
+    protected $description = 'Drop all tables, views and functions in current DB (migration table also)';
 
     /**
      * Create a new command instance.
@@ -54,8 +54,9 @@ class DropDB extends Command
             return;
         }
 
-        // Drop tables
+        // Drop tables and views
         $this->dropTables();
+        $this->dropViews();
 
         // Drop functions / procedures
         $this->dropFunctions();
@@ -66,7 +67,8 @@ class DropDB extends Command
 
     private function dropTables()
     {
-        $tables = DB::select('SHOW TABLES');
+        // Select tables only (not views)
+        $tables = DB::select("SHOW FULL TABLES WHERE Table_Type = 'BASE TABLE'");
 
         if (empty($tables)) {
             $this->comment(PHP_EOL . "$this->db DB has no tables");
@@ -81,6 +83,29 @@ class DropDB extends Command
                     DB::unprepared("DROP TABLE {$table->$colname}");
                 }
                 DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+                DB::commit();
+            } else {
+                $this->comment(PHP_EOL . 'Command aborted' . PHP_EOL);
+            }
+        }
+    }
+
+    private function dropViews()
+    {
+        // Select views only (not tables)
+        $views = DB::select("SHOW FULL TABLES WHERE Table_Type = 'VIEW'");
+
+        if (empty($views)) {
+            $this->comment(PHP_EOL . "$this->db DB has no views");
+        } else {
+            if ($this->confirm("All views in $this->db DB will be deleted! Do you really want to continue?")) {
+                $colname = 'Tables_in_' . $this->db;
+
+                DB::beginTransaction();
+                foreach ($views as $table) {
+                    $this->comment("Dropping {$table->$colname} view");
+                    DB::unprepared("DROP VIEW {$table->$colname}");
+                }
                 DB::commit();
             } else {
                 $this->comment(PHP_EOL . 'Command aborted' . PHP_EOL);
