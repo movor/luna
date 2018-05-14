@@ -29,18 +29,20 @@ abstract class ApiController extends Controller
      * @param  array           $messages
      * @param  array           $customAttributes
      *
-     * @return void
+     * @return array
      *
      * @throws ApiBaseException
      */
     public function validate(SymphonyRequest $request, array $rules, array $messages = [], array $customAttributes = [])
     {
-        $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
+        $validator = $this->getValidationFactory()
+            ->make($request->all(), $rules, $messages, $customAttributes);
 
         if ($validator->fails()) {
-            $message = implode(' ', $validator->errors()->all());
-            $this->throwUnprocessableEntityException($message);
+            $this->throwUnprocessableEntityException(null, $validator->errors());
         }
+
+        return $this->extractInputFromRules($request, $rules);
     }
 
     /**
@@ -190,41 +192,45 @@ abstract class ApiController extends Controller
 
     /**
      * @param string $message
+     * @param array  $data
      *
      * @throws ApiBaseException
      */
-    protected function throwMethodNotAllowedException($message = '')
+    protected function throwMethodNotAllowedException($message = '', $data = [])
     {
-        throw new ApiMethodNotAllowedException($message);
+        throw new ApiMethodNotAllowedException($message, $data);
     }
 
     /**
      * @param string $message
+     * @param array  $data
      *
      * @throws ApiBaseException
      */
-    protected function throwResourceNotFoundException($message = '')
+    protected function throwResourceNotFoundException($message = '', $data = [])
     {
-        throw new ApiResourceNotFoundException($message);
+        throw new ApiResourceNotFoundException($message, $data);
     }
 
     /**
      * @param string $message
+     * @param array  $data
      *
      * @throws ApiBaseException
      */
-    protected function throwUnauthorizedException($message = '')
+    protected function throwUnauthorizedException($message = '', $data = [])
     {
-        throw new ApiUnauthorizedException($message);
+        throw new ApiUnauthorizedException($message, $data);
     }
 
     /**
      * @param string $message
+     * @param array  $data
      *
      * @throws ApiBaseException
      */
-    protected function throwUnprocessableEntityException($message = '')
+    protected function throwUnprocessableEntityException($message = '', $data = [])
     {
-        throw new ApiUnprocessableEntityException($message);
+        throw new ApiUnprocessableEntityException($message, $data);
     }
 }

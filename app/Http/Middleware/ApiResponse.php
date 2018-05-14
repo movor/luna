@@ -28,7 +28,7 @@ class ApiResponse
                 $data = [
                     'status' => 'error',
                     'message' => $exception->getMessage(),
-                    'data' => [],
+                    'data' => $exception->getData(),
                 ];
             } // Handle other exceptions
             else {
