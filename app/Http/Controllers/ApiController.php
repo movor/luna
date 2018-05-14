@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ApiExceptions\ApiBadRequestException;
 use App\Exceptions\ApiExceptions\ApiBaseException;
 use App\Exceptions\ApiExceptions\ApiMethodNotAllowedException;
 use App\Exceptions\ApiExceptions\ApiResourceNotFoundException;
@@ -194,7 +195,7 @@ abstract class ApiController extends Controller
      * @param string $message
      * @param array  $data
      *
-     * @throws ApiBaseException
+     * @throws ApiMethodNotAllowedException
      */
     protected function throwMethodNotAllowedException($message = '', $data = [])
     {
@@ -205,7 +206,7 @@ abstract class ApiController extends Controller
      * @param string $message
      * @param array  $data
      *
-     * @throws ApiBaseException
+     * @throws ApiResourceNotFoundException
      */
     protected function throwResourceNotFoundException($message = '', $data = [])
     {
@@ -216,7 +217,7 @@ abstract class ApiController extends Controller
      * @param string $message
      * @param array  $data
      *
-     * @throws ApiBaseException
+     * @throws ApiUnauthorizedException
      */
     protected function throwUnauthorizedException($message = '', $data = [])
     {
@@ -227,10 +228,21 @@ abstract class ApiController extends Controller
      * @param string $message
      * @param array  $data
      *
-     * @throws ApiBaseException
+     * @throws ApiUnprocessableEntityException
      */
     protected function throwUnprocessableEntityException($message = '', $data = [])
     {
         throw new ApiUnprocessableEntityException($message, $data);
+    }
+
+    /**
+     * @param string $message
+     * @param array  $data
+     *
+     * @throws ApiBadRequestException
+     */
+    protected function throwBadRequestException($message = '', $data = [])
+    {
+        throw new ApiBadRequestException($message, $data);
     }
 }
