@@ -27,6 +27,8 @@
 
         {{-- Scripts --}}
 
+        @include('partials.js_env')
+
         @yield('scripts-head')
 
         {{-- /Scripts --}}
