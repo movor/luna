@@ -1,12 +1,15 @@
 @extends('layouts.default')
 
 @section('scripts-head')
+
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
 @endsection
 
 @section('content')
 
     @php
+
         // Validation
         $emailInputClass = $messageInputClass = '';
 
@@ -27,6 +30,14 @@
                     directly you can click <a href="mailto:{{ env('APP_CONTACT_EMAIL') }}">here</a> or use this email
                     address: <span class="text-primary">{{ env('APP_CONTACT_EMAIL') }}</span>
                 </p>
+
+                @if($errors->has('g-recaptcha-response'))
+
+                    <p class="mb-4 pb-4 text-danger text-center">
+                        {{ $errors->first('g-recaptcha-response') }}
+                    </p>
+
+                @endif
 
                 {{ Form::open(['id' => "recaptcha"]) }}
 
@@ -68,9 +79,10 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary float-sm-right mb-5 g-recaptcha"
-                        data-sitekey="{{env('GOOGLE_RECAPTCHA_PUBLIC_KEY')}}"
+                        data-sitekey="{{ env('GOOGLE_RECAPTCHA_PUBLIC_KEY') }}"
                         data-callback="submitForm"
-                >Submit
+                >
+                    Submit
                 </button>
 
                 {{ Form::close() }}
@@ -82,9 +94,13 @@
 @endsection
 
 @section('scripts-bottom')
+
     <script>
+
         function submitForm() {
             $('#recaptcha').submit();
         }
+
     </script>
+
 @endsection

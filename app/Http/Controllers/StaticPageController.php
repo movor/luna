@@ -4,13 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogTag;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
-use GuzzleHttp\Client;
 use Mail;
 
 class StaticPageController extends Controller
 {
+    public function __construct()
+    {
+        // Custom validator for Google captcha
+        \Validator::extend('recaptcha', function ($attribute, $value) {
+            $request = app('request');
+            $client = new Client;
+
+            $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
+                'form_params' => [
+                    'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+                    'response' => $value,
+                    'remoteip' => $request->getClientIp()
+                ]
+            ]);
+
+            $response = json_decode($response->getBody()->getContents());
+
+            return $response->success === true;
+        }, 'Google thinks that you are a bot. Please try again.');
+    }
+
     public function index()
     {
         // SEO
@@ -24,49 +45,21 @@ class StaticPageController extends Controller
 
     public function contact(Request $request)
     {
-
         if ($request->isMethod('post')) {
-
             $request->validate([
+                'g-recaptcha-response' => 'required|recaptcha',
                 'email' => 'email',
                 'message' => 'required',
-                'g-recaptcha-response' => 'required'
             ]);
 
-            $client = new Client();
+            Mail::raw($request->message, function (Message $mail) use ($request) {
+                $mail->subject(env('APP_NAME') . ' Contact Form')
+                    ->from($request->email)
+                    ->to(env('APP_CONTACT_EMAIL'));
+            });
 
-            $body = [
-                'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
-                'response' => $request->get('g-recaptcha-response'),
-                'remoteip' => $request->getClientIp()
-            ];
-
-            $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify',
-                ['form_params' => $body]
-            );
-
-            $responseContent = json_decode($response->getBody()->getContents());
-
-            // Successful message for blade rendering
-            $flashMessage = [
-                'variable' => 'message',
-                'message' => 'Your message has been successfully sent. You can expect our response soon.'
-            ];
-
-            // If answer from google is right ...
-            if ($responseContent->success === true) {
-                Mail::raw($request->message, function (Message $mail) use ($request) {
-                    $mail->subject(env('APP_NAME') . ' Contact Form')
-                        ->from($request->email)
-                        ->to(env('APP_CONTACT_EMAIL'));
-                });
-            } else {
-                // Error message
-                $flashMessage['variable'] = 'errorMessage';
-                $flashMessage['message'] = 'Google thinks that you are a bot. Please try again.';
-            }
-
-            return redirect()->back()->with($flashMessage['variable'], $flashMessage['message']);
+            return redirect()->back()
+                ->withMessage('Your message has been successfully sent. You can expect our response soon.');
         }
 
         // SEO
