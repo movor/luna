@@ -1,5 +1,9 @@
 @extends('layouts.default')
 
+@section('scripts-head')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+@endsection
+
 @section('content')
 
     @php
@@ -24,7 +28,7 @@
                     address: <span class="text-primary">{{ env('APP_CONTACT_EMAIL') }}</span>
                 </p>
 
-                {{ Form::open() }}
+                {{ Form::open(['id' => "recaptcha"]) }}
 
                 <div class="form-group row mb-md-5">
                     <label for="email" class="col-sm-3 col-form-label form-control-lg">Email</label>
@@ -63,7 +67,11 @@
 
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary float-sm-right mb-5">Submit</button>
+                <button type="submit" class="btn btn-lg btn-primary float-sm-right mb-5 g-recaptcha"
+                        data-sitekey="{{env('GOOGLE_RECAPTCHA_PUBLIC_KEY')}}"
+                        data-callback="submitForm"
+                >Submit
+                </button>
 
                 {{ Form::close() }}
 
@@ -71,4 +79,12 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts-bottom')
+    <script>
+        function submitForm() {
+            $('#recaptcha').submit();
+        }
+    </script>
 @endsection
