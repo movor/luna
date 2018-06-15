@@ -28,7 +28,6 @@
 @import "~bootstrap/scss/mixins/list-group";
 @import "~bootstrap/scss/mixins/lists";
 @import "~bootstrap/scss/mixins/nav-divider";
-@import "~bootstrap/scss/mixins/navbar-align";
 @import "~bootstrap/scss/mixins/pagination";
 @import "~bootstrap/scss/mixins/reset-text";
 @import "~bootstrap/scss/mixins/resize";
@@ -37,10 +36,7 @@
 @import "~bootstrap/scss/mixins/table-row";
 @import "~bootstrap/scss/mixins/text-emphasis";
 @import "~bootstrap/scss/mixins/text-hide";
-
-// Overridden
-@import "mixins/text-truncate";
-
+@import "mixins/text-truncate"; // Overridden
 @import "~bootstrap/scss/mixins/transition";
 @import "~bootstrap/scss/mixins/visibility";
 
@@ -50,10 +46,7 @@
 
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
-
-// Overridden
-@import "type";
-
+@import "type"; // Overridden
 @import "~bootstrap/scss/images";
 //@import "~bootstrap/scss/code";
 @import "~bootstrap/scss/grid";
@@ -66,19 +59,13 @@
 //@import "~bootstrap/scss/input-group";
 //@import "~bootstrap/scss/custom-forms";
 @import "~bootstrap/scss/nav";
-
-// Overridden
-@import "navbar";
-@import "card";
-
+@import "navbar"; // Overridden
+@import "card"; // Overridden
 //@import "~bootstrap/scss/breadcrumb";
 //@import "~bootstrap/scss/pagination";
 @import "~bootstrap/scss/badge";
 //@import "~bootstrap/scss/jumbotron";
-
-// Overridden
-@import "alert";
-
+@import "alert"; // Overridden
 //@import "~bootstrap/scss/progress";
 //@import "~bootstrap/scss/media";
 //@import "~bootstrap/scss/list-group";
@@ -104,9 +91,6 @@
 //@import "~bootstrap/scss/utilities/screenreaders";
 @import "~bootstrap/scss/utilities/sizing";
 @import "~bootstrap/scss/utilities/spacing";
-
-// Overridden
-@import "utilities/text";
-
+@import "utilities/text"; // Overridden
 @import "~bootstrap/scss/utilities/visibility";
 //@import "~bootstrap/scss/print";
