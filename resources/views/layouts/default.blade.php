@@ -41,7 +41,7 @@
 
             @include('partials.header')
 
-            @includeWhen(Session::has('message'), 'partials.flash')
+            @includeWhen($messages->any() || $errors->any(), 'partials.flash')
 
             <main>@yield('content')</main>
 

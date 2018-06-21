@@ -59,7 +59,7 @@ class StaticPageController extends Controller
             });
 
             return redirect()->back()
-                ->withMessage('Your message has been successfully sent. You can expect our response soon.');
+                ->withMessages('Your message has been successfully sent. You can expect our response soon.');
         }
 
         // SEO
