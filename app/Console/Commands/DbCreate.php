@@ -51,7 +51,7 @@ class DbCreate extends Command
     public function handle()
     {
         if (!$this->confirmToProceed()) {
-            return;
+            return 1;
         }
 
         $created = false;
@@ -69,8 +69,10 @@ class DbCreate extends Command
 
         if ($created) {
             $this->info(PHP_EOL . sprintf('Database "%s" created successfully', $this->db) . PHP_EOL);
+            return 0;
         } else {
             $this->comment(PHP_EOL . sprintf('Database "%s" already exists', $this->db) . PHP_EOL);
+            return 1;
         }
     }
 

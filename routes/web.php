@@ -34,18 +34,7 @@ Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 Route::post('newsletter', 'NewsletterController@subscribe');
 
 //
-// Cached placeholder images (from external source, but served as internal)
+// ImagePlaceholder - Cached placeholder images (from external source, but served as internal)
 //
 
-Route::get('img/placeholders/{name}.jpg', function ($name) {
-    $width = Request::query('width', 1280);
-    $height = Request::query('height', 720);
-
-    $cacheKey = 'placeholderImage.' . $name . '-' . $width . 'x' . $height;
-
-    $image = \Cache::rememberForever($cacheKey, function () use ($width, $height) {
-        return file_get_contents("https://picsum.photos/$width/$height?random");
-    });
-
-    return Image::make($image)->response();
-});
+Route::get('img/placeholders/{name}.jpg', 'ImagePlaceholderController@get');
