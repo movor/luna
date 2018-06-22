@@ -28,6 +28,12 @@ Route::get('blog/{slug}', 'BlogPostController@view');
 Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 //
+// Newsletter
+//
+
+Route::post('newsletter', 'NewsletterController@subscribe');
+
+//
 // Cached placeholder images (from external source, but served as internal)
 //
 

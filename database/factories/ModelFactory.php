@@ -74,3 +74,11 @@ $factory->define(App\Models\BlogTag::class, function (Faker $faker) {
         'name' => str_slug($name),
     ];
 });
+
+//
+// Newsletter
+//
+
+$factory->define(App\Models\Newsletter::class, function (Faker $faker) {
+    return ['email' => $faker->unique()->email];
+});

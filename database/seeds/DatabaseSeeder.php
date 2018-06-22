@@ -70,5 +70,11 @@ class DatabaseSeeder extends Seeder
 
             return ['primary' => false];
         });
+
+        //
+        // Newsletter
+        //
+
+        factory(App\Models\Newsletter::class, 50)->create();
     }
 }
