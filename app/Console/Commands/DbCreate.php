@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
+use Illuminate\Support\Collection;
 use PDO;
 
 class DbCreate extends Command
@@ -16,7 +17,6 @@ class DbCreate extends Command
      * @var string
      */
     protected $db;
-
     /**
      * The name and signature of the console command.
      *
@@ -39,7 +39,6 @@ class DbCreate extends Command
     public function __construct()
     {
         $this->db = env('DB_DATABASE');
-
         parent::__construct();
     }
 
@@ -51,6 +50,20 @@ class DbCreate extends Command
     public function handle()
     {
         if (!$this->confirmToProceed()) {
+            return 1;
+        }
+
+        // Checking environment file for the required data
+        $errors = $this->checkEnvironmentFile();
+        if ($errors->isNotEmpty()) {
+            // Reduce collection of errors to single word
+            $errorResponse = $errors->reduce(function ($carry, $item) {
+                return "$carry $item";
+            }, 'Your ".env" file missing following variables:');
+
+            // Log error to the user
+            $this->error($errorResponse);
+            // Default error logging
             return 1;
         }
 
@@ -71,9 +84,30 @@ class DbCreate extends Command
             $this->info(PHP_EOL . sprintf('Database "%s" created successfully', $this->db) . PHP_EOL);
             return 0;
         } else {
-            $this->comment(PHP_EOL . sprintf('Database "%s" already exists', $this->db) . PHP_EOL);
+            $this->error(PHP_EOL . sprintf('Database "%s" already exists', $this->db) . PHP_EOL);
             return 1;
         }
+    }
+
+
+    protected function checkEnvironmentFile(): Collection
+    {
+        $environment_errors = [];
+
+        if (!$this->db) {
+            $environment_errors[] = 'DB_DATABASE';
+        }
+        if (!env('DB_HOST')) {
+            $environment_errors[] = 'DB_HOST';
+        }
+        if (!env('DB_PORT')) {
+            $environment_errors[] = 'DB_PORT';
+        }
+        if (!env('DB_USERNAME')) {
+            $environment_errors[] = 'DB_USERNAME';
+        }
+
+        return collect($environment_errors);
     }
 
     /**
