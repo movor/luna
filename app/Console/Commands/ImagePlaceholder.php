@@ -56,7 +56,7 @@ class ImagePlaceholder extends Command
         }
 
         foreach ($results as $key => $value) {
-            file_put_contents(storage_path('app/uploads/placeholders/placeholder') . '-' . $key. '.jpg', $value->getBody()->getContents());
+            file_put_contents(storage_path('app/uploads/placeholders/placeholder') . '-' . $key. '.png', $value->getBody()->getContents());
         }
     }
 }
