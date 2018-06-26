@@ -39,6 +39,18 @@ class ProjectInit extends Command
      */
     public function handle()
     {
+        $this->comment(PHP_EOL
+            . '--------------------------' .
+            "Movor-Uni Project Initiator"
+            . '--------------------------' . PHP_EOL);
+        // First check for init file
+        if (!file_exists(app()->basePath('.env'))) {
+            $this->comment('In order to use the application you will have to create ".env" file.');
+            $this->comment('In order to do that use "project:wizard" command or use ".env.example" as a primer');
+            return 1;
+        }
+
+
         // Create database
         if ($this->call('db:create')) {
             $this->error('Cannot Init project!');
@@ -69,5 +81,11 @@ class ProjectInit extends Command
                 $this->error($exception->getMessage());
             }
         }
+        // Create initial administrator user
+        $admin = new \App\Models\User;
+        $admin->name = 'Movor Dev';
+        $admin->email = 'movor@movor.io';
+        $admin->password = bcrypt('secret');
+        $admin->save();
     }
 }
