@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Collective\Html\HtmlServiceProvider::class,
+        Gverschuur\RobotsTxt\RobotsTxtProvider::class,
 
         /*
          * Application Service Providers...

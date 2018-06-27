@@ -15,7 +15,8 @@
         "laravel/framework": "5.5.*",
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "5.5.*"
+        "laravelcollective/html": "5.5.*",
+        "verschuur/laravel-robotstxt": "^1.1"
     },
     "require-dev": {
         "backpack/generators": "^1.1",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "685f575625069e0d59af796126888a46",
+    "content-hash": "179d145f8da17091f35a85e418bcff42",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -4120,6 +4120,47 @@
                 "revision"
             ],
             "time": "2016-08-02T02:32:00+00:00"
+        },
+        {
+            "name": "verschuur/laravel-robotstxt",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/verschuur/laravel-robotstxt.git",
+                "reference": "abae9b76b8234ddfbf92f8dccb642843afe03f7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/verschuur/laravel-robotstxt/zipball/abae9b76b8234ddfbf92f8dccb642843afe03f7e",
+                "reference": "abae9b76b8234ddfbf92f8dccb642843afe03f7e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gverschuur\\RobotsTxt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Govert Verschuur",
+                    "email": "govert.verschuur@gmail.com"
+                }
+            ],
+            "description": "Set the robots.txt content dynamically based on the Laravel app environment.",
+            "keywords": [
+                "laravel",
+                "php",
+                "robots.txt"
+            ],
+            "time": "2018-04-23T17:10:37+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
