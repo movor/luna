@@ -75,40 +75,12 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function viewCanonical($id)
-    {
-        $query = BlogPost::where('id', $id);
-
-        // If admin is logged in, allow view of all posts,
-        // not only published ones
-        if (!Auth::check()) {
-            $query->published();
-        }
-
-        /* @var BlogPost $post */
-        $post = $query->firstOrFail();
-
-        // Featured posts (exclude current)
-        $featuredPosts = BlogPost::where('id', '!=', $id)
-            ->published()
-            ->featured()->inRandomOrder()
-            ->limit(3)->get();
-
-        $this->setMeta($post);
-
-        return view('blog_post.view')->with([
-            'post' => $post,
-            'featuredPosts' => $featuredPosts,
-            'allTags' => BlogTag::all()
-        ]);
-    }
-
     protected function setMeta(BlogPost $post)
     {
         SEOMeta::setTitle($post->title)
             ->setDescription($post->summary)
             ->setKeywords($post->tags->pluck('name')->toArray())
-            ->setCanonical(url('blog-post/' . $post->id));
+            ->setCanonical($post->getCanonicalUrl());
 
         OpenGraph::addImage(asset($post->featured_image->xl()));
     }

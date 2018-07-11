@@ -25,7 +25,6 @@ Route::match(['post', 'get'], '/contact', 'StaticPageController@contact');
 
 Route::get('blog', 'BlogPostController@index');
 Route::get('blog/{slug}', 'BlogPostController@view');
-Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 //
 // Newsletter
@@ -33,8 +32,16 @@ Route::get('blog-post/{id}', 'BlogPostController@viewCanonical');
 
 Route::post('newsletter', 'NewsletterController@subscribe');
 
+// TODO: Potentially merge next two Routes and Controllers into one
+
 //
 // ImagePlaceholder - Cached placeholder images (from external source, but served as internal)
 //
 
 Route::get('img/placeholders/{name}.jpg', 'ImagePlaceholderController@get');
+
+//
+// Universal Canonical Controller
+//
+
+Route::get('canonical/{hash}', 'HashRecordController@canonicalView');
