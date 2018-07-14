@@ -1,0 +1,25 @@
+{
+  "name": "movor/laravel-model-meta",
+  "description": "Laravel model meta storage",
+  "authors": [
+    {
+      "name": "Vladimir Kovic",
+      "email": "vlada.kovic@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Movor\\LaravelModelMeta\\": "src/LaravelModelMeta"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Movor\\LaravelModelMeta\\LaravelModelMetaServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT"
+}
