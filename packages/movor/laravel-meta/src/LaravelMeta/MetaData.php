@@ -5,242 +5,111 @@ namespace Movor\LaravelMeta;
 class MetaData
 {
     /**
-     * Set meta
+     * Set meta at given key
      *
-     * @param array  $data
-     * @param string $type
+     * @param string $key
+     * @param mixed  $value
+     * @param string $realm
      * @param string $metableType
-     * @param int    $metableId
+     * @param string $metableId
      *
      * @throws \Exception
      */
-    public function set($data, $type, $metableType = '', $metableId = 0)
+    public function set($key, $value, $realm = null, $metableType = '', $metableId = '')
     {
         MetaModel::updateOrCreate([
-            'type' => $type,
+            'realm' => !is_null($realm) ? $realm : config('laravel-meta.default_realm'),
             'metable_type' => $metableType,
             'metable_id' => $metableId,
-        ], ['data' => $data]);
+            'key' => $key,
+        ], ['key' => $key, 'value' => $value]);
     }
 
     /**
-     * Get meta
+     * Get meta at given key
      *
-     * @param string $type
+     * @param string $key
+     * @param mixed  $default
+     * @param string $realm
      * @param string $metableType
-     * @param int    $metableId
+     * @param string $metableId
      *
      * @throws \Exception
      *
      * @return array
      */
-    public function get($type, $metableType = '', $metableId = 0)
+    public function get($key, $default = null, $realm = null, $metableType = '', $metableId = '')
     {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
+        $meta = MetaModel::filter($realm, $metableType, $metableId)
+            ->where('key', $key)
+            ->first();
 
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId);
-        }
-
-        return $meta->data;
+        return optional($meta)->value ?: $default;
     }
 
     /**
-     * Delete entire meta data and set it to empty array
+     * Get all meta
      *
-     * @param        $type
+     * @param string $realm
      * @param string $metableType
-     * @param int    $metableId
+     * @param string $metableId
      *
      * @throws \Exception
+     *
+     * @return array
      */
-    public function delete($type, $metableType = '', $metableId = 0)
+    public function getAll($realm = null, $metableType = '', $metableId = '')
     {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
-
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId, 'Cannot delete meta. ');
-        }
-
-        $meta->data = [];
-        $meta->save();
+        return MetaModel::filter($realm, $metableType, $metableId)
+            ->pluck('value', 'key')
+            ->toArray();
     }
 
     /**
-     * Remove meta record from database
-     *
-     * @param        $type
-     * @param string $metableType
-     * @param int    $metableId
-     *
-     * @throws \Exception
-     */
-    public function remove($type, $metableType = '', $metableId = 0)
-    {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
-
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId, 'Cannot remove meta. ');
-        }
-
-        $meta->delete();
-    }
-
-    /**
-     * Add key-value in meta data.
-     * If "unique meta key" already exists, data will be merged.
-     *
-     * "unique meta key" consists of: "type", "metable_type", "metable_id".
-     *
-     * @param array  $data
-     * @param string $type
-     * @param string $metableType
-     * @param int    $metableId
-     *
-     * @throws \Exception
-     */
-    public function add($data = [], $type, $metableType = '', $metableId = 0)
-    {
-        $meta = MetaModel::where(['type' => $type])->first();
-
-        if ($meta) {
-            $metaData = $meta->data;
-
-            foreach ($data as $key => $value) {
-                $metaData[$key] = $value;
-            }
-
-            $meta->data = $metaData;
-            $meta->save();
-        } else {
-            $this->set($data, $type, $metableType, $metableId);
-        }
-    }
-
-    /**
-     * Get value for given key in meta
+     * Remove meta at given key
      *
      * @param string $key
-     * @param string $type
+     * @param string $realm
      * @param string $metableType
-     * @param int    $metableId
+     * @param string $metableId
      *
-     * @throws  \Exception
-     *
-     * @return bool
+     * @throws \Exception
      */
-    public function getKey($key, $type, $metableType = '', $metableId = 0)
+    public function remove($key, $realm = null, $metableType = '', $metableId = '')
     {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
+        $meta = MetaModel::filter($realm, $metableType, $metableId)
+            ->where('key', $key)
+            ->delete();
+    }
 
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId, 'Cannot get key. ');
-        }
-
-        $data = object_get($meta, 'data');
-
-        return array_get($data, $key);
+    /**
+     * Purge meta
+     *
+     * @param string $realm
+     * @param string $metableType
+     * @param string $metableId
+     *
+     * @throws \Exception
+     */
+    public function purge($realm = null, $metableType = '', $metableId = '')
+    {
+        MetaModel::filter($realm, $metableType, $metableId)->delete();
     }
 
     /**
      * Check if key exists
      *
-     * @param string  $key
-     * @param string  $type
-     * @param string  $metableType
-     * @param integer $metableId
-     *
-     * @throws  \Exception
+     * @param string $key
+     * @param string $realm
+     * @param string $metableType
+     * @param string $metableId
      *
      * @return bool
      */
-    public function hasKey($key, $type, $metableType = '', $metableId = 0)
+    public function hasKey($key, $realm = null, $metableType = '', $metableId = '')
     {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
-
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId, 'Cannot check key. ');
-        }
-
-        $data = object_get($meta, 'data', []);
-
-        return isset($data[$key]);
-    }
-
-    /**
-     * Remove data associated with the given key.
-     * Given key can be string or array of keys.
-     *
-     * @param string|array $key
-     * @param string       $type
-     * @param string       $metableType
-     * @param integer      $metableId
-     *
-     * @throws \Exception
-     */
-    public function removeKey($key, $type, $metableType = '', $metableId = 0)
-    {
-        $meta = MetaModel::where([
-            'type' => $type,
-            'metable_type' => $metableType,
-            'metable_id' => $metableId,
-        ])->first();
-
-        if (!$meta) {
-            $this->throwFormattedException($type, $metableType, $metableId, 'Cannot remove key. ');
-        }
-
-        $metaData = $meta->data;
-
-        // Remove data by given key/keys from meta data variable
-        if (is_array($key)) {
-            foreach ($key as $k) {
-                if (isset($metaData[$k])) {
-                    unset($metaData[$k]);
-                }
-            }
-        } elseif (isset($metaData[$key])) {
-            unset($metaData[$key]);
-        }
-
-        // Put back data and save
-        $meta->data = $metaData;
-        $meta->save();
-    }
-
-    /**
-     * @param string $type
-     * @param string $metableType
-     * @param int    $metableId
-     * @param string $prependMsg
-     *
-     * @throws \Exception
-     */
-    protected function throwFormattedException($type, $metableType, $metableId, $prependMsg = '')
-    {
-        $uniqueMetaKey = $type . '-' . $metableType . '-' . $metableId;
-
-        $message = $prependMsg . 'No meta found: ' . $uniqueMetaKey;
-        throw new \Exception($message);
+        return MetaModel::filter($realm, $metableType, $metableId)
+            ->where('key', $key)
+            ->exists();
     }
 }

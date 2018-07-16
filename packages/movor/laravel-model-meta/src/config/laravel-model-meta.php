@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'model_meta_type' => 'laravel-model'
+    'realm' => 'laravel-model'
 ];

@@ -15,13 +15,18 @@ class CreateMetaDataTable extends Migration
     {
         Schema::create(config('laravel-meta.table_name'), function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
-            $table->unsignedInteger('metable_id')->default(0);
+            $table->string('realm', 32);
             $table->string('metable_type')->default('');
-            $table->text('data');
+            $table->string('metable_id', 64)->default('');
+            $table->string('key', 64);
+            $table->longText('value');
+            $table->string('type')->nullable();
+
             $table->timestamps();
 
-            $table->unique(['type', 'metable_id', 'metable_type']);
+            $table->unique(['realm', 'metable_type', 'metable_id', 'key']);
+
+            // TODO.FOR:vkovic - Add indices
         });
     }
 
