@@ -43,6 +43,7 @@ trait HasMetaData
     {
         $this->meta()->updateOrCreate([
             'realm' => $this->getMetaIdentifier()[0],
+            'key' => $key,
         ], ['key' => $key, 'value' => $value]);
     }
 
