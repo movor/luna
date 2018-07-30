@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Lib\CanonicalTrait;
 use App\Lib\CustomCasts\CustomCastableTrait;
 use App\Models\CustomCasts\BlogPostFeaturedImageCast;
 use Backpack\CRUD\CrudTrait;
@@ -12,7 +11,7 @@ use Parsedown;
 
 class BlogPost extends Model
 {
-    use CrudTrait, CustomCastableTrait, CanonicalTrait;
+    use CrudTrait, CustomCastableTrait;
 
     protected $fillable = [
         'user_id',
@@ -25,8 +24,6 @@ class BlogPost extends Model
         'commentable',
         'published_at'
     ];
-
-    protected $baseUrl = 'blog';
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -50,7 +47,7 @@ class BlogPost extends Model
 
     public function getIsPublishedAttribute()
     {
-        return (bool)$this->published_at;
+        return (bool) $this->published_at;
     }
 
     public function getFeaturedImageRawAttribute()

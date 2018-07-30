@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2675b0112cc432da6cab927673896d7",
+    "content-hash": "42ef1f86d82d067710940ee651e91182",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -2310,6 +2310,35 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "movor/laravel-db-redirect",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "packages/movor/laravel-db-redirect",
+                "reference": "f8d35fb33d27297616c3ceb4599d820f1c3215e2",
+                "shasum": null
+            },
+            "require": {
+                "ramsey/uuid": "~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Movor\\LaravelDbRedirect\\": "src/package"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Kovic",
+                    "email": "vlada.kovic@gmail.com"
+                }
+            ],
+            "description": "Laravel redirect from database"
         },
         {
             "name": "movor/laravel-meta",
@@ -6391,6 +6420,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "movor/laravel-db-redirect": 20,
         "movor/laravel-meta": 20,
         "movor/laravel-model-meta": 20,
         "laracasts/generators": 20

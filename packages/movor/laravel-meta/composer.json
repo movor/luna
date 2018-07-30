@@ -3,7 +3,7 @@
   "description": "Laravel meta storage interface primarily for models",
   "authors": [
     {
-      "name": "Vladimir Kovic",
+      "name": "Vladimir Ković",
       "email": "vlada.kovic@gmail.com"
     }
   ],

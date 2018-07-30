@@ -12,6 +12,10 @@
         {
             "type": "path",
             "url": "packages/movor/laravel-model-meta"
+        },
+        {
+            "type": "path",
+            "url": "packages/movor/laravel-db-redirect"
         }
     ],
     "require": {
@@ -26,6 +30,7 @@
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.5.*",
+        "movor/laravel-db-redirect": "@dev",
         "movor/laravel-meta": "@dev",
         "movor/laravel-model-meta": "@dev",
         "verschuur/laravel-robotstxt": "^1.1"
