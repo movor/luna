@@ -1,6 +1,8 @@
 {
   "name": "movor/laravel-meta",
-  "description": "Laravel meta storage interface primarily for models",
+  "description": "Laravel meta storage for different purposes",
+  "keywords": ["laravel", "meta", "data"],
+  "license": "MIT",
   "authors": [
     {
       "name": "Vladimir Ković",
@@ -9,17 +11,10 @@
   ],
   "autoload": {
     "psr-4": {
-      "Movor\\LaravelMeta\\": "src/LaravelMeta"
+      "Movor\\LaravelMeta\\": "src/package"
     }
   },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Movor\\LaravelMeta\\LaravelMetaServiceProvider"
-      ]
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "license": "MIT"
+  "require": {
+    "php": ">=7.0.0"
+  }
 }
