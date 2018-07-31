@@ -1,21 +1,21 @@
 {
   "name": "movor/laravel-db-redirect",
-  "description": "Advance Laravel redirects from database",
+  "description": "Manage HTTP redirections using database",
+  "keywords": ["laravel", "redirect", "database"],
+  "license": "MIT",
   "authors": [
     {
       "name": "Vladimir Ković",
       "email": "vlada.kovic@gmail.com"
     }
   ],
-  "require": {
-    "ramsey/uuid": "~3.0"
-  },
   "autoload": {
     "psr-4": {
       "Movor\\LaravelDbRedirect\\": "src/package"
     }
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "license": "MIT"
+  "require": {
+    "php": ">=7.0.0",
+    "ramsey/uuid": "~3.0"
+  }
 }
