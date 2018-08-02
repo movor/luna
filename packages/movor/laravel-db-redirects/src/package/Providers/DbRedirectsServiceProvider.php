@@ -1,14 +1,11 @@
 <?php
 
-namespace Movor\LaravelDbRedirect\Providers;
+namespace Movor\LaravelDbRedirects\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Movor\LaravelDbRedirect\DbRedirectHandler;
 
-class DbRedirectServiceProvider extends ServiceProvider
+class DbRedirectsServiceProvider extends ServiceProvider
 {
-    public static $packageName = 'laravel-db-redirect';
-
     /**
      * Bootstrap the application services.
      *
@@ -26,6 +23,6 @@ class DbRedirectServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(static::$packageName, DbRedirectHandler::class);
+        //
     }
 }

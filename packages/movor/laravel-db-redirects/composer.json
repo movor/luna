@@ -1,6 +1,6 @@
 {
-  "name": "movor/laravel-db-redirect",
-  "description": "Manage HTTP redirections using database",
+  "name": "movor/laravel-db-redirects",
+  "description": "Manage HTTP redirection using database",
   "keywords": ["laravel", "redirect", "database"],
   "license": "MIT",
   "authors": [
@@ -11,11 +11,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "Movor\\LaravelDbRedirect\\": "src/package"
+      "Movor\\LaravelDbRedirects\\": "src/package"
     }
   },
   "require": {
-    "php": ">=7.0.0",
-    "ramsey/uuid": "~3.0"
+    "php": "^7",
+    "illuminate/framework": "~5.5.0|~5.6.0"
   }
 }
