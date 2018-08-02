@@ -1,5 +1,5 @@
 #
-# OS Generated Files
+# OS generated files and junk
 #
 
 .DS_Store
@@ -18,7 +18,13 @@ ehthumbs.db
 /.idea
 
 #
-# Project Ignores
+# Movor packages (development)
+#
+
+/packages
+
+#
+# Project
 #
 
 npm-debug.log
@@ -32,7 +38,8 @@ yarn-error.log
 /vendor
 
 #
-# Laravel IDE Helper
+# Laravel IDE helper
 #
+
 _ide_helper.php
 .phpstorm.meta.php
