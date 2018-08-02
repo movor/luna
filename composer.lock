@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "42ef1f86d82d067710940ee651e91182",
+    "content-hash": "7a5f7ce507dc2184c5646b094996081f",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -2312,12 +2312,12 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
-            "name": "movor/laravel-db-redirect",
+            "name": "movor/laravel-db-redirects",
             "version": "dev-master",
             "dist": {
                 "type": "path",
-                "url": "packages/movor/laravel-db-redirect",
-                "reference": "066df5c39944152f2537653f982ba8b412dd1896",
+                "url": "packages/movor/laravel-db-redirects",
+                "reference": "b24f8c93c621b15d749f87040371332287e3bdb9",
                 "shasum": null
             },
             "require": {
@@ -2327,7 +2327,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Movor\\LaravelDbRedirect\\": "src/package"
+                    "Movor\\LaravelDbRedirects\\": "src/package"
                 }
             },
             "license": [
@@ -2349,10 +2349,15 @@
         {
             "name": "movor/laravel-meta",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/movor/laravel-meta.git",
+                "reference": "ca3a31c422c6b695c823b9794e4fc355093ae23f"
+            },
             "dist": {
                 "type": "path",
-                "url": "packages/movor/laravel-meta",
-                "reference": "e465fc6e3b2df087a88ec733786dc8108df94234",
+                "url": "https://api.github.com/repos/movor/laravel-meta/zipball/ca3a31c422c6b695c823b9794e4fc355093ae23f",
+                "reference": "ca3a31c422c6b695c823b9794e4fc355093ae23f",
                 "shasum": null
             },
             "require": {
@@ -6435,7 +6440,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "movor/laravel-db-redirect": 20,
+        "movor/laravel-db-redirects": 20,
         "movor/laravel-meta": 20,
         "movor/laravel-model-meta": 20,
         "laracasts/generators": 20
