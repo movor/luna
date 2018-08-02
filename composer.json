@@ -4,12 +4,6 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/movor/laravel-db-redirects"
-        }
-    ],
     "require": {
         "php": ">=7.0.0",
         "artesaos/seotools": "^0.11.1",
@@ -22,9 +16,6 @@
         "laravel/passport": "~4.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.5.*",
-        "movor/laravel-db-redirects": "@dev",
-        "movor/laravel-meta": "@dev",
-        "movor/laravel-model-meta": "@dev",
         "verschuur/laravel-robotstxt": "^1.1"
     },
     "require-dev": {

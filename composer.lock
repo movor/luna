@@ -2321,8 +2321,8 @@
                 "shasum": null
             },
             "require": {
-                "php": ">=7.0.0",
-                "ramsey/uuid": "~3.0"
+                "illuminate/framework": "~5.5.0|~5.6.0",
+                "php": "^7"
             },
             "type": "library",
             "autoload": {
@@ -2388,11 +2388,16 @@
         {
             "name": "movor/laravel-model-meta",
             "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/movor/laravel-model-meta.git",
+                "reference": "15fa888089cc388755ec975abc8e8d961008803a"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/movor/laravel-model-meta",
-                "reference": "7657533821438d604c072de3b0903dea93d1aefe",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/movor/laravel-model-meta/zipball/15fa888089cc388755ec975abc8e8d961008803a",
+                "reference": "15fa888089cc388755ec975abc8e8d961008803a",
+                "shasum": ""
             },
             "require": {
                 "movor/laravel-meta": "@dev",
@@ -2404,6 +2409,7 @@
                     "Movor\\LaravelModelMeta\\": "src/package"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2419,7 +2425,8 @@
                 "laravel",
                 "meta",
                 "model"
-            ]
+            ],
+            "time": "2018-08-02T16:28:06+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
