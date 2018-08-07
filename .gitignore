@@ -12,16 +12,10 @@ ehthumbs.db
 *.log
 
 #
-# IDE
+# PhpStorm
 #
 
 /.idea
-
-#
-# Movor packages (development)
-#
-
-/packages
 
 #
 # Project

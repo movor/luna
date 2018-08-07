@@ -23,7 +23,6 @@ class Handler extends ExceptionHandler
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
-        \App\Exceptions\ApiExceptions\ApiBaseException::class,
         \App\Exceptions\AppExceptions\AppErrorException::class,
     ];
 
@@ -94,15 +93,6 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         $routePrefix = $request->route()->getPrefix();
-
-        // If given request expects json, than consider this as an API call so respond in API way
-        if ($request->expectsJson() && $routePrefix == 'api') {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-                'data' => []
-            ], 401);
-        }
 
         // Redirect to login page based on route prefix
         return redirect($routePrefix . '/login');

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,26 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $now = Carbon::now();
-
-        //
-        // Oauth/Passport
-        //
-
-        // Oauth clients
-        DB::table('oauth_clients')->insert([
-            'id' => 1,
-            'user_id' => null,
-            'name' => env('APP_NAME') . ' Password Grant Client',
-            'secret' => 'OdjXwsu1xv6NnX6VAd3wyCBFCRFdaVpraEffaPkg',
-            'redirect' => 'http://localhost',
-            'personal_access_client' => 0,
-            'password_client' => 1,
-            'revoked' => 0,
-            'created_at' => $now,
-            'updated_at' => $now
-        ]);
-
         //
         // User
         //
@@ -53,6 +32,7 @@ class DatabaseSeeder extends Seeder
         // Delete all previous blog images before seeding
         $deletePattern = \App\Models\CustomCasts\BlogPostFeaturedImageCast::storageDir();
         File::delete(File::glob(storage_path_app($deletePattern) . '/*'));
+
         factory(\App\Models\BlogPost::class, 20)->create();
 
         //
