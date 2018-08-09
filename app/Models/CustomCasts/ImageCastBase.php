@@ -2,9 +2,9 @@
 
 namespace App\Models\CustomCasts;
 
-use App\Lib\CustomCasts\CustomCastableBase;
 use File;
 use Image;
+use Movor\LaravelCustomCasts\CustomCastableBase;
 
 abstract class ImageCastBase extends CustomCastableBase
 {
@@ -43,7 +43,7 @@ abstract class ImageCastBase extends CustomCastableBase
             $image = Image::make($value);
             $newValue = static::storageDir() . '/' . $filename . '.' . $extension;
 
-            // Make sure images are saved when after model is saved,
+            // Make sure images are saved after model is saved,
             // not here (when attribute is set)
             $this->storeImagesCallback = function () use ($image, $filename, $extension, $newValue) {
                 $imageQuality = 75;
@@ -81,7 +81,7 @@ abstract class ImageCastBase extends CustomCastableBase
      *
      * @return string
      */
-    private function getBase64fileExtension($base64string)
+    protected function getBase64fileExtension($base64string)
     {
         $start = strpos($base64string, '/') + 1;
         $end = strpos($base64string, ';');
@@ -94,7 +94,7 @@ abstract class ImageCastBase extends CustomCastableBase
     }
 
     /**
-     * Created event
+     * React to created event
      *
      * Handle initial image saving
      */
@@ -106,9 +106,9 @@ abstract class ImageCastBase extends CustomCastableBase
     }
 
     /**
-     * Updating event
+     * React to updating event
      *
-     * Handle image replacing here, because we can check if corresonding
+     * Handle image replacing here, because we can check if corresponding
      * model field is dirty and update accordingly
      */
     public function updating()
@@ -124,7 +124,7 @@ abstract class ImageCastBase extends CustomCastableBase
     }
 
     /**
-     * Deleted event
+     * Reach to deleted event
      *
      * Handle image deleting
      */

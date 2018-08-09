@@ -2,6 +2,8 @@
 
 namespace App\Models\CustomCasts;
 
+use App\Lib\ImageVariations\ImageVariations;
+
 class BlogPostFeaturedImageCast extends ImageCastBase
 {
     public static function storageDir()

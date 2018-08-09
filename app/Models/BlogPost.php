@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use App\Lib\CustomCasts\CustomCastableTrait;
 use App\Models\CustomCasts\BlogPostFeaturedImageCast;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Movor\LaravelCustomCasts\CustomCastableTrait;
 use Parsedown;
 
 class BlogPost extends Model
@@ -26,9 +26,9 @@ class BlogPost extends Model
     ];
 
     protected $casts = [
+        'featured_image' => BlogPostFeaturedImageCast::class,
         'published_at' => 'datetime',
         'featured' => 'boolean',
-        'featured_image' => BlogPostFeaturedImageCast::class,
         'commentable' => 'boolean',
     ];
 

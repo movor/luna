@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb4543201f06c94703a7a67311a945fd",
+    "content-hash": "efda5f32c25a8dac077b1f01dedc7856",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1773,6 +1773,97 @@
                 "psr-3"
             ],
             "time": "2017-06-19T01:22:40+00:00"
+        },
+        {
+            "name": "movor/laravel-custom-casts",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/movor/laravel-custom-casts.git",
+                "reference": "0e54a1a4d66ea831741d6f766939823b2e8fe87a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/movor/laravel-custom-casts/zipball/0e54a1a4d66ea831741d6f766939823b2e8fe87a",
+                "reference": "0e54a1a4d66ea831741d6f766939823b2e8fe87a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.5.*|5.6.*"
+            },
+            "require-dev": {
+                "orchestra/database": "3.5.*|3.6.*",
+                "orchestra/testbench": "3.5.*|3.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Movor\\LaravelCustomCasts\\": "src/package"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Ković",
+                    "email": "vlada.kovic@gmail.com"
+                }
+            ],
+            "description": "Make your own custom cast for Laravel model",
+            "keywords": [
+                "cast",
+                "casts",
+                "datatype",
+                "laravel",
+                "model"
+            ],
+            "time": "2018-08-09T16:03:56+00:00"
+        },
+        {
+            "name": "movor/laravel-db-redirector",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/movor/laravel-db-redirector.git",
+                "reference": "495e59e872ec49e33e81f9a3f6d233d17ca55625"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/movor/laravel-db-redirector/zipball/495e59e872ec49e33e81f9a3f6d233d17ca55625",
+                "reference": "495e59e872ec49e33e81f9a3f6d233d17ca55625",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.5.*|5.6.*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.5.*|3.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Movor\\LaravelDbRedirector\\": "src/package"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladimir Ković",
+                    "email": "vlada.kovic@gmail.com"
+                }
+            ],
+            "description": "Manage Laravel HTTP redirections using database",
+            "keywords": [
+                "database",
+                "laravel",
+                "redirect"
+            ],
+            "time": "2018-08-07T09:40:20+00:00"
         },
         {
             "name": "mtdowling/cron-expression",
