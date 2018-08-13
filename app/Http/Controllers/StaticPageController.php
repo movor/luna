@@ -20,7 +20,7 @@ class StaticPageController extends Controller
 
             $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [
                 'form_params' => [
-                    'secret' => env('GOOGLE_RECAPTCHA_SECRET_KEY'),
+                    'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
                     'response' => $value,
                     'remoteip' => $request->getClientIp()
                 ]

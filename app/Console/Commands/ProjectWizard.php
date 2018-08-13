@@ -103,8 +103,8 @@ class ProjectWizard extends Command
             'MAIL_FORCE_RECIPIENT_NAME' => "Movor Dev",
 
             'GOOGLE_ANALYTICS_KEY' => empty($googleAnalyticsKey) ? '' : $googleAnalyticsKey,
-            'GOOGLE_RECAPTCHA_PUBLIC_KEY' => empty($googleRecaptchaPublic) ? '' : $googleRecaptchaPublic,
-            'GOOGLE_RECAPTCHA_SECRET_KEY' => empty($googleRecaptchaSecret) ? '' : $googleRecaptchaSecret,
+            'GOOGLE_RECAPTCHA_KEY' => empty($googleRecaptchaPublic) ? '' : $googleRecaptchaPublic,
+            'GOOGLE_RECAPTCHA_SECRET' => empty($googleRecaptchaSecret) ? '' : $googleRecaptchaSecret,
 
             'MIX_DISQS_WEBSITE' => empty($disqusDomain) ? '' : $disqusDomain,
             'JS_ENV' => $appEnvironment,

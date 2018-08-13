@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary float-sm-right mb-5 g-recaptcha"
-                        data-sitekey="{{ env('GOOGLE_RECAPTCHA_PUBLIC_KEY') }}"
+                        data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"
                         data-callback="submitForm"
                 >
                     Submit
