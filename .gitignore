@@ -28,6 +28,7 @@ yarn-error.log
 /node_modules
 /public/hot
 /public/storage
+/public/sitemap.xml
 /storage/*.key
 /vendor
 
