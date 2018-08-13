@@ -169,6 +169,7 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Gverschuur\RobotsTxt\RobotsTxtProvider::class,
+        Movor\LaravelDbRedirector\Providers\DbRedirectorServiceProvider::class,
 
         /*
          * Application Service Providers...

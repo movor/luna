@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "efda5f32c25a8dac077b1f01dedc7856",
+    "content-hash": "2264d54de20eb4fd84d2b473bfb69724",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -1823,16 +1823,16 @@
         },
         {
             "name": "movor/laravel-db-redirector",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/movor/laravel-db-redirector.git",
-                "reference": "495e59e872ec49e33e81f9a3f6d233d17ca55625"
+                "reference": "a3a7404156a5ecb32633f7beee9e926a5c113c70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/movor/laravel-db-redirector/zipball/495e59e872ec49e33e81f9a3f6d233d17ca55625",
-                "reference": "495e59e872ec49e33e81f9a3f6d233d17ca55625",
+                "url": "https://api.github.com/repos/movor/laravel-db-redirector/zipball/a3a7404156a5ecb32633f7beee9e926a5c113c70",
+                "reference": "a3a7404156a5ecb32633f7beee9e926a5c113c70",
                 "shasum": ""
             },
             "require": {
@@ -1863,7 +1863,7 @@
                 "laravel",
                 "redirect"
             ],
-            "time": "2018-08-07T09:40:20+00:00"
+            "time": "2018-08-10T18:19:46+00:00"
         },
         {
             "name": "mtdowling/cron-expression",

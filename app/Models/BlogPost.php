@@ -7,6 +7,7 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Movor\LaravelCustomCasts\CustomCastableTrait;
+use Movor\LaravelDbRedirector\Models\RedirectRule;
 use Parsedown;
 
 class BlogPost extends Model
@@ -31,6 +32,29 @@ class BlogPost extends Model
         'featured' => 'boolean',
         'commentable' => 'boolean',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        // Create 301 redirect when slug changes
+        static::updated(function (BlogPost $blogPost) {
+            if ($blogPost->isDirty('slug')) {
+                RedirectRule::create([
+                    'origin' => 'blog/' . $blogPost->getOriginal('slug'),
+                    'destination' => 'blog/' . $blogPost->slug
+                ]);
+            }
+        });
+
+        // Remove redirects when post is deleted
+        static::deleted(function (BlogPost $blogPost) {
+            try {
+                RedirectRule::deleteChainedRecursively('blog/' . $blogPost->slug);
+            } catch (\Exception $e) {
+            }
+        });
+    }
 
     /**
      * @return BelongsToMany
@@ -98,5 +122,10 @@ class BlogPost extends Model
         return $published
             ? $query->whereNotNull('published_at')
             : $query->whereNull('published_at');
+    }
+
+    public function getUrl()
+    {
+        return url('blog/' . $this->slug);
     }
 }

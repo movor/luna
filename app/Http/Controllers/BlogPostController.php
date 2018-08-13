@@ -80,7 +80,7 @@ class BlogPostController extends Controller
         SEOMeta::setTitle($post->title)
             ->setDescription($post->summary)
             ->setKeywords($post->tags->pluck('name')->toArray())
-            ->setCanonical(url('blog/' . $post->slug));
+            ->setCanonical($post->getUrl());
 
         OpenGraph::addImage(asset($post->featured_image->xl()));
     }
