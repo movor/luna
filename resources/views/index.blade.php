@@ -48,7 +48,6 @@
                         vitae voluptatem voluptatibus?
                     </p>
                 </div>
-                @include('partials.newsletter')
             </div>
         </div>
     </div>

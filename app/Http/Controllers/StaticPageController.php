@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogTag;
+use App\Models\Newsletter;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -37,8 +38,7 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('Home')
             ->setDescription('Welcome to ' . env('APP_NAME'))
-            ->setKeywords(BlogTag::pluck('name')->toArray())
-            ->setCanonical(url('/'));
+            ->setKeywords(BlogTag::pluck('name')->toArray());
 
         return view('index');
     }
@@ -52,11 +52,20 @@ class StaticPageController extends Controller
                 'message' => 'required',
             ]);
 
-            Mail::raw($request->message, function (Message $mail) use ($request) {
-                $mail->subject(env('APP_NAME') . ' Contact Form')
-                    ->from($request->email)
-                    ->to(env('APP_CONTACT_EMAIL'));
-            });
+            $message = $request->message;
+            $message .= 2 * PHP_EOL;
+            $message .= 'Sender email: ' . $request->email;
+
+            try {
+                Mail::raw($message, function (Message $mail) {
+                    $mail->subject(env('APP_NAME') . ' Contact Form')
+                        ->from(env('MAIL_FROM_ADDRESS'))
+                        ->to(env('APP_CONTACT_EMAIL'));
+                });
+            } catch (\Exception $e) {
+                return redirect()->back()
+                    ->withErrors($e->getMessage());
+            }
 
             return redirect()->back()
                 ->withMessages('Your message has been successfully sent. You can expect our response soon.');
@@ -64,9 +73,8 @@ class StaticPageController extends Controller
 
         // SEO
         SEOMeta::setTitle('Contact')
-            ->setDescription('Feel free to contact us any time using web form or email!')
-            ->setKeywords(BlogTag::pluck('name')->toArray())
-            ->setCanonical(url('contact'));
+            ->setDescription('You can use webform on this page to contact us')
+            ->setKeywords(BlogTag::pluck('name')->toArray());
 
         return view('static_pages.contact');
     }
@@ -76,9 +84,35 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('About')
             ->setDescription('Check out our awesome team!')
-            ->setKeywords(BlogTag::pluck('name')->toArray())
-            ->setCanonical(url('about'));
+            ->setKeywords(BlogTag::pluck('name')->toArray());
 
         return view('static_pages.about');
+    }
+
+    public function newsletter(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+
+            try {
+                Newsletter::create(['email' => $request->email]);
+            } catch (\Exception $e) {
+                return redirect()->back()
+                    ->withErrors($e->getMessage());
+            }
+
+            return redirect()
+                ->back()
+                ->withMessages('You have successfully subscribed');
+        }
+
+        // SEO
+        SEOMeta::setTitle('Newsletter')
+            ->setDescription('Sign up for newsletter')
+            ->setKeywords(BlogTag::pluck('name')->toArray());
+
+        return view('static_pages.newsletter');
     }
 }

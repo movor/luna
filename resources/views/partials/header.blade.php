@@ -15,6 +15,9 @@
                 <li class="nav-item {{ Request::segment(1) == 'contact' ? 'active' : '' }}">
                     <a class="nav-link" href="/contact">Contact</a>
                 </li>
+                <li class="nav-item {{ Request::segment(1) == 'newsletter' ? 'active' : '' }}">
+                    <a class="nav-link" href="/newsletter">Newsletter</a>
+                </li>
                 <li class="nav-item {{ Request::segment(1) == 'blog' ? 'active' : '' }}">
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
