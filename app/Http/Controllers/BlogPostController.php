@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\BlogTag;
-use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\SEOMeta;
 use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Request;
@@ -32,15 +30,6 @@ class BlogPostController extends Controller
 
         $posts = $query->get();
 
-        SEOMeta::setTitle($title)
-            ->setDescription('Checkout out our awesome blog posts. We wrote them with soul!')
-            ->setKeywords(BlogTag::pluck('name')->toArray())
-            ->setCanonical(url('blog'));
-
-        if ($posts->isNotEmpty()) {
-            OpenGraph::addImage(asset($posts->first()->featured_image->xl()));
-        }
-
         return view('blog_post.index')->with([
             'title' => $title,
             'posts' => $query->get()
@@ -66,22 +55,10 @@ class BlogPostController extends Controller
             ->featured()->inRandomOrder()
             ->limit(3)->get();
 
-        $this->setMeta($post);
-
         return view('blog_post.view')->with([
             'post' => $post,
             'featuredPosts' => $featuredPosts,
             'allTags' => BlogTag::all()
         ]);
-    }
-
-    protected function setMeta(BlogPost $post)
-    {
-        SEOMeta::setTitle($post->title)
-            ->setDescription($post->summary)
-            ->setKeywords($post->tags->pluck('name')->toArray())
-            ->setCanonical($post->getUrl());
-
-        OpenGraph::addImage(asset($post->featured_image->xl()));
     }
 }

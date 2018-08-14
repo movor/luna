@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $deletePattern = \App\Models\CustomCasts\BlogPostFeaturedImageCast::storageDir();
         File::delete(File::glob(storage_path_app($deletePattern) . '/*'));
 
-        factory(\App\Models\BlogPost::class, 20)->create();
+        factory(\App\Models\BlogPost::class, 10)->create();
 
         //
         // Pivot: Blog posts and blog tags (each post should have exactly one primary tag)
@@ -50,11 +50,5 @@ class DatabaseSeeder extends Seeder
 
             return ['primary' => false];
         });
-
-        //
-        // Newsletter
-        //
-
-        factory(App\Models\Newsletter::class, 50)->create();
     }
 }

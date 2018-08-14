@@ -52,7 +52,6 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 
             return 'data:image/jpg;base64,' . $base64Image;
         }),
-        'commentable' => chance(70),
         'published_at' => chance(70, function () {
             return \Carbon\Carbon::now();
         }),
@@ -73,12 +72,4 @@ $factory->define(App\Models\BlogTag::class, function (Faker $faker) {
     return [
         'name' => str_slug($name),
     ];
-});
-
-//
-// Newsletter
-//
-
-$factory->define(App\Models\Newsletter::class, function (Faker $faker) {
-    return ['email' => $faker->unique()->email];
 });
