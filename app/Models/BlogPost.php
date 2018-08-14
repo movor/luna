@@ -33,6 +33,29 @@ class BlogPost extends Model
         'commentable' => 'boolean',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        // Create 301 redirect when slug changes
+        static::updated(function (BlogPost $blogPost) {
+            if ($blogPost->isDirty('slug')) {
+                RedirectRule::create([
+                    'origin' => 'blog/' . $blogPost->getOriginal('slug'),
+                    'destination' => 'blog/' . $blogPost->slug
+                ]);
+            }
+        });
+
+        // Remove redirects when post is deleted
+        static::deleted(function (BlogPost $blogPost) {
+            try {
+                RedirectRule::deleteChainedRecursively('blog/' . $blogPost->slug);
+            } catch (\Exception $e) {
+            }
+        });
+    }
+
     /**
      * @return BelongsToMany
      */

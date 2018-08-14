@@ -192,6 +192,12 @@ class BlogPostCrudController extends CrudController
                 'tab' => 'Other'
             ])
             ->addField([
+                'name' => 'commentable',
+                'label' => 'Enable Comments',
+                'type' => 'checkbox',
+                'tab' => 'Other'
+            ])
+            ->addField([
                 'name' => 'tags',
                 'label' => 'Tags',
                 'type' => 'select2_multiple',
