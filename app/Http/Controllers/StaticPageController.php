@@ -53,14 +53,12 @@ class StaticPageController extends Controller
             ]);
 
             $message = $request->message;
-            $message .= 2 * PHP_EOL;
-            $message .= 'Sender email: ' . $request->email;
+            $message .= "\r\n\n\n";
+            $message .= 'Mail: ' . $request->email;
 
             try {
                 Mail::raw($message, function (Message $mail) {
-                    $mail->subject(env('APP_NAME') . ' Contact Form')
-                        ->from(env('MAIL_FROM_ADDRESS'))
-                        ->to(env('APP_CONTACT_EMAIL'));
+                    $mail->subject(env('APP_NAME') . ' Contact Form');
                 });
             } catch (\Exception $e) {
                 return redirect()->back()
