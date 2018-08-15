@@ -28,7 +28,7 @@ Route::get('blog', 'BlogPostController@index');
 Route::get('blog/{slug}', 'BlogPostController@view');
 
 //
-// ImagePlaceholder - Cached placeholder images (from external source, but served as internal)
+// ImagePlaceholders - Cached placeholder images (from external source, but served as internal)
 //
 
 Route::get('img/placeholders/{name}.jpg', 'ImagePlaceholderController@get');
