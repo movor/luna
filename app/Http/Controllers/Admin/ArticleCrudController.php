@@ -5,6 +5,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ArticleCrudController extends CrudController
 {
@@ -136,32 +137,29 @@ class ArticleCrudController extends CrudController
                 'tab' => 'Basics'
             ]);
 
-        // TODO.SOLVE
-        if (\Request::segment(3)) {
-            $segment = \Request::segment(3);
+        // Show primary tag selector only if tag exists.
+        // Also if article only tag has been deleted,
+        // the first one (form tags table) will be preselected
+        if ($segment = \Request::segment(3) && Tag::exists()) {
+            $articleId = $segment;
             $options = Tag::ordered()->pluck('name', 'id')->toArray();
+            $article = Article::find($articleId);
 
-            if ($options) {
-                // Edit
-                if (is_numeric($segment)) {
-                    $articleId = $segment;
-                    $article = Article::find($articleId);
-                    $selected = $article->getPrimaryTag()->id;
-                } // Create
-                else {
-                    $selected = Tag::ordered()->first()->id;
-                }
-
-                $this->crud->addField([
-                    'name' => 'primary_tag',
-                    'label' => 'Primary Tag',
-                    'type' => 'select_from_array_with_default',
-                    'options' => $options,
-                    'selected' => $selected,
-                    'allow_null' => false,
-                    'tab' => 'Basics'
-                ])->afterField('title');
+            if ($primaryTag = $article->getPrimaryTag()) {
+                $selected = $primaryTag->id;
+            } else {
+                $selected = Tag::ordered()->first()->id;
             }
+
+            $this->crud->addField([
+                'name' => 'primary_tag',
+                'label' => 'Primary Tag',
+                'type' => 'select_from_array_with_default',
+                'options' => $options,
+                'selected' => $selected,
+                'allow_null' => false,
+                'tab' => 'Basics'
+            ])->afterField('title');
         }
 
         return $this;
@@ -198,22 +196,26 @@ class ArticleCrudController extends CrudController
                 'tab' => 'Other'
             ])
             ->addField([
-                'name' => 'tags',
-                'label' => 'Tags',
-                'type' => 'select2_multiple',
-                'entity' => 'tags',
-                'attribute' => 'name',
-                'model' => Tag::class,
-                'pivot' => true,
-                //'wrapperAttributes' => ['class' => 'form-group col-md-8'],
-                'tab' => 'Other'
-            ])
-            ->addField([
                 'name' => 'published_at',
                 'label' => 'Published At',
                 'type' => 'date',
                 'tab' => 'Other'
             ]);
+
+        if (Tag::exists()) {
+            $this->crud
+                ->addField([
+                    'name' => 'tags',
+                    'label' => 'Tags',
+                    'type' => 'select2_multiple',
+                    'entity' => 'tags',
+                    'attribute' => 'name',
+                    'model' => Tag::class,
+                    'pivot' => true,
+                    'tab' => 'Other'
+                ])
+                ->afterField('commentable');
+        }
     }
 
     public function store(Request $request)
@@ -249,7 +251,10 @@ class ArticleCrudController extends CrudController
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
-            'slug' => 'required',
+            'slug' => [
+                'required',
+                Rule::unique('articles', 'slug')->ignore(\Request::segment(3))
+            ],
             'body' => 'required'
         ]);
 
