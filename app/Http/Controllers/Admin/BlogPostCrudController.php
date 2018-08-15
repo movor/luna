@@ -90,7 +90,7 @@ class BlogPostCrudController extends CrudController
             ->addColumn([
                 'label' => 'Link',
                 'type' => 'front_link',
-                'method_name' => 'getPageUrl',
+                'method_name' => 'getUrl',
                 'name' => 'url'
             ])
             ->addColumn([
@@ -106,7 +106,7 @@ class BlogPostCrudController extends CrudController
             ->addField([
                 'label' => 'Link',
                 'type' => 'front_link',
-                'method_name' => 'getPageUrl',
+                'method_name' => 'getUrl',
                 'tab' => 'Basics',
                 'name' => 'url'
             ])

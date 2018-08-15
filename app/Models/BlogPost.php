@@ -100,11 +100,6 @@ class BlogPost extends Model
         return str_replace(array_keys($replace), $replace, $rendered);
     }
 
-    public function getPageUrl()
-    {
-        return url('blog/' . $this->slug);
-    }
-
     public function getPrimaryTag()
     {
         $tag = $this->tags()->where('primary', true)->first();

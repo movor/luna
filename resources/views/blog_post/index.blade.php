@@ -36,7 +36,7 @@
 
                                 {{-- /Inner card --}}
 
-                                <a href="{{ $post->getPageUrl() }}">
+                                <a href="{{ $post->getUrl() }}">
                                     <div class="card-body">
                                         <h2 class="card-title text-truncate-2">{{ $post->title }}</h2>
                                         <p class="card-text text-justify text-truncate-3">
