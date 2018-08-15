@@ -6,13 +6,13 @@ use App\Models\Tag;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
-class BlogTagCrudController extends CrudController
+class TagCrudController extends CrudController
 {
     public function setup()
     {
         $this->crud->setModel(Tag::class);
         $this->crud->orderBy('name', 'asc');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-tag');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/tag');
 
         // Columns
         $this->crud

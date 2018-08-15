@@ -6,13 +6,13 @@ use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
-class BlogPostCrudController extends CrudController
+class ArticleCrudController extends CrudController
 {
     public function setup()
     {
         $this->crud->setModel(Article::class);
         $this->crud->orderBy('created_at', 'desc');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-post');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/article');
 
         // Filter: user
         $this->crud->addFilter([
@@ -39,7 +39,7 @@ class BlogPostCrudController extends CrudController
         // Filter: tag
         $this->crud->addFilter([
             'label' => 'Tag',
-            'name' => 'blog_tag',
+            'name' => 'tag',
             'type' => 'select2_multiple',
         ], Tag::pluck('name', 'id')->toArray(), function ($values) {
             $values = json_decode($values);
@@ -144,9 +144,9 @@ class BlogPostCrudController extends CrudController
             if ($options) {
                 // Edit
                 if (is_numeric($segment)) {
-                    $postId = $segment;
-                    $post = Article::find($postId);
-                    $selected = $post->getPrimaryTag()->id;
+                    $articleId = $segment;
+                    $article = Article::find($articleId);
+                    $selected = $article->getPrimaryTag()->id;
                 } // Create
                 else {
                     $selected = Tag::ordered()->first()->id;
@@ -187,7 +187,7 @@ class BlogPostCrudController extends CrudController
             ])
             ->addField([
                 'name' => 'featured',
-                'label' => 'Featured Post',
+                'label' => 'Featured Article',
                 'type' => 'checkbox',
                 'tab' => 'Other'
             ])
