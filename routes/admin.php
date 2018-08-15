@@ -8,3 +8,4 @@ CRUD::resource('user', 'UserCrudController');
 CRUD::resource('article', 'ArticleCrudController');
 CRUD::resource('tag', 'TagCrudController');
 CRUD::resource('newsletter', 'NewsletterCrudController');
+CRUD::resource('redirect-rule', 'RedirectRuleCrudController');

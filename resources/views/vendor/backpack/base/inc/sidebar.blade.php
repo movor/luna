@@ -20,8 +20,8 @@
 
           <li><a href="{{ backpack_url('article') }}"><i class="fa fa-book"></i> <span>Articles</span></a></li>
           <li><a href="{{ backpack_url('tag') }}"><i class="fa fa-tag"></i> <span>Tags</span></a></li>
-          <li><a href="{{ backpack_url('user') }}"><i class="fa fa-user"></i> <span>Users</span></a></li>
-          <li><a href="{{ backpack_url('newsletter') }}"><i class="fa fa-user"></i> <span>Newsletter</span></a></li>
+          <li><a href="{{ backpack_url('user') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+          <li><a href="{{ backpack_url('newsletter') }}"><i class="fa fa-newspaper-o"></i> <span>Newsletter</span></a></li>
 
           <li>&nbsp;</li>
 
@@ -29,6 +29,7 @@
 
           {{-- Elfinder --}}
           <li><a href="{{  backpack_url('elfinder') }}"><i class="fa fa-image"></i> <span>File manager</span></a></li>
+          <li><a href="{{ backpack_url('redirect-rule') }}"><i class="fa fa-map-signs"></i> <span>Redirect Rules</span></a></li>
 
           <!-- ======================================= -->
           {{-- <li class="header">Other menus</li> --}}
