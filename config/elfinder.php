@@ -73,7 +73,7 @@ return [
                 // Ignore .gitignore, .tmb and .quarantine
                 // ['pattern' => '/.(.gitignore|.tmb|.quarantine)/', 'hidden' => true],
                 // Prevent deletion of project folders
-                // ['pattern' => '!^/blog_post$!', 'locked' => true, 'write' => false],
+                // ['pattern' => '!^/article$!', 'locked' => true, 'write' => false],
             ],
             'accessControl' => function ($attr, $path, $data, $volume, $isDir) {
                 $storagePath = storage_path('app/uploads') . '/';

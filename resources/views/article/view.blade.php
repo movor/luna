@@ -2,27 +2,27 @@
 
 @section('content')
 
-    <div class="container blog-post-view">
+    <div class="container article-view">
         <div class="row">
             <div class="col-lg-9">
-                <h1 class="mb-4">{{ $post->title }}</h1>
+                <h1 class="mb-4">{{ $article->title }}</h1>
                 <div class="lead mb-3">
                     <div>
                         <span class="text-muted">Author:</span>
-                        <strong><a class="bold" href="{{ url('about') }}">{{ $post->user->name }}</a></strong>
+                        <strong><a class="bold" href="{{ url('about') }}">{{ $article->user->name }}</a></strong>
                     </div>
                     <div class="mb-3">
                         <small>
                             <span class="text-muted">Posted on</span>
-                            {{ $post->published_at ? $post->published_at->format('d F, Y') : '' }}
+                            {{ $article->published_at ? $article->published_at->format('d F, Y') : '' }}
                         </small>
                     </div>
                     <div>
                         <small class="text-muted">Tags:</small>
 
-                        @foreach($post->tags as $tag)
+                        @foreach($article->tags as $tag)
 
-                            <a href="{{ url("blog?tags=$tag->name") }}" class="badge badge-primary">{{ $tag->name }}</a>
+                            <a href="{{ url("article?tag=$tag->name") }}" class="badge badge-primary">{{ $tag->name }}</a>
 
                         @endforeach
 
@@ -31,11 +31,11 @@
 
                 {{-- Image, summary and body --}}
 
-                <img class="img-fluid rounded" src="{{ asset($post->featured_image->xl()) }}" alt="">
+                <img class="img-fluid rounded" src="{{ asset($article->featured_image->xl()) }}" alt="">
 
-                <div class="alert alert-lite">{{ $post->summary }}</div>
+                <div class="alert alert-lite">{{ $article->summary }}</div>
 
-                <div class="post-body text-justify">{!! $post->body_html !!}</div>
+                <div class="post-body text-justify">{!! $article->body_html !!}</div>
 
                 {{-- /Image, summary and body --}}
 
@@ -54,7 +54,7 @@
 
                             @foreach($allTags as $tag)
 
-                                <a class="badge badge-primary mr-1 mb-1" href="/blog?tags={{ $tag->name }}">{{ $tag->name }}</a>
+                                <a class="badge badge-primary mr-1 mb-1" href="/article?tag={{ $tag->name }}">{{ $tag->name }}</a>
 
                             @endforeach
 
@@ -65,22 +65,22 @@
 
                 {{-- /All Tags --}}
 
-                {{-- Featured Posts --}}
+                {{-- Featured Articles --}}
 
-                @if($featuredPosts->isNotEmpty())
+                @if($featuredArticles->isNotEmpty())
 
-                    <h5 class="text-muted">Featured Posts</h5>
+                    <h5 class="text-muted">Featured Articles</h5>
 
-                    <div class="row featured-posts">
+                    <div class="row featured-articles">
 
-                        @foreach($featuredPosts as $featuredPost)
+                        @foreach($featuredArticles as $featuredArticle)
 
                             <div class="col-sm-6 col-md-4 col-lg-12">
-                                <a href="{{ url('blog/' . $featuredPost->slug) }}">
+                                <a href="{{ url('article/' . $featuredArticle->slug) }}">
                                     <div class="card mb-4">
-                                        <img class="card-img-top" src="{{ asset($featuredPost->featured_image->lg()) }}">
+                                        <img class="card-img-top" src="{{ asset($featuredArticle->featured_image->lg()) }}">
                                         <div class="card-body">
-                                            <p class="card-title font-weight-bold mb-0 text-muted">{{ $featuredPost->title }}</p>
+                                            <p class="card-title font-weight-bold mb-0 text-muted">{{ $featuredArticle->title }}</p>
                                         </div>
                                     </div>
                                 </a>
@@ -92,7 +92,7 @@
 
                 @endif
 
-                {{-- /Featured Posts --}}
+                {{-- /Featured Articles --}}
 
             </div>
         </div>
@@ -102,13 +102,13 @@
         <hr class="mt-5">
 
         {{-- Load Disqs Vue component if post is commentable --}}
-        @if($post->commentable)
+        @if($article->commentable)
 
             <app-disqus
                     website="{{ env('DISQS_WEBSITE') }}"
                     title="{{ env('APP_NAME') }}"
-                    identifier="{{ '/blog-post/' . $post->id }}"
-                    url="{{ url('/blog-post/' . $post->id) }}"
+                    identifier="{{ '/article/' . $article->id }}"
+                    url="{{ url('/article/' . $article->id) }}"
             ></app-disqus>
 
         @endif

@@ -109,10 +109,10 @@ body {
 }
 
 //
-// Blog Index
+// Article Index
 //
 
-.blog-post-index {
+.article-index {
   .card-body {
     color: $body-color;
 
@@ -135,10 +135,10 @@ body {
 }
 
 //
-// Blog view
+// Article view
 //
 
-.blog-post-view {
+.article-view {
   .post-body {
     h2, h3, h4, h5 {
       padding-top: $paragraph-margin-bottom;

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container blog-post-index">
+    <div class="container article-index">
         <div class="row">
             <div class="col-md-12">
 
@@ -10,7 +10,7 @@
 
                 <div class="row">
 
-                    @foreach($posts as $post)
+                    @foreach($articles as $article)
 
                         <div class="col-lg-6">
                             <div class="card mb-4">
@@ -18,12 +18,12 @@
                                 {{-- Inner card --}}
 
                                 <div class="card card-inner text-white">
-                                    <img class="card-img-top" src="{{ asset($post->featured_image->source()) }}">
+                                    <img class="card-img-top" src="{{ asset($article->featured_image->source()) }}">
                                     <div class="lead card-img-overlay d-flex align-items-end justify-content-end">
 
-                                        @foreach($post->tags as $tag)
+                                        @foreach($article->tags as $tag)
 
-                                            <a href="{{ url("blog?tags=$tag->name") }}"
+                                            <a href="{{ url("article?tag=$tag->name") }}"
                                                class="badge badge-primary ml-1"
                                             >
                                                 {{ $tag->name }}
@@ -36,20 +36,20 @@
 
                                 {{-- /Inner card --}}
 
-                                <a href="{{ $post->getUrl() }}">
+                                <a href="{{ $article->getUrl() }}">
                                     <div class="card-body">
-                                        <h2 class="card-title text-truncate-2">{{ $post->title }}</h2>
+                                        <h2 class="card-title text-truncate-2">{{ $article->title }}</h2>
                                         <p class="card-text text-justify text-truncate-3">
-                                            {{ $post->summary }}
+                                            {{ $article->summary }}
                                         </p>
                                         <span class="btn btn-primary">Read More</span>
                                     </div>
                                 </a>
                                 <div class="card-footer text-muted">
-                                    <a href="/about">{{ $post->user->name }}</a>
+                                    <a href="/about">{{ $article->user->name }}</a>
                                     <span class="float-right">
                                         <small class="align-text-bottom">
-                                            {{ $post->published_at->format('d F, Y') }}
+                                            {{ $article->published_at->format('d F, Y') }}
                                         </small>
                                     </span>
                                 </div>

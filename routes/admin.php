@@ -3,7 +3,7 @@
 // Custom crud controller methods
 Route::get('newsletter/export', 'NewsletterCrudController@export');
 
-// Blogging crud resources
+// Crud resources
 CRUD::resource('user', 'UserCrudController');
 CRUD::resource('blog-post', 'BlogPostCrudController');
 CRUD::resource('blog-tag', 'BlogTagCrudController');

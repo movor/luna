@@ -38,19 +38,19 @@ class Article extends Model
         parent::boot();
 
         // Create 301 redirect when slug changes
-        static::updated(function (Article $blogPost) {
-            if ($blogPost->isDirty('slug')) {
+        static::updated(function (Article $article) {
+            if ($article->isDirty('slug')) {
                 RedirectRule::create([
-                    'origin' => 'blog/' . $blogPost->getOriginal('slug'),
-                    'destination' => 'blog/' . $blogPost->slug
+                    'origin' => 'article/' . $article->getOriginal('slug'),
+                    'destination' => 'article/' . $article->slug
                 ]);
             }
         });
 
         // Remove redirects when post is deleted
-        static::deleted(function (Article $blogPost) {
+        static::deleted(function (Article $article) {
             try {
-                RedirectRule::deleteChainedRecursively('blog/' . $blogPost->slug);
+                RedirectRule::deleteChainedRecursively('article/' . $article->slug);
             } catch (\Exception $e) {
             }
         });
@@ -121,6 +121,6 @@ class Article extends Model
 
     public function getUrl()
     {
-        return url('blog/' . $this->slug);
+        return url('article/' . $this->slug);
     }
 }

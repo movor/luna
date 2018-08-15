@@ -21,11 +21,11 @@ Route::match(['post', 'get'], '/contact', 'StaticPageController@contact');
 Route::match(['post', 'get'], '/newsletter', 'StaticPageController@newsletter');
 
 //
-// Blog
+// Article
 //
 
-Route::get('blog', 'BlogPostController@index');
-Route::get('blog/{slug}', 'BlogPostController@view');
+Route::get('article', 'ArticleController@index');
+Route::get('article/{slug}', 'ArticleController@view');
 
 //
 // ImagePlaceholders - Cached placeholder images (from external source, but served as internal)
