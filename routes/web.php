@@ -32,9 +32,3 @@ Route::get('blog/{slug}', 'BlogPostController@view');
 //
 
 Route::get('img/placeholders/{name}.jpg', 'ImagePlaceholderController@get');
-
-//
-// Universal Canonical Controller
-//
-
-Route::get('canonical/{hash}', 'HashRecordController@canonicalView');
