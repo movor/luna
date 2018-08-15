@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Models\BlogPost;
-use App\Models\BlogTag;
+use App\Models\Article;
+use App\Models\Tag;
 use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ class BlogPostCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(BlogPost::class);
+        $this->crud->setModel(Article::class);
         $this->crud->orderBy('created_at', 'desc');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-post');
 
@@ -41,12 +41,12 @@ class BlogPostCrudController extends CrudController
             'label' => 'Tag',
             'name' => 'blog_tag',
             'type' => 'select2_multiple',
-        ], BlogTag::pluck('name', 'id')->toArray(), function ($values) {
+        ], Tag::pluck('name', 'id')->toArray(), function ($values) {
             $values = json_decode($values);
             if ($values) {
                 foreach ($values as $key => $value) {
                     $this->crud->query = $this->crud->query->whereHas('tags', function ($query) use ($value) {
-                        $query->where('blog_tag_id', $value);
+                        $query->where('tag_id', $value);
                     });
                 }
             }
@@ -78,7 +78,7 @@ class BlogPostCrudController extends CrudController
                 'name' => 'tags',
                 'entity' => 'tags',
                 'attribute' => 'name',
-                'model' => BlogTag::class,
+                'model' => Tag::class,
             ])
             ->addColumn([
                 'label' => 'User',
@@ -139,17 +139,17 @@ class BlogPostCrudController extends CrudController
         // TODO.SOLVE
         if (\Request::segment(3)) {
             $segment = \Request::segment(3);
-            $options = BlogTag::ordered()->pluck('name', 'id')->toArray();
+            $options = Tag::ordered()->pluck('name', 'id')->toArray();
 
             if ($options) {
                 // Edit
                 if (is_numeric($segment)) {
                     $postId = $segment;
-                    $post = BlogPost::find($postId);
+                    $post = Article::find($postId);
                     $selected = $post->getPrimaryTag()->id;
                 } // Create
                 else {
-                    $selected = BlogTag::ordered()->first()->id;
+                    $selected = Tag::ordered()->first()->id;
                 }
 
                 $this->crud->addField([
@@ -203,7 +203,7 @@ class BlogPostCrudController extends CrudController
                 'type' => 'select2_multiple',
                 'entity' => 'tags',
                 'attribute' => 'name',
-                'model' => BlogTag::class,
+                'model' => Tag::class,
                 'pivot' => true,
                 //'wrapperAttributes' => ['class' => 'form-group col-md-8'],
                 'tab' => 'Other'
@@ -227,7 +227,7 @@ class BlogPostCrudController extends CrudController
         $this->validate($request, [
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
-            'slug' => 'required|unique:blog_posts,slug',
+            'slug' => 'required|unique:articles,slug',
             'body' => 'required'
         ]);
 

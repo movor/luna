@@ -20,30 +20,30 @@ class DatabaseSeeder extends Seeder
         factory(\App\Models\User::class, 3)->create();
 
         //
-        // Blog Tag
+        // Tag
         //
 
-        factory(\App\Models\BlogTag::class, 10)->create();
+        factory(\App\Models\Tag::class, 10)->create();
 
         //
-        // Blog Post
+        // Article
         //
 
-        // Delete all previous blog images before seeding
-        $deletePattern = \App\Models\CustomCasts\BlogPostFeaturedImageCast::storageDir();
+        // Delete all previous article featured images before seeding
+        $deletePattern = \App\Models\CustomCasts\ArticleFeaturedImageCast::storageDir();
         File::delete(File::glob(storage_path_app($deletePattern) . '/*'));
 
-        factory(\App\Models\BlogPost::class, 20)->create();
+        factory(\App\Models\Article::class, 20)->create();
 
         //
-        // Pivot: Blog posts and blog tags (each post should have exactly one primary tag)
+        // Pivot: Articles and tags (each article should have exactly one primary tag)
         //
 
-        seedPivotData('blog_post_blog_tag', 'blog_posts', 'blog_tags', function ($postId) {
-            static $tmpPostId;
+        seedPivotData('article_tag', 'articles', 'tags', function ($articleId) {
+            static $tmpArticleId;
 
-            if ($tmpPostId != $postId) {
-                $tmpPostId = $postId;
+            if ($tmpArticleId != $articleId) {
+                $tmpArticleId = $articleId;
 
                 return ['primary' => true];
             }

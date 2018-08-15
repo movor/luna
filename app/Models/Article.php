@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\CustomCasts\BlogPostFeaturedImageCast;
+use App\Models\CustomCasts\ArticleFeaturedImageCast;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,7 +10,7 @@ use Movor\LaravelCustomCasts\CustomCastableTrait;
 use Movor\LaravelDbRedirector\Models\RedirectRule;
 use Parsedown;
 
-class BlogPost extends Model
+class Article extends Model
 {
     use CrudTrait, CustomCastableTrait;
 
@@ -27,7 +27,7 @@ class BlogPost extends Model
     ];
 
     protected $casts = [
-        'featured_image' => BlogPostFeaturedImageCast::class,
+        'featured_image' => ArticleFeaturedImageCast::class,
         'published_at' => 'datetime',
         'featured' => 'boolean',
         'commentable' => 'boolean',
@@ -38,7 +38,7 @@ class BlogPost extends Model
         parent::boot();
 
         // Create 301 redirect when slug changes
-        static::updated(function (BlogPost $blogPost) {
+        static::updated(function (Article $blogPost) {
             if ($blogPost->isDirty('slug')) {
                 RedirectRule::create([
                     'origin' => 'blog/' . $blogPost->getOriginal('slug'),
@@ -48,7 +48,7 @@ class BlogPost extends Model
         });
 
         // Remove redirects when post is deleted
-        static::deleted(function (BlogPost $blogPost) {
+        static::deleted(function (Article $blogPost) {
             try {
                 RedirectRule::deleteChainedRecursively('blog/' . $blogPost->slug);
             } catch (\Exception $e) {
@@ -61,7 +61,7 @@ class BlogPost extends Model
      */
     public function tags()
     {
-        return $this->belongsToMany(BlogTag::class)->orderBy('primary', 'desc')->withTimestamps();
+        return $this->belongsToMany(Tag::class)->orderBy('primary', 'desc')->withTimestamps();
     }
 
     public function user()

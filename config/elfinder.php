@@ -89,7 +89,7 @@ return [
                     //
 
                     $lockDirs = [
-                        $storagePath . 'blog_post',
+                        $storagePath . 'article',
                     ];
 
                     if (in_array($path, $lockDirs)) {

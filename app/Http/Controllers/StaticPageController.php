@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogTag;
+use App\Models\Tag;
 use App\Models\Newsletter;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use GuzzleHttp\Client;
@@ -38,7 +38,7 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('Home')
             ->setDescription('Welcome to ' . env('APP_NAME'))
-            ->setKeywords(BlogTag::pluck('name')->toArray());
+            ->setKeywords(Tag::pluck('name')->toArray());
 
         return view('index');
     }
@@ -72,7 +72,7 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('Contact')
             ->setDescription('You can use webform on this page to contact us')
-            ->setKeywords(BlogTag::pluck('name')->toArray());
+            ->setKeywords(Tag::pluck('name')->toArray());
 
         return view('static_pages.contact');
     }
@@ -82,7 +82,7 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('About')
             ->setDescription('Check out our awesome team!')
-            ->setKeywords(BlogTag::pluck('name')->toArray());
+            ->setKeywords(Tag::pluck('name')->toArray());
 
         return view('static_pages.about');
     }
@@ -109,7 +109,7 @@ class StaticPageController extends Controller
         // SEO
         SEOMeta::setTitle('Newsletter')
             ->setDescription('Sign up for newsletter')
-            ->setKeywords(BlogTag::pluck('name')->toArray());
+            ->setKeywords(Tag::pluck('name')->toArray());
 
         return view('static_pages.newsletter');
     }

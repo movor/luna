@@ -29,10 +29,10 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 });
 
 //
-// Blog Post
+// Article
 //
 
-$factory->define(App\Models\BlogPost::class, function (Faker $faker) {
+$factory->define(App\Models\Article::class, function (Faker $faker) {
     $title = rtrim($faker->unique()->sentence, '.');
 
     return [
@@ -60,10 +60,10 @@ $factory->define(App\Models\BlogPost::class, function (Faker $faker) {
 });
 
 //
-// Blog Tag
+// Tag
 //
 
-$factory->define(App\Models\BlogTag::class, function (Faker $faker) {
+$factory->define(App\Models\Tag::class, function (Faker $faker) {
     $name = $faker->unique()->word;
 
     $name = chance(30, function () use ($faker, $name) {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\BlogTag;
+use App\Models\Tag;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ class BlogTagCrudController extends CrudController
 {
     public function setup()
     {
-        $this->crud->setModel(BlogTag::class);
+        $this->crud->setModel(Tag::class);
         $this->crud->orderBy('name', 'asc');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/blog-tag');
 
@@ -52,7 +52,7 @@ class BlogTagCrudController extends CrudController
     protected function validateFields(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:2|max:32|unique:blog_tags,name',
+            'name' => 'required|min:2|max:32|unique:tags,name',
         ]);
     }
 }

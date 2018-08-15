@@ -4,11 +4,11 @@ namespace App\Models\CustomCasts;
 
 use App\Lib\ImageVariations\ImageVariations;
 
-class BlogPostFeaturedImageCast extends ImageCastBase
+class ArticleFeaturedImageCast extends ImageCastBase
 {
     public static function storageDir()
     {
-        return 'uploads/blog_post';
+        return 'uploads/article';
     }
 
     public function castAttribute($value)

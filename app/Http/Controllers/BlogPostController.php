@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogPost;
-use App\Models\BlogTag;
+use App\Models\Article;
+use App\Models\Tag;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Auth;
@@ -15,7 +15,7 @@ class BlogPostController extends Controller
     public function index()
     {
         /* @var Builder $query */
-        $query = BlogPost::published()->orderBy('published_at', 'desc');
+        $query = Article::published()->orderBy('published_at', 'desc');
 
         $filterTags = Request::query('tags');
 
@@ -34,7 +34,7 @@ class BlogPostController extends Controller
 
         SEOMeta::setTitle($title)
             ->setDescription('Checkout out our awesome blog posts. We wrote them with soul!')
-            ->setKeywords(BlogTag::pluck('name')->toArray())
+            ->setKeywords(Tag::pluck('name')->toArray())
             ->setCanonical(url('blog'));
 
         if ($posts->isNotEmpty()) {
@@ -49,7 +49,7 @@ class BlogPostController extends Controller
 
     public function view($slug)
     {
-        $query = BlogPost::where('slug', $slug);
+        $query = Article::where('slug', $slug);
 
         // If admin is logged in, allow view of all posts,
         // not only published ones
@@ -57,11 +57,11 @@ class BlogPostController extends Controller
             $query->published();
         }
 
-        /* @var BlogPost $post */
+        /* @var Article $post */
         $post = $query->firstOrFail();
 
         // Featured posts (exclude current)
-        $featuredPosts = BlogPost::where('slug', '!=', $slug)
+        $featuredPosts = Article::where('slug', '!=', $slug)
             ->published()
             ->featured()->inRandomOrder()
             ->limit(3)->get();
@@ -71,11 +71,11 @@ class BlogPostController extends Controller
         return view('blog_post.view')->with([
             'post' => $post,
             'featuredPosts' => $featuredPosts,
-            'allTags' => BlogTag::all()
+            'allTags' => Tag::all()
         ]);
     }
 
-    protected function setMeta(BlogPost $post)
+    protected function setMeta(Article $post)
     {
         SEOMeta::setTitle($post->title)
             ->setDescription($post->summary)
