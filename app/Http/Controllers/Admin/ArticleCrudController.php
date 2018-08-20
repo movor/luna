@@ -137,30 +137,29 @@ class ArticleCrudController extends CrudController
                 'tab' => 'Basics'
             ]);
 
-        // Show primary tag selector only if tag exists.
-        // Also if article only tag has been deleted,
-        // the first one (form tags table) will be preselected
-        if ($segment = \Request::segment(3) && Tag::exists()) {
+        $selected = app('request')->old('primary_tag');
+        $options = Tag::ordered()->pluck('name', 'id')->toArray() + [null => '-'];
+
+        // Preselect primary tag if it's set
+        $segment = \Request::segment(3);
+        if (is_numeric($segment) && Tag::exists()) {
             $articleId = $segment;
-            $options = Tag::ordered()->pluck('name', 'id')->toArray();
             $article = Article::find($articleId);
 
             if ($primaryTag = $article->getPrimaryTag()) {
                 $selected = $primaryTag->id;
-            } else {
-                $selected = Tag::ordered()->first()->id;
             }
-
-            $this->crud->addField([
-                'name' => 'primary_tag',
-                'label' => 'Primary Tag',
-                'type' => 'select_from_array_with_default',
-                'options' => $options,
-                'selected' => $selected,
-                'allow_null' => false,
-                'tab' => 'Basics'
-            ])->afterField('title');
         }
+
+        $this->crud->addField([
+            'name' => 'primary_tag',
+            'label' => 'Primary Tag',
+            'type' => 'select_from_array_with_default',
+            'options' => $options,
+            'selected' => $selected,
+            'allow_null' => false,
+            'tab' => 'Basics'
+        ])->afterField('title');
 
         return $this;
     }
@@ -206,8 +205,8 @@ class ArticleCrudController extends CrudController
             $this->crud
                 ->addField([
                     'name' => 'tags',
-                    'label' => 'Tags',
-                    'type' => 'select2_multiple',
+                    'label' => 'Secondary Tags',
+                    'type' => 'select_secondary_tags',
                     'entity' => 'tags',
                     'attribute' => 'name',
                     'model' => Tag::class,
@@ -233,7 +232,7 @@ class ArticleCrudController extends CrudController
             'body' => 'required'
         ]);
 
-        $this->handlePrimaryTag($request);
+        $this->handleTags($request);
         $this->handleEmptyImages($request);
         $this->handleCustomCastableFeaturedImage($request);
 
@@ -258,7 +257,7 @@ class ArticleCrudController extends CrudController
             'body' => 'required'
         ]);
 
-        $this->handlePrimaryTag($request);
+        $this->handleTags($request);
         $this->handleEmptyImages($request);
         $this->handleCustomCastableFeaturedImage($request);
 
@@ -266,24 +265,25 @@ class ArticleCrudController extends CrudController
     }
 
     /**
-     * Handle primary tag savingg.
+     * Handle tags saving.
      * Many to many relationship with additional pivot data.
      *
      * @param Request $request
      */
-    protected function handlePrimaryTag(Request $request)
+    protected function handleTags(Request $request)
     {
-        $requestTags = $request->tags ?: [];
-        $primaryTag = $request->primary_tag;
+        $newSecondaryTags = $request->tags ?: [];
+        $newPrimaryTagId = $request->primary_tag;
 
-        if (!in_array($primaryTag, $requestTags)) {
-            $requestTags[] = $primaryTag;
+        // We need to put all tags info single array
+        if ($newPrimaryTagId && !in_array($newPrimaryTagId, $newSecondaryTags)) {
+            $newSecondaryTags[] = $newPrimaryTagId;
         }
 
         // Transform many to many to accept additional field - "primary"
         $tags = [];
-        foreach ($requestTags as $tag) {
-            $tags[$tag] = ['primary' => $tag == $primaryTag];
+        foreach ($newSecondaryTags as $tag) {
+            $tags[$tag] = ['primary' => $tag == $newPrimaryTagId];
         }
 
         $request->request->set('tags', $tags);

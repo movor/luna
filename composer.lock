@@ -1823,16 +1823,16 @@
         },
         {
             "name": "movor/laravel-db-redirector",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/movor/laravel-db-redirector.git",
-                "reference": "a3a7404156a5ecb32633f7beee9e926a5c113c70"
+                "reference": "ec429357521772328cedea4d1a3e39219c162135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/movor/laravel-db-redirector/zipball/a3a7404156a5ecb32633f7beee9e926a5c113c70",
-                "reference": "a3a7404156a5ecb32633f7beee9e926a5c113c70",
+                "url": "https://api.github.com/repos/movor/laravel-db-redirector/zipball/ec429357521772328cedea4d1a3e39219c162135",
+                "reference": "ec429357521772328cedea4d1a3e39219c162135",
                 "shasum": ""
             },
             "require": {
@@ -1863,7 +1863,7 @@
                 "laravel",
                 "redirect"
             ],
-            "time": "2018-08-10T18:19:46+00:00"
+            "time": "2018-08-16T18:04:59+00:00"
         },
         {
             "name": "mtdowling/cron-expression",

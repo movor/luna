@@ -64,6 +64,11 @@ class Article extends Model
         return $this->belongsToMany(Tag::class)->orderBy('primary', 'desc')->withTimestamps();
     }
 
+    public function getPrimaryTag()
+    {
+        return $this->tags()->wherePivot('primary', true)->first();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -98,13 +103,6 @@ class Article extends Model
         ];
 
         return str_replace(array_keys($replace), $replace, $rendered);
-    }
-
-    public function getPrimaryTag()
-    {
-        $tag = $this->tags()->where('primary', true)->first();
-
-        return $tag ?: $this->tags()->first();
     }
 
     public function scopeFeatured($query, $featured = true)
