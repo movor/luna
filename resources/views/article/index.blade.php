@@ -19,8 +19,9 @@
 
                                 <div class="card card-inner text-white">
                                     <img class="card-img-top" src="{{ asset($article->featured_image->source()) }}">
-                                    <div class="lead card-img-overlay d-flex align-items-end justify-content-end">
-
+                                    <div class="lead card-img-overlay d-flex align-items-end justify-content-end cursor-pointer"
+                                         data-link="{{ $article->getUrl() }}"
+                                    >
                                         @foreach($article->tags as $tag)
 
                                             <a href="{{ url("article?tag=$tag->name") }}"
@@ -64,5 +65,19 @@
     </div>
 
 @endsection
+
+@section('scripts-bottom')
+
+    <script type="javascript">
+
+        // Make card image a link
+        $('.card-img-overlay').click(function (event) {
+            window.location = $(event.target).data('link');
+        })
+
+    </script>
+
+@endsection
+
 
 
