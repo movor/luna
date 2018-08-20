@@ -6,13 +6,13 @@ use App\Models\CustomCasts\ArticleFeaturedImageCast;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Movor\LaravelCustomCasts\CustomCastableTrait;
+use Movor\LaravelCustomCasts\HasCustomCasts;
 use Movor\LaravelDbRedirector\Models\RedirectRule;
 use Parsedown;
 
 class Article extends Model
 {
-    use CrudTrait, CustomCastableTrait;
+    use CrudTrait, HasCustomCasts;
 
     protected $fillable = [
         'user_id',

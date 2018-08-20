@@ -1776,16 +1776,16 @@
         },
         {
             "name": "movor/laravel-custom-casts",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/movor/laravel-custom-casts.git",
-                "reference": "0e54a1a4d66ea831741d6f766939823b2e8fe87a"
+                "reference": "d185dde055968e649f27a20229c6c64dfaaca761"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/movor/laravel-custom-casts/zipball/0e54a1a4d66ea831741d6f766939823b2e8fe87a",
-                "reference": "0e54a1a4d66ea831741d6f766939823b2e8fe87a",
+                "url": "https://api.github.com/repos/movor/laravel-custom-casts/zipball/d185dde055968e649f27a20229c6c64dfaaca761",
+                "reference": "d185dde055968e649f27a20229c6c64dfaaca761",
                 "shasum": ""
             },
             "require": {
@@ -1819,7 +1819,7 @@
                 "laravel",
                 "model"
             ],
-            "time": "2018-08-09T16:03:56+00:00"
+            "time": "2018-08-18T18:11:42+00:00"
         },
         {
             "name": "movor/laravel-db-redirector",

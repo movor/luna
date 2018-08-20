@@ -4,9 +4,9 @@ namespace App\Models\CustomCasts;
 
 use File;
 use Image;
-use Movor\LaravelCustomCasts\CustomCastableBase;
+use Movor\LaravelCustomCasts\CustomCastBase;
 
-abstract class ImageCastBase extends CustomCastableBase
+abstract class ImageCastBase extends CustomCastBase
 {
     /**
      * Callback
