@@ -3055,6 +3055,16 @@
 
 /*
 |--------------------------------------------------------------------------
+| Global
+|--------------------------------------------------------------------------
+*/
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/*
+|--------------------------------------------------------------------------
 | Body
 |--------------------------------------------------------------------------
 */
@@ -3079,7 +3089,7 @@ body {
 */
 
 .navbar {
-  border-bottom: 1px solid rgba(30, 159, 99, 0.1);
+  border-bottom: 1px solid rgba(39, 196, 123, 0.1);
 }
 
 .navbar .navbar-brand img {
@@ -3136,7 +3146,7 @@ body {
 
 .page-about .card .card-body .separator {
   margin-bottom: 15px;
-  border-top: 3px solid #1E9F63;
+  border-top: 3px solid #27c47b;
   width: 40px;
 }
 
@@ -3155,6 +3165,10 @@ body {
   padding-bottom: 0;
   background: none;
   border: none;
+}
+
+.article-index #filter .badge.badge-secondary {
+  background-color: #b0b5b9;
 }
 
 .article-index .card-body {

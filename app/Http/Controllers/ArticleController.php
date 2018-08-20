@@ -17,15 +17,15 @@ class ArticleController extends Controller
         /* @var Builder $query */
         $query = Article::published()->orderBy('published_at', 'desc');
 
-        $filterTags = Request::query('tags');
+        // Narrow articles by tags form url query
+        if ($queryTag = Request::query('tag')) {
+            foreach (explode('~', $queryTag) as $filterTag) {
+                $query->whereHas('tags', function (Builder $query) use ($filterTag) {
+                    $query->where('name', $filterTag);
+                });
+            }
 
-        if ($filterTags) {
-            $filterTags = explode(',', $filterTags);
-            $query->whereHas('tags', function (Builder $query) use ($filterTags) {
-                $query->whereIn('name', explode(',', Request::query('tags')), 'and');
-            });
-
-            $title = 'Tags: ' . implode(', ', $filterTags);
+            $title = "Tags: " . str_replace('~', ', ', $queryTag);
         } else {
             $title = "All Articles";
         }
@@ -34,15 +34,13 @@ class ArticleController extends Controller
 
         SEOMeta::setTitle($title)
             ->setDescription('Checkout out our awesome articles. We wrote them with soul!')
-            ->setKeywords(Tag::pluck('name')->toArray())
-            ->setCanonical(url('article'));
+            ->setKeywords(Tag::pluck('name')->toArray());
 
         if ($articles->isNotEmpty()) {
             OpenGraph::addImage(asset($articles->first()->featured_image->xl()));
         }
 
         return view('article.index')->with([
-            'title' => $title,
             'articles' => $articles
         ]);
     }
@@ -66,22 +64,17 @@ class ArticleController extends Controller
             ->featured()->inRandomOrder()
             ->limit(3)->get();
 
-        $this->setMeta($article);
-
-        return view('article.view')->with([
-            'article' => $article,
-            'featuredArticles' => $featuredArticles,
-            'allTags' => Tag::all()
-        ]);
-    }
-
-    protected function setMeta(Article $article)
-    {
         SEOMeta::setTitle($article->title)
             ->setDescription($article->summary)
             ->setKeywords($article->tags->pluck('name')->toArray())
             ->setCanonical($article->getUrl());
 
         OpenGraph::addImage(asset($article->featured_image->xl()));
+
+        return view('article.view')->with([
+            'article' => $article,
+            'featuredArticles' => $featuredArticles,
+            'allTags' => Tag::all()
+        ]);
     }
 }

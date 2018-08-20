@@ -5,8 +5,32 @@
     <div class="container article-index">
         <div class="row">
             <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="filter" class="pb-5 pt-3 px-md-5">
+                            <p class="h4 text-center pb-2">Filter by tags:</p>
 
-                <h1 class="mb-4">{{ $title }}</h1>
+                            @foreach(App\Models\Tag::ordered()->get() as $tag)
+
+                                @php
+
+                                    $badgeColor = in_array($tag->name, explode('~', Request::query('tag')))
+                                        ? 'badge-primary'
+                                        : 'badge-secondary';
+
+                                @endphp
+
+                                <span class="badge {{ $badgeColor }} ml-1 cursor-pointer"
+                                      data-name="{{ $tag->name }}"
+                                >
+                                    {{ $tag->name }}
+                                </span>
+
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
 
@@ -68,12 +92,32 @@
 
 @section('scripts-bottom')
 
-    <script type="javascript">
+    <script>
 
         // Make card image a link
         $('.card-img-overlay').click(function (event) {
             window.location = $(event.target).data('link');
-        })
+        });
+
+        // Filter by url query tags
+        $('#filter .badge').click(function (event) {
+            const clickedTag = $(event.target).data('name'),
+                query = new URLSearchParams(window.location.search),
+                queryTag = query.get('tag'),
+                queryTags = queryTag !== null
+                    ? queryTag.split('~')
+                    : [];
+
+            queryTags.includes(clickedTag)
+                ? queryTags.splice(queryTags.indexOf(clickedTag), 1)
+                : queryTags.push(clickedTag);
+
+            queryTags.length === 0
+                ? query.delete('tag')
+                : query.set('tag', queryTags.join('~'));
+
+            window.location.search = query.toString();
+        });
 
     </script>
 
