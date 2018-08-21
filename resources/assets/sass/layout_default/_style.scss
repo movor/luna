@@ -60,11 +60,13 @@ body {
   .badge {
     font-weight: 300;
     font-size: .9rem;
+    padding: 0.35em 0.4em;
     margin-bottom: 5px;
-  }
-  .badge.badge-secondary {
-    color: #FFF;
-    background-color: $gray-500;
+
+    &.badge-secondary {
+      color: #FFF;
+      background-color: $gray-500;
+    }
   }
 
   .card {
@@ -125,7 +127,7 @@ body {
 .article-index {
   #filter {
     .badge.badge-secondary {
-      background-color: #b0b5b9;
+      background-color: $gray-400;
     }
   }
 

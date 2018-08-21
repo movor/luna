@@ -35,14 +35,16 @@
                                     Accusamus ad consequuntur illum itaque maiores minima nam nulla saepe tempora vel.
                                 </p>
                                 <p class="card-text">
-                                    <span class="d-block">Primary technologies:</span>
+                                    <span class="d-block mb-1">Primary technologies:</span>
                                     <span class="badge badge-primary">Lorem</span>
                                     <span class="badge badge-primary">Ipsum</span>
                                     <span class="badge badge-primary">Dolor</span>
                                     <span class="badge badge-primary">Sit</span>
+                                    <span class="badge badge-primary">Amet</span>
+                                    <span class="badge badge-primary">Elit</span>
                                 </p>
                                 <p class="card-text">
-                                    <span class="d-block">Familiar technologies:</span>
+                                    <span class="d-block mb-1">Familiar technologies:</span>
                                     <span class="badge badge-secondary">Amet</span>
                                     <span class="badge badge-secondary">Consectetur</span>
                                     <span class="badge badge-secondary">Adipisicing</span>

@@ -3110,6 +3110,7 @@ body {
 .page-about .badge {
   font-weight: 300;
   font-size: .9rem;
+  padding: 0.35em 0.4em;
   margin-bottom: 5px;
 }
 
@@ -3168,7 +3169,7 @@ body {
 }
 
 .article-index #filter .badge.badge-secondary {
-  background-color: #b0b5b9;
+  background-color: #ced4da;
 }
 
 .article-index .card-body {
@@ -3176,12 +3177,12 @@ body {
 }
 
 .article-index .card-body .card-title {
-  height: 62px;
+  height: 47px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
   .article-index .card-body .card-title {
-    min-height: auto;
+    height: auto;
   }
 }
 
@@ -3189,9 +3190,9 @@ body {
   height: 78px;
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 767.98px) {
   .article-index .card-body .card-text {
-    min-height: auto;
+    height: auto;
   }
 }
 
@@ -3260,7 +3261,7 @@ footer a.movor-with-love small {
 }
 
 footer a.movor-with-love i.fa-heart {
-  color: #dc3545;
+  color: #cc4754;
   margin: 0 3px;
 }
 

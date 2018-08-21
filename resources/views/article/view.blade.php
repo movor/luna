@@ -6,19 +6,17 @@
         <div class="row">
             <div class="col-lg-9">
                 <h1 class="mb-4">{{ $article->title }}</h1>
-                <div class="lead mb-3">
+                <div class="mb-3">
                     <div>
-                        <span class="text-muted">Author:</span>
-                        <strong><a class="bold" href="{{ url('about') }}">{{ $article->user->name }}</a></strong>
+                        Author:
+                        <a class="h5" href="{{ url('about') }}">{{ $article->user->name }}</a>
                     </div>
                     <div class="mb-3">
-                        <small>
-                            <span class="text-muted">Posted on</span>
-                            {{ $article->published_at ? $article->published_at->format('d F, Y') : '' }}
-                        </small>
+                        Posted on
+                        {{ $article->published_at ? $article->published_at->format('d F, Y') : '' }}
                     </div>
                     <div>
-                        <small class="text-muted">Tags:</small>
+                        Tags:
 
                         @foreach($article->tags as $tag)
 
@@ -54,7 +52,7 @@
 
                             @foreach($allTags as $tag)
 
-                                <a class="badge badge-primary mr-1 mb-1" href="{{ url('article?tag=' . $tag->name) }}">{{ $tag->name }}</a>
+                                <a class="badge badge-secondary mr-1 mb-1" href="{{ url('article?tag=' . $tag->name) }}">{{ $tag->name }}</a>
 
                             @endforeach
 
