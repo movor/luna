@@ -54,7 +54,7 @@
 
                             @foreach($allTags as $tag)
 
-                                <a class="badge badge-primary mr-1 mb-1" href="/article?tag={{ $tag->name }}">{{ $tag->name }}</a>
+                                <a class="badge badge-primary mr-1 mb-1" href="{{ url('article?tag=' . $tag->name) }}">{{ $tag->name }}</a>
 
                             @endforeach
 

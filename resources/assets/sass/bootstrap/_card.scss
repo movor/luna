@@ -5,11 +5,14 @@
 //
 
 .card {
+  border: none;
+
   .card-inner {
     border: none;
   }
 
   .card-footer {
     font-family: $font-family-monospace;
+    border-top: none;
   }
 }

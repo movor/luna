@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div id="filter" class="pb-5 pt-3 px-md-5">
+                    <div class="col-lg-8 offset-lg-2">
+                        <div id="filter" class="pb-5 pt-3">
                             <p class="h4 text-center pb-2">Filter by tags:</p>
 
                             @foreach(App\Models\Tag::ordered()->get() as $tag)
@@ -20,7 +20,7 @@
 
                                 @endphp
 
-                                <span class="badge {{ $badgeColor }} ml-1 cursor-pointer"
+                                <span class="badge {{ $badgeColor }} cursor-pointer"
                                       data-name="{{ $tag->name }}"
                                 >
                                     {{ $tag->name }}
@@ -36,48 +36,46 @@
 
                     @foreach($articles as $article)
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-4 col-md-6">
                             <div class="card mb-4">
 
-                                {{-- Inner card --}}
+                                {{-- Card top --}}
 
                                 <div class="card card-inner text-white">
-                                    <img class="card-img-top" src="{{ asset($article->featured_image->source()) }}">
-                                    <div class="lead card-img-overlay d-flex align-items-end justify-content-end cursor-pointer"
-                                         data-link="{{ $article->getUrl() }}"
-                                    >
-                                        @foreach($article->tags as $tag)
-
-                                            <a href="{{ url("article?tag=$tag->name") }}"
-                                               class="badge badge-primary ml-1"
-                                            >
-                                                {{ $tag->name }}
-                                            </a>
-
-                                        @endforeach
-
-                                    </div>
+                                    <a href="{{ $article->getUrl() }}">
+                                        <img class="card-img-top" src="{{ asset($article->featured_image->lg()) }}">
+                                    </a>
                                 </div>
 
-                                {{-- /Inner card --}}
+                                {{-- /Card top --}}
+
+                                {{-- Card body --}}
 
                                 <a href="{{ $article->getUrl() }}">
                                     <div class="card-body">
-                                        <h2 class="card-title text-truncate-2">{{ $article->title }}</h2>
-                                        <p class="card-text text-justify text-truncate-3">
+                                        <h2 class="h4 card-title text-truncate-2">{{ $article->title }}</h2>
+                                        <p class="card-text text-truncate-3">
                                             {{ $article->summary }}
                                         </p>
-                                        <span class="btn btn-primary">Read More</span>
+                                        <span class="btn btn-outline-primary">Read More</span>
                                     </div>
                                 </a>
+
+                                {{-- /Card body --}}
+
+                                {{-- Card footer --}}
+
                                 <div class="card-footer text-muted">
-                                    <a href="/about">{{ $article->user->name }}</a>
+                                    <a class="h5" href="{{ url('/about') }}">{{ $article->user->name }}</a>
                                     <span class="float-right">
                                         <small class="align-text-bottom">
                                             {{ $article->published_at->format('d F, Y') }}
                                         </small>
                                     </span>
                                 </div>
+
+                                {{-- /Card footer --}}
+
                             </div>
                         </div>
 
@@ -93,11 +91,6 @@
 @section('scripts-bottom')
 
     <script>
-
-        // Make card image a link
-        $('.card-img-overlay').click(function (event) {
-            window.location = $(event.target).data('link');
-        });
 
         // Filter by url query tags
         $('#filter .badge').click(function (event) {

@@ -24,20 +24,16 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card mb-5">
                             <div class="card-header">
-                                <img class="rounded mb-4" src="img/placeholders/john_doe.jpg?width=120&height=120">
-                                <h2 class="text-uppercase">John Doe</h2>
+                                <h2 class="text-uppercase mt-3">John Doe</h2>
                                 <p>American Farmer</p>
                             </div>
-
                             <div class="card-body">
                                 <span class="separator d-block"></span>
                                 <h5 class="card-title">Farmer</h5>
-
                                 <p class="card-text">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Accusamus ad consequuntur illum itaque maiores minima nam nulla saepe tempora vel.
                                 </p>
-
                                 <p class="card-text">
                                     <span class="d-block">Primary technologies:</span>
                                     <span class="badge badge-primary">Lorem</span>
@@ -45,7 +41,6 @@
                                     <span class="badge badge-primary">Dolor</span>
                                     <span class="badge badge-primary">Sit</span>
                                 </p>
-
                                 <p class="card-text">
                                     <span class="d-block">Familiar technologies:</span>
                                     <span class="badge badge-secondary">Amet</span>
@@ -53,14 +48,9 @@
                                     <span class="badge badge-secondary">Adipisicing</span>
                                     <span class="badge badge-secondary">Elit</span>
                                 </p>
-
                                 <p class="card-text">
                                     Hobby: Accusamus
                                 </p>
-                            </div>
-
-                            <div class="card-footer">
-                                <div class="border-bottom"></div>
                             </div>
                         </div>
                     </div>

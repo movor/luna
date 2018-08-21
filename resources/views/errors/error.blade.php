@@ -12,7 +12,7 @@
                 <p class="lead">{{ $body or 'Hold tight, we are already working on it' }}</p>
             </div>
             <div class="bottom">
-                <a href="/" class="btn btn-lg btn-primary">Back Home</a>
+                <a href="{{ url('/') }}" class="btn btn-lg btn-outline-primary">Back Home</a>
             </div>
         </div>
     </div>

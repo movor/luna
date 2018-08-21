@@ -133,18 +133,18 @@ body {
     color: $body-color;
 
     .card-title {
-      height: 62px;
+      height: 47px;
 
-      @include media-breakpoint-down(md) {
-        min-height: auto;
+      @include media-breakpoint-down(sm) {
+        height: auto;
       }
     }
 
     .card-text {
       height: 78px;
 
-      @include media-breakpoint-down(md) {
-        min-height: auto;
+      @include media-breakpoint-down(sm) {
+        height: auto;
       }
     }
   }
