@@ -37,7 +37,7 @@
                     @foreach($articles as $article)
 
                         <div class="col-lg-4 col-md-6">
-                            <div class="card mb-4">
+                            <div class="card article-card mb-4">
 
                                 {{-- Card top --}}
 

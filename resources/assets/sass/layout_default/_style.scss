@@ -1,15 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Global
-|--------------------------------------------------------------------------
-*/
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-/*
-|--------------------------------------------------------------------------
 | Body
 |--------------------------------------------------------------------------
 */
@@ -24,6 +14,42 @@ body {
   position: relative;
   margin: 0;
   padding-bottom: 183px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Global
+|--------------------------------------------------------------------------
+*/
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+//
+// Article cards
+//
+
+.card.article-card {
+  .card-body {
+    color: $body-color;
+
+    .card-title {
+      height: 47px;
+
+      @include media-breakpoint-down(sm) {
+        height: auto;
+      }
+    }
+
+    .card-text {
+      height: 78px;
+
+      @include media-breakpoint-down(sm) {
+        height: auto;
+      }
+    }
+  }
 }
 
 /*
@@ -121,33 +147,13 @@ body {
 }
 
 //
-// Article Index
+// Article index
 //
 
 .article-index {
   #filter {
     .badge.badge-secondary {
       background-color: $gray-400;
-    }
-  }
-
-  .card-body {
-    color: $body-color;
-
-    .card-title {
-      height: 47px;
-
-      @include media-breakpoint-down(sm) {
-        height: auto;
-      }
-    }
-
-    .card-text {
-      height: 78px;
-
-      @include media-breakpoint-down(sm) {
-        height: auto;
-      }
     }
   }
 }

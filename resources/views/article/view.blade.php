@@ -18,24 +18,30 @@
                     <div>
                         Tags:
 
+                        @php($primaryTag = $article->getPrimaryTag())
+
                         @foreach($article->tags as $tag)
 
-                            <a href="{{ url("article?tag=$tag->name") }}" class="badge badge-primary">{{ $tag->name }}</a>
+                            <a href="{{ url("article?tag=$tag->name") }}"
+                               class="badge {{ $tag->id == optional($primaryTag)->id ? 'badge-danger' : 'badge-primary' }}"
+                            >
+                                {{ $tag->name }}
+                            </a>
 
                         @endforeach
 
                     </div>
                 </div>
 
-                {{-- Image, summary and body --}}
+                {{-- Summary and body --}}
 
-                <img class="img-fluid rounded" src="{{ asset($article->featured_image->xl()) }}" alt="">
+                <div class="">{{ $article->summary }}</div>
 
-                <div class="alert alert-lite">{{ $article->summary }}</div>
+                <hr class="my-4">
 
                 <div class="post-body text-justify">{!! $article->body_html !!}</div>
 
-                {{-- /Image, summary and body --}}
+                {{-- /Summary and body --}}
 
             </div>
             <div class="col-lg-3 col-md-12">
@@ -76,9 +82,24 @@
                             <div class="col-sm-6 col-md-4 col-lg-12">
                                 <a href="{{ url('article/' . $featuredArticle->slug) }}">
                                     <div class="card mb-4">
-                                        <img class="card-img-top" src="{{ asset($featuredArticle->featured_image->lg()) }}">
                                         <div class="card-body">
                                             <p class="card-title font-weight-bold mb-0 text-muted">{{ $featuredArticle->title }}</p>
+                                        </div>
+
+                                        <div class="card-footer">
+
+                                            @php($primaryTag = $featuredArticle->getPrimaryTag())
+
+                                            @foreach($featuredArticle->tags as $tag)
+
+                                                <a href="{{ url("article?tag=$tag->name") }}"
+                                                   class="badge {{ $tag->id == optional($primaryTag)->id ? 'badge-danger' : 'badge-primary' }}"
+                                                >
+                                                    {{ $tag->name }}
+                                                </a>
+
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </a>
@@ -94,23 +115,6 @@
 
             </div>
         </div>
-    </div>
-
-    <div class="container">
-        <hr class="mt-5">
-
-        {{-- Load Disqs Vue component if post is commentable --}}
-        @if($article->commentable)
-
-            <app-disqus
-                    website="{{ env('DISQS_WEBSITE') }}"
-                    title="{{ env('APP_NAME') }}"
-                    identifier="{{ '/article/' . $article->id }}"
-                    url="{{ url('/article/' . $article->id) }}"
-            ></app-disqus>
-
-        @endif
-
     </div>
 
 @endsection
