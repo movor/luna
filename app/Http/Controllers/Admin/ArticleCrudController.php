@@ -137,18 +137,19 @@ class ArticleCrudController extends CrudController
                 'tab' => 'Basics'
             ]);
 
+        //
+        // Preselect primary tag
+        //
+
         $selected = app('request')->old('primary_tag');
         $options = Tag::ordered()->pluck('name', 'id')->toArray() + [null => '-'];
 
-        // Preselect primary tag if it's set
-        $segment = \Request::segment(3);
-        if (is_numeric($segment) && Tag::exists()) {
-            $articleId = $segment;
-            $article = Article::find($articleId);
-
-            if ($primaryTag = $article->getPrimaryTag()) {
-                $selected = $primaryTag->id;
-            }
+        if ($selected === null
+            && is_numeric($segment = \Request::segment(3))
+            && ($article = Article::find($segment))
+            && Tag::exists()
+            && ($primaryTag = $article->getPrimaryTag())) {
+            $selected = $primaryTag->id;
         }
 
         $this->crud->addField([
