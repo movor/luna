@@ -33,15 +33,17 @@
                     </div>
                 </div>
 
-                {{-- Summary and body --}}
+                {{-- Image, summary and body --}}
 
-                <div class="">{{ $article->summary }}</div>
+                <img class="img-fluid rounded" src="{{ asset($article->featured_image->xl()) }}" alt="">
+
+                <div class="mt-4 lead text-secondary">{{ $article->summary }}</div>
 
                 <hr class="my-4">
 
                 <div class="post-body text-justify">{!! $article->body_html !!}</div>
 
-                {{-- /Summary and body --}}
+                {{-- /Image, summary and body --}}
 
             </div>
             <div class="col-lg-3 col-md-12">

@@ -24,15 +24,11 @@ class ArticleController extends Controller
                     $query->where('name', $filterTag);
                 });
             }
-
-            $title = "Tags: " . str_replace('~', ', ', $queryTag);
-        } else {
-            $title = "All Articles";
         }
 
         $articles = $query->get();
 
-        SEOMeta::setTitle($title)
+        SEOMeta::setTitle('Blog Posts')
             ->setDescription('Checkout out our awesome articles. We wrote them with soul!')
             ->setKeywords(Tag::pluck('name')->toArray());
 
