@@ -12,7 +12,7 @@ class ArticleCrudController extends CrudController
     public function setup()
     {
         $this->crud->setModel(Article::class);
-        $this->crud->orderBy('created_at', 'desc');
+        $this->crud->orderBy('updated_at', 'desc');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/article');
 
         // Filter: user
