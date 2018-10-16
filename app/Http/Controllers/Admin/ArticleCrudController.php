@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Admin;
+<?php
+
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Article;
 use App\Models\Tag;
@@ -230,7 +232,8 @@ class ArticleCrudController extends CrudController
             'title' => 'required|min:5|max:128',
             'summary' => 'required|min:30|max:255',
             'slug' => 'required|unique:articles,slug',
-            'body' => 'required'
+            'body' => 'required',
+            'featured_image' => 'nullable|mimes:jpeg,jpg,png',
         ]);
 
         $this->handleTags($request);
@@ -255,7 +258,8 @@ class ArticleCrudController extends CrudController
                 'required',
                 Rule::unique('articles', 'slug')->ignore(\Request::segment(3))
             ],
-            'body' => 'required'
+            'body' => 'required',
+            'featured_image' => 'nullable|mimes:jpeg,jpg,png',
         ]);
 
         $this->handleTags($request);
@@ -315,9 +319,10 @@ class ArticleCrudController extends CrudController
         $imageBase64 = object_get($request, 'featured_image_raw');
 
         if ($imageBase64 && starts_with($imageBase64, 'data:image')) {
-            $request->request->remove('featured_image_raw');
             $request->request->set('featured_image', $imageBase64);
         }
+
+        $request->request->remove('featured_image_raw');
     }
 }
 
