@@ -116,7 +116,7 @@ abstract class ImageCastBase extends CustomCastBase
         // Check if image field is changed and if callback is defined
         if ($this->model->isDirty($this->attribute)) {
             // Delete old file
-            $this->deleteFile();
+            $this->deleteImages();
 
             // Callback to save file on model updating
             if (is_callable($this->storeImagesCallback)) {
