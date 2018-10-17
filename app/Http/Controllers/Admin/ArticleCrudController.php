@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\User;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class ArticleCrudController extends CrudController
+class ArticleCrudController extends BaseCrudController
 {
+    protected $imageFields = ['featured_image'];
+
     public function setup()
     {
         $this->crud->setModel(Article::class);
@@ -237,8 +238,6 @@ class ArticleCrudController extends CrudController
         ]);
 
         $this->handleTags($request);
-        $this->handleEmptyImages($request);
-        $this->handleCustomCastableFeaturedImage($request);
 
         return parent::storeCrud($request);
     }
@@ -263,8 +262,6 @@ class ArticleCrudController extends CrudController
         ]);
 
         $this->handleTags($request);
-        $this->handleEmptyImages($request);
-        $this->handleCustomCastableFeaturedImage($request);
 
         return parent::updateCrud();
     }
@@ -292,37 +289,6 @@ class ArticleCrudController extends CrudController
         }
 
         $request->request->set('tags', $tags);
-    }
-
-    /**
-     * If image is not set for upload, request attribute
-     * will not contain base 64 (data:image) prefix
-     * so remove value from request to avoid errors
-     *
-     * @param Request $request
-     */
-    protected function handleEmptyImages(Request $request)
-    {
-        $imageAttributes = [
-            'featured_image',
-        ];
-
-        foreach ($imageAttributes as $attribute) {
-            if (strpos($request->get($attribute), 'data:image') === false) {
-                $request->request->remove($attribute);
-            }
-        }
-    }
-
-    protected function handleCustomCastableFeaturedImage(Request $request)
-    {
-        $imageBase64 = object_get($request, 'featured_image_raw');
-
-        if ($imageBase64 && starts_with($imageBase64, 'data:image')) {
-            $request->request->set('featured_image', $imageBase64);
-        }
-
-        $request->request->remove('featured_image_raw');
     }
 }
 
