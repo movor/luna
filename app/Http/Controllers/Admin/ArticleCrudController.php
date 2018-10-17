@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\User;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class ArticleCrudController extends BaseCrudController
+class ArticleCrudController extends CrudController
 {
-    protected $imageFields = ['featured_image'];
-
     public function setup()
     {
         $this->crud->setModel(Article::class);
@@ -179,7 +178,7 @@ class ArticleCrudController extends BaseCrudController
                 'tab' => 'Other'
             ])
             ->addField([
-                'name' => 'featured_image_raw',
+                'name' => 'featured_image',
                 'label' => 'Featured Image',
                 'type' => 'image',
                 'crop' => 'true',
@@ -234,7 +233,6 @@ class ArticleCrudController extends BaseCrudController
             'summary' => 'required|min:30|max:255',
             'slug' => 'required|unique:articles,slug',
             'body' => 'required',
-            'featured_image' => 'nullable|mimes:jpeg,jpg,png',
         ]);
 
         $this->handleTags($request);
@@ -258,7 +256,6 @@ class ArticleCrudController extends BaseCrudController
                 Rule::unique('articles', 'slug')->ignore(\Request::segment(3))
             ],
             'body' => 'required',
-            'featured_image' => 'nullable|mimes:jpeg,jpg,png',
         ]);
 
         $this->handleTags($request);

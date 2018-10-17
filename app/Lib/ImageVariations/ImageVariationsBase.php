@@ -79,4 +79,15 @@ abstract class ImageVariationsBase
     {
         return $this->relPath;
     }
+
+    /**
+     * In case something someone tries to echo this object,
+     * return source image path
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->relPath;
+    }
 }

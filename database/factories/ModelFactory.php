@@ -46,7 +46,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'featured' => chance(20),
-        'featured_image' => chance(10, function () {
+        'featured_image' => chance(90, function () {
             return fetchImage();
         }),
         'commentable' => chance(70),
