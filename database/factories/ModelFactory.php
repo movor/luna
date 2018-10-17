@@ -46,11 +46,8 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'featured' => chance(20),
-        'featured_image' => chance(90, function () {
-            $image = file_get_contents("https://picsum.photos/1280/720?random");
-            $base64Image = base64_encode($image);
-
-            return 'data:image/jpg;base64,' . $base64Image;
+        'featured_image' => chance(10, function () {
+            return fetchImage();
         }),
         'commentable' => chance(70),
         'published_at' => chance(70, function () {
@@ -82,3 +79,25 @@ $factory->define(App\Models\Tag::class, function (Faker $faker) {
 $factory->define(App\Models\Newsletter::class, function (Faker $faker) {
     return ['email' => $faker->unique()->email];
 });
+
+//
+// Helpers
+//
+
+/**
+ * Fetch random image based on biggest size from image variations
+ *
+ * @return string
+ */
+function fetchImage()
+{
+    $size = explode('x', \App\Lib\ImageVariations\ImageVariations_16_9::getSizes()['xl']);
+
+    $width = $size[0];
+    $height = $size[1];
+
+    $image = file_get_contents("https://picsum.photos/$width/$height?random");
+    $base64Image = base64_encode($image);
+
+    return 'data:image/jpg;base64,' . $base64Image;
+}

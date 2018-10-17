@@ -2,7 +2,7 @@
 
 namespace App\Models\CustomCasts;
 
-use App\Lib\ImageVariations\ImageVariations;
+use App\Lib\ImageVariations\ImageVariations_16_9;
 
 class ArticleFeaturedImageCast extends ImageCastBase
 {
@@ -11,8 +11,13 @@ class ArticleFeaturedImageCast extends ImageCastBase
         return 'uploads/article';
     }
 
+    public static function imageSizes()
+    {
+        return ImageVariations_16_9::getSizes();
+    }
+
     public function castAttribute($value)
     {
-        return new ImageVariations($value ?? 'uploads/placeholders/placeholder.png');
+        return new ImageVariations_16_9($value ?? 'uploads/placeholders/placeholder.png');
     }
 }

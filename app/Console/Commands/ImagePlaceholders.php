@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Lib\ImageVariations\ImageVariations_16_9;
+use File;
 use Illuminate\Console\Command;
 
 class ImagePlaceholders extends Command
@@ -27,16 +29,24 @@ class ImagePlaceholders extends Command
      */
     public function handle()
     {
-        // Placeholder images base url and storage path
-        $url = 'http://via.placeholder.com/';
         $storagePath = storage_path('app/uploads/placeholders/');
 
-        // Add one more size which will represent raw image (without size)
-        $imageResolutions = array_merge(config('custom_castable.image_sizes'), ['2560x1440']);
+        // Remove old placeholders if any
+        File::delete(File::glob($storagePath . '*.png'));
+
+        // Placeholder images base url and storage path
+        $url = 'http://via.placeholder.com/';
+
+        // Get unique resolutions
+        $imageResolutions = array_unique(array_merge(
+        // Add all image variations here
+            array_values(ImageVariations_16_9::getSizes()),
+            ['1920x1080']
+        ));
 
         foreach ($imageResolutions as $imageResolution) {
-            $filename = $imageResolution == '2560x1440'
-                ? 'placeholder.png'
+            $filename = $imageResolution == '1920x1080'
+                ? 'placeholder.png' // Original placeholder (without resize)
                 : 'placeholder-' . $imageResolution . '.png';
 
             file_put_contents($storagePath . $filename, file_get_contents($url . $imageResolution));

@@ -23,6 +23,13 @@ abstract class ImageCastBase extends CustomCastBase
     abstract static function storageDir();
 
     /**
+     * Image sizes e.g.: ['lg' => '1024x768', 'xl' => '1280x1024]
+     *
+     * @return array
+     */
+    abstract static function imageSizes();
+
+    /**
      * @param $value
      *
      * @return string String to be inserted into database
@@ -53,7 +60,7 @@ abstract class ImageCastBase extends CustomCastBase
                 $image->save(storage_path_app($newValue), $imageQuality);
 
                 // Store other image sizes
-                foreach (config('custom_castable.image_sizes') as $imageSize) {
+                foreach (static::imageSizes() as $imageSize) {
                     list($width, $height) = explode('x', $imageSize);
 
                     // Variant image name and path

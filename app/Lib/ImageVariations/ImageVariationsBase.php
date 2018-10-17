@@ -2,7 +2,7 @@
 
 namespace App\Lib\ImageVariations;
 
-class ImageVariations
+abstract class ImageVariationsBase
 {
     /**
      * Path to image relative to /storage/app (path + file name + extension)
@@ -33,6 +33,8 @@ class ImageVariations
      */
     protected $extension;
 
+    abstract public static function getSizes();
+
     public function __construct($imagePath)
     {
         $this->relPath = $imagePath;
@@ -55,7 +57,7 @@ class ImageVariations
      */
     public function __call($name, $arguments)
     {
-        $imageSizes = config('custom_castable.image_sizes');
+        $imageSizes = static::getSizes();
 
         // Check for corresponding image size variable
         if (!array_key_exists($name, $imageSizes)) {
