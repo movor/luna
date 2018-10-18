@@ -1,0 +1,238 @@
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+*/
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    margin: 0;
+    padding-bottom: 183px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Global
+|--------------------------------------------------------------------------
+*/
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+//
+// Article cards
+//
+
+.card.article-card {
+    .card-body {
+        color: $body-color;
+
+        .card-title {
+            height: 47px;
+
+            @include media-breakpoint-down(sm) {
+                height: auto;
+            }
+        }
+
+        .card-text {
+            height: 78px;
+
+            @include media-breakpoint-down(sm) {
+                height: auto;
+            }
+        }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+*/
+
+.navbar {
+    border-bottom: 1px solid rgba($primary, .1);
+
+    .navbar-brand img {
+        height: 32px;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+*/
+
+//
+// Page About
+//
+
+.page-about {
+    h2.display-5 {
+        text-transform: uppercase;
+        font-weight: 900;
+    }
+
+    // Custom badges
+    .badge {
+        font-weight: 300;
+        font-size: .9rem;
+        padding: 0.35em 0.4em;
+        margin-bottom: 5px;
+
+        &.badge-secondary {
+            color: #FFF;
+            background-color: $gray-500;
+        }
+    }
+
+    .card {
+        border: none;
+
+        .card-header {
+            background: none;
+            border: none;
+
+            h2 {
+                margin-bottom: 0;
+                font-weight: 600;
+                font-size: $font-size-base;
+                letter-spacing: 1px;
+            }
+
+            p {
+                font-family: $font-family-monospace;
+                font-size: 1rem;
+                margin-bottom: 0;
+            }
+        }
+
+        // Custom cards
+        .card-body {
+            padding-top: 0;
+
+            .separator {
+                margin-bottom: 15px;
+                border-top: 3px solid $primary;
+                width: 40px;
+            }
+
+            .card-title {
+                font-weight: normal;
+                font-size: 1rem;
+            }
+
+            .card-text {
+                font-size: $font-size-base * .9;
+                font-weight: 300;
+            }
+        }
+
+        .card-footer {
+            padding-top: 0;
+            padding-bottom: 0;
+            background: none;
+            border: none;
+        }
+    }
+}
+
+//
+// Article index
+//
+
+.article-index {
+    #filter {
+        .badge.badge-secondary {
+            background-color: $gray-400;
+        }
+    }
+}
+
+//
+// Article view
+//
+
+.article-view {
+    .post-body {
+        h2, h3, h4, h5 {
+            padding-top: $paragraph-margin-bottom;
+            margin-bottom: $paragraph-margin-bottom;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        img {
+            margin-bottom: $paragraph-margin-bottom;
+            max-width: 100%;
+        }
+
+        table {
+            margin-bottom: $paragraph-margin-bottom;
+        }
+    }
+
+    .featured-posts .card-body {
+        @include media-breakpoint-between(sm, md) {
+            height: 119px;
+        }
+
+        .card-title {
+            @include media-breakpoint-between(sm, md) {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+        }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+*/
+
+footer {
+    height: 183px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    img.movor-icon {
+        height: 80px;
+    }
+
+    a.movor-with-love {
+        display: block;
+        width: 155px;
+        margin: 0 auto;
+
+        small {
+            font-size: 70%;
+        }
+
+        i.fa-heart {
+            color: $red;
+            margin: 0 3px;
+        }
+
+        img {
+            height: 12px;
+            margin-left: 3px;
+        }
+    }
+}
