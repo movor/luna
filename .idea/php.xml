@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+    <component name="PhpIncludePathManager">
+        <include_path>
+            <path value="$PROJECT_DIR$/vendor/laravel/passport/src" />
+            <path value="$PROJECT_DIR$/vendor/flugger/laravel-responder/src" />
+            <path value="$PROJECT_DIR$/vendor/league/fractal/src/" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/app" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/ModelTraits" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/PanelTraits" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudPanel.php" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudRouter.php" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudServiceProvider.php" />
+            <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudTrait.php" />
+            <path value="$PROJECT_DIR$/vendor/backpack/base/src/app" />
+            <path value="$PROJECT_DIR$/vendor/movor" />
+            <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
+            <path value="$PROJECT_DIR$/vendor/nesbot/carbon/src" />
+            <path value="$PROJECT_DIR$/vendor/fzaninotto/faker/src/Faker" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Auth" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Broadcasting" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Bus" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Cache" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Config" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Console" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Container" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Cookie" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Encryption" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Events" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Filesystem" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Hashing" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Http" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Log" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Mail" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Notifications" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Pagination" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Pipeline" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Queue" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Routing" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Session" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Arr.php" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Carbon.php" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Collection.php" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/MessageBag.php" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Validation" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/View" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Auth" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Bus" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Console" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Events" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Http" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Providers" />
+            <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Validation" />
+        </include_path>
+    </component>
+    <component name="PhpProjectSharedConfiguration" php_language_level="7" />
+    <component name="PhpUnit">
+        <phpunit_settings>
+            <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+        </phpunit_settings>
+    </component>
+</project>

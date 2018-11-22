@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/bootstrap" />
+      <excludeFolder url="file://$MODULE_DIR$/public/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/public/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/lang" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/views/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/logs" />
+      <excludeFolder url="file://$MODULE_DIR$/tests" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

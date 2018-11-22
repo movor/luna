@@ -15,7 +15,9 @@ ehthumbs.db
 # PhpStorm
 #
 
-/.idea
+.idea/*
+!.idea/php.xml
+!.idea/*.iml
 
 #
 # Project
