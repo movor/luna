@@ -46,9 +46,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
         'body' => file_get_contents('tests/Mockfiles/markdown.md'),
         'featured' => chance(20),
-        'featured_image' => chance(90, function () {
-            return fetchImage();
-        }),
+        'featured_image' => fetchImage(),
         'commentable' => chance(70),
         'published_at' => chance(70, function () {
             return \Carbon\Carbon::now();
@@ -91,13 +89,15 @@ $factory->define(App\Models\Newsletter::class, function (Faker $faker) {
  */
 function fetchImage()
 {
-    $size = explode('x', \App\Lib\ImageVariations\ImageVariations_16_9::getSizes()['xl']);
+    return chance(env('DEV_SEED_IMAGE_CHANCE', 50), function () {
+        $size = explode('x', \App\Lib\ImageVariations\ImageVariations_16_9::getSizes()['xl']);
 
-    $width = $size[0];
-    $height = $size[1];
+        $width = $size[0];
+        $height = $size[1];
 
-    $image = file_get_contents("https://picsum.photos/$width/$height?random");
-    $base64Image = base64_encode($image);
+        $image = file_get_contents("https://picsum.photos/$width/$height?random");
+        $base64Image = base64_encode($image);
 
-    return 'data:image/jpg;base64,' . $base64Image;
+        return 'data:image/jpg;base64,' . $base64Image;
+    });
 }
