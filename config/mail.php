@@ -1,7 +1,6 @@
 <?php
 
-return [
-
+$data = [
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
@@ -119,26 +118,24 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Global "To" Address
-    |--------------------------------------------------------------------------
-    |
-    | You may wish for all e-mails sent by your application to be sent to
-    | the same address. Here, you may specify a name and address that is
-    | used globally for all e-mails that are sent by your application.
-    | In other words if you don't use "to" when sending emails, those
-    | below will be used.
-    |
-    */
-
-    'to' => [
-        'address' => env('APP_ENV') == 'production'
-            ? env('APP_CONTACT_EMAIL')
-            : (env('APP_CONTACT_EMAIL_DEBUG') ?? env('APP_CONTACT_EMAIL')),
-
-        'name' => ''
-    ],
-
 ];
+
+/*
+|--------------------------------------------------------------------------
+| Global "To" Address
+|--------------------------------------------------------------------------
+|
+| You may wish for all e-mails sent by your application to be sent to the
+| same address, no matter "to" is set in the code.
+|
+*/
+
+if (env('MAIL_FORCE_RECIPIENT') !== null) {
+    $data['to'] = [
+        'address' => env('MAIL_FORCE_RECIPIENT'),
+        // Set recipient name to be email in case it's not defined in .env file
+        'name' => env('MAIL_FORCE_RECIPIENT_NAME', env('MAIL_FORCE_RECIPIENT'))
+    ];
+}
+
+return $data;
