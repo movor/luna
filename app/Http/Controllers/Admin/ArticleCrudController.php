@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\User;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class ArticleCrudController extends CrudController
+class ArticleCrudController extends BaseCrudController
 {
     public function setup()
     {

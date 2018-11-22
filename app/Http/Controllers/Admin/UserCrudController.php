@@ -1,15 +1,15 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
-class UserCrudController extends CrudController
+class UserCrudController extends BaseCrudController
 {
     public function setup()
     {
         $this->crud->setModel(User::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/user');
+        $this->crud->denyAccess(['delete', 'update']);
 
         // Columns
         $this->crud

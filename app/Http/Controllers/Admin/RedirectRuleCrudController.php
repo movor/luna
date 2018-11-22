@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\RedirectRule;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
-class RedirectRuleCrudController extends CrudController
+class RedirectRuleCrudController extends BaseCrudController
 {
     public function setup()
     {

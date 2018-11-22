@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
-use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Illuminate\Http\Request;
 
-class TagCrudController extends CrudController
+class TagCrudController extends BaseCrudController
 {
     public function setup()
     {
