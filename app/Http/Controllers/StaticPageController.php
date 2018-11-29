@@ -16,7 +16,7 @@ class StaticPageController extends Controller
     {
         // Custom validator for Google captcha
         \Validator::extend('recaptcha', function ($attribute, $value) {
-            $request = app('request');
+            $request = request();
             $client = new Client;
 
             $response = $client->request('POST', 'https://www.google.com/recaptcha/api/siteverify', [

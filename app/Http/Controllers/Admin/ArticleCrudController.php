@@ -142,7 +142,7 @@ class ArticleCrudController extends BaseCrudController
         // Preselect primary tag
         //
 
-        $selected = app('request')->old('primary_tag');
+        $selected = request()->old('primary_tag');
         $options = Tag::ordered()->pluck('name', 'id')->toArray() + [null => '-'];
 
         if ($selected === null
