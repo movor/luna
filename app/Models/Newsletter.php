@@ -11,5 +11,5 @@ class Newsletter extends Model
 
     protected $table = 'newsletter';
 
-    protected $fillable = ['email'];
+    protected $guarded = ['id'];
 }

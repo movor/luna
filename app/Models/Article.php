@@ -14,17 +14,7 @@ class Article extends Model
 {
     use CrudTrait, HasCustomCasts;
 
-    protected $fillable = [
-        'user_id',
-        'title',
-        'summary',
-        'body',
-        'slug',
-        'featured',
-        'featured_image',
-        'commentable',
-        'published_at'
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'featured_image' => ArticleFeaturedImageCast::class,

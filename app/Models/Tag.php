@@ -10,7 +10,7 @@ class Tag extends Model
 {
     use CrudTrait;
 
-    protected $fillable = ['name'];
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsToMany
