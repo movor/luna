@@ -10,6 +10,8 @@ Icon?
 .Trashes
 ehthumbs.db
 *.log
+*.log*
+*.swp
 
 #
 # PhpStorm
