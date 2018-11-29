@@ -37,10 +37,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
 
     return [
         // Give Movor user a better chance
-        'user_id' => chance(50, function () {
-            // Movor user id
-            return 1;
-        }, DB::table('users')->inRandomOrder()->pluck('id')->first()),
+        'user_id' => chance(50, 1, DB::table('users')->inRandomOrder()->pluck('id')->first()),
         'title' => title_case($title),
         'slug' => str_slug($title),
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
@@ -48,9 +45,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'featured' => chance(20),
         'featured_image' => fetchImage(),
         'commentable' => chance(70),
-        'published_at' => chance(70, function () {
-            return \Carbon\Carbon::now();
-        }),
+        'published_at' => chance(70, \Carbon\Carbon::now(), null),
     ];
 });
 
@@ -61,9 +56,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
 $factory->define(App\Models\Tag::class, function (Faker $faker) {
     $name = $faker->unique()->word;
 
-    $name = chance(30, function () use ($faker, $name) {
-        return $name . ' ' . $faker->unique()->word;
-    }, $name);
+    $name = chance(30, $name . ' ' . $faker->unique()->word, $name);
 
     return [
         'name' => str_slug($name),
@@ -99,5 +92,5 @@ function fetchImage()
         $base64Image = base64_encode($image);
 
         return 'data:image/jpg;base64,' . $base64Image;
-    });
+    }, null);
 }
