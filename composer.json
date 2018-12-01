@@ -7,8 +7,6 @@
     "require": {
         "php": ">=7.0.0",
         "artesaos/seotools": "^0.11.1",
-        "backpack/base": "^0.8.9",
-        "backpack/crud": "^3.3",
         "barryvdh/laravel-cors": "^0.11.2",
         "erusev/parsedown": "^1.6",
         "fideloper/proxy": "~3.3",
@@ -21,7 +19,6 @@
         "verschuur/laravel-robotstxt": "^1.1"
     },
     "require-dev": {
-        "backpack/generators": "^1.1",
         "barryvdh/laravel-ide-helper": "^2.4",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
