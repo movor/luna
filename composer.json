@@ -13,6 +13,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.7",
         "movor/laravel-custom-casts": "^0.2.1",
         "movor/laravel-db-redirector": "^0.3.1"
     },
