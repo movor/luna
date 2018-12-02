@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "artesaos/seotools": "^0.12.1",
         "barryvdh/laravel-cors": "^0.11.2",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.0",
