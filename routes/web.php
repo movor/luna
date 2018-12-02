@@ -11,11 +11,15 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 //
 // Static pages
 //
 
-Route::get('/', 'StaticPageController@index');
+Route::get('/home', 'StaticPageController@index');
 Route::get('/about', 'StaticPageController@about');
 Route::match(['post', 'get'], '/contact', 'StaticPageController@contact');
 Route::match(['post', 'get'], '/newsletter', 'StaticPageController@newsletter');
