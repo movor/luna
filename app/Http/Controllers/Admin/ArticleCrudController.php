@@ -284,6 +284,7 @@ class ArticleCrudController extends BaseCrudController
             $tags[$tag] = ['primary' => $tag == $newPrimaryTagId];
         }
 
+        $request->request->remove('primary_tag');
         $request->request->set('tags', $tags);
     }
 }

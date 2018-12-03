@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/public/packages" />
       <excludeFolder url="file://$MODULE_DIR$/public/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/resources/lang" />
-      <excludeFolder url="file://$MODULE_DIR$/resources/views/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/resources/views/vendor/elfinder" />
       <excludeFolder url="file://$MODULE_DIR$/storage/framework" />
       <excludeFolder url="file://$MODULE_DIR$/storage/logs" />
       <excludeFolder url="file://$MODULE_DIR$/tests" />
