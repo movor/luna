@@ -39,8 +39,8 @@ return [
     */
 
     'route' => [
-        'prefix'     => config('backpack.base.route_prefix', 'admin').'/elfinder',
-        'middleware' => ['web', config('backpack.base.middleware_key', 'admin')], //Set to null to disable middleware filter
+        'prefix' => config('backpack.base.route_prefix', 'admin') . '/elfinder',
+        'middleware' => ['web', 'admin'], // Set to null to disable middleware
     ],
 
     /*
@@ -64,7 +64,78 @@ return [
     |
     */
 
-    'roots' => null,
+    'roots' => [
+        [
+            'driver' => 'LocalFileSystem',
+            'path' => storage_path('app/uploads'),
+            'URL' => env('APP_URL') . '/uploads',
+            'attributes' => [
+                // Ignore .gitignore, .tmb and .quarantine
+                // ['pattern' => '/.(.gitignore|.tmb|.quarantine)/', 'hidden' => true],
+                // Prevent deletion of project folders
+                // ['pattern' => '!^/article$!', 'locked' => true, 'write' => false],
+            ],
+            'accessControl' => function ($attr, $path, $data, $volume, $isDir) {
+                $storagePath = storage_path('app/uploads') . '/';
+
+                //
+                // Detect directories
+                //
+
+                if ($isDir) {
+
+                    //
+                    // Read Only (lock and prevent write)
+                    //
+
+                    $lockDirs = [
+                        $storagePath . 'article',
+                    ];
+
+                    if (in_array($path, $lockDirs)) {
+                        if ($attr == 'locked') return true;
+                        if ($attr == 'write') return false;
+                    }
+
+                    //
+                    // Hide
+                    //
+
+                    $hideDirs = [
+                        $storagePath . '.tmb',
+                        $storagePath . '.quarantine',
+                    ];
+
+                    if ($attr == 'hidden' && in_array($path, $hideDirs)) {
+                        return true;
+                    }
+                }
+
+                //
+                // Detect files
+                //
+
+                else {
+
+                    //
+                    // Hide recursive
+                    //
+
+                    $hideFilesRecursive = [
+                        '.gitignore'
+                    ];
+
+                    if ($attr == 'hidden') {
+                        $pathInfo = pathinfo($path);
+
+                        if (in_array($pathInfo['basename'], $hideFilesRecursive)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +147,13 @@ return [
     |
     */
 
-    'options' => [],
-
+    'options' => [
+        'bind' => [
+            'upload.presave' => function (&$path, &$name, $tmpname, $context, $volume) {
+                // Sanitize uploaded file name
+                $pathInfo = pathinfo($name);
+                $name = str_slug($pathInfo['filename'], '_') . '.' . $pathInfo['extension'];
+            },
+        ],
+    ],
 ];
