@@ -12,27 +12,48 @@ mix.disableNotifications();
  |
  */
 
+//
+// Watch config
+//
+
+if (process.env.WATCH === 'all') {
+    mix.js('resources/js/vendor.js', 'public/js')
+        .js('resources/js/app.js', 'public/js')
+        .sass('resources/sass/vendor.scss', 'public/css')
+        .sass('resources/sass/layout_default.scss', 'public/css')
+        .sass('resources/sass/layout_error.scss', 'public/css')
+        .sourceMaps();
+}
 // Local: compile only app assets (without large vendor ones)
 // Used only for watching, to speed up building process
-if (process.env.NODE_ENV === 'local') {
+else if (process.env.WATCH === 'app') {
     mix.js('resources/js/app.js', 'public/js')
-        .sass('resources/scss/layout_default.scss', 'public/css')
-        .sass('resources/scss/layout_error.scss', 'public/css');
+        .sass('resources/sass/layout_default.scss', 'public/css')
+        .sass('resources/sass/layout_error.scss', 'public/css')
+        .sourceMaps();
 }
-// Development: Compile all assets, non minified, without file versions
-else if (process.env.NODE_ENV === 'development') {
-    mix.js('resources/js/vendor.js', 'public/js')
-        .js('resources/js/app.js', 'public/js')
-        .sass('resources/scss/vendor.scss', 'public/css')
-        .sass('resources/scss/layout_default.scss', 'public/css')
-        .sass('resources/scss/layout_error.scss', 'public/css');
-}
-// Production: compile all assets with versions, minified
-if (process.env.NODE_ENV == 'production') {
-    mix.js('resources/js/vendor.js', 'public/js')
-        .js('resources/js/app.js', 'public/js')
-        .sass('resources/scss/vendor.scss', 'public/css')
-        .sass('resources/scss/layout_default.scss', 'public/css')
-        .sass('resources/scss/layout_error.scss', 'public/css')
-        .version();
+
+//
+// Build config
+//
+
+if (typeof process.env.WATCH === 'undefined') {
+    // Development: Compile all assets, non minified, without file versions
+    if (process.env.NODE_ENV === 'development') {
+        mix.js('resources/js/vendor.js', 'public/js')
+            .js('resources/js/app.js', 'public/js')
+            .sass('resources/sass/vendor.scss', 'public/css')
+            .sass('resources/sass/layout_default.scss', 'public/css')
+            .sass('resources/sass/layout_error.scss', 'public/css')
+            .sourceMaps();
+    }
+    // Production: compile all assets with versions, minified
+    else if (process.env.NODE_ENV == 'production') {
+        mix.js('resources/js/vendor.js', 'public/js')
+            .js('resources/js/app.js', 'public/js')
+            .sass('resources/sass/vendor.scss', 'public/css')
+            .sass('resources/sass/layout_default.scss', 'public/css')
+            .sass('resources/sass/layout_error.scss', 'public/css')
+            .version();
+    }
 }
