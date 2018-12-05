@@ -172,7 +172,7 @@ class ArticleCrudController extends BaseCrudController
         $this->crud
             ->addField([
                 'label' => 'Slug',
-                'name' => 'name',
+                'name' => 'slug',
                 'attributes' => ['disabled' => 'disabled'],
                 'tab' => 'Other'
             ])
