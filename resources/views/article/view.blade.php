@@ -119,4 +119,20 @@
         </div>
     </div>
 
+    <div class="container">
+        <hr class="mt-5">
+
+        {{-- Load Disqs Vue component if article is commentable --}}
+        @if($article->commentable)
+
+            <app-disqus
+                website="{{ env('DISQS_WEBSITE') }}"
+                title="{{ env('APP_NAME') }}"
+                identifier="{{ '/article/' . $article->id }}"
+            ></app-disqus>
+
+        @endif
+
+    </div>
+
 @endsection
