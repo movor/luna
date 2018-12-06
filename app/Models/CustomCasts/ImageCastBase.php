@@ -4,7 +4,7 @@ namespace App\Models\CustomCasts;
 
 use File;
 use Image;
-use Movor\LaravelCustomCasts\CustomCastBase;
+use Vkovic\LaravelCustomCasts\CustomCastBase;
 
 abstract class ImageCastBase extends CustomCastBase
 {

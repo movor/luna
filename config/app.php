@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Movor\LaravelDbRedirector\Providers\DbRedirectorServiceProvider::class,
+        Vkovic\LaravelDbRedirector\Providers\DbRedirectorServiceProvider::class,
 
         /*
          * Application Service Providers...
