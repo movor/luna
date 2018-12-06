@@ -126,15 +126,17 @@ $data = [
 |--------------------------------------------------------------------------
 |
 | You may wish for all e-mails sent by your application to be sent to the
-| same address, no matter "to" is set in the code.
+| same address, no matter "to" is set in the code. Handy for development.
 |
 */
 
-if (env('MAIL_FORCE_RECIPIENT') !== null) {
+$mailForceRecipient = env('MAIL_FORCE_RECIPIENT');
+
+if ($mailForceRecipient !== null && $mailForceRecipient !== '') {
     $data['to'] = [
-        'address' => env('MAIL_FORCE_RECIPIENT'),
+        'address' => $mailForceRecipient,
         // Set recipient name to be email in case it's not defined in .env file
-        'name' => env('MAIL_FORCE_RECIPIENT_NAME', env('MAIL_FORCE_RECIPIENT'))
+        'name' => env('MAIL_FORCE_RECIPIENT_NAME', $mailForceRecipient)
     ];
 }
 

@@ -1,7 +1,7 @@
 {
-    "/js/vendor.js": "/js/vendor.js?id=be80291fba3984420fa0",
-    "/css/vendor.css": "/css/vendor.css?id=f8977a96f32acd2f43ff",
-    "/css/layout_default.css": "/css/layout_default.css?id=d9ff01ef1aacb6388239",
-    "/css/layout_error.css": "/css/layout_error.css?id=0d8ba2879ff85798a204",
-    "/js/app.js": "/js/app.js?id=9857f51480bb12828781"
+    "/js/vendor.js": "/js/vendor.js",
+    "/css/vendor.css": "/css/vendor.css",
+    "/css/layout_default.css": "/css/layout_default.css",
+    "/css/layout_error.css": "/css/layout_error.css",
+    "/js/app.js": "/js/app.js"
 }
