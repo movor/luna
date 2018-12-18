@@ -8,8 +8,9 @@
                 <div class="px-lg-3 mb-5">
                     <h1 class="mb-3">About Us</h1>
                     <p>
-                        Movor Uni is developed by Movor.
-                        You can find <strong><a href="https://movor.io" target="_blank">more about us here</a></strong>.
+                        Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing elit. Beatae, natus?
+                        Aperiam architecto beatae distinctio ipsum laborum magnam quod reprehenderit sapiente tempore
+                        vel.
                     </p>
                 </div>
                 <div class="px-lg-3 mb-5">
@@ -25,11 +26,11 @@
                         <div class="card mb-5">
                             <div class="card-header">
                                 <h2 class="text-uppercase mt-3">John Doe</h2>
-                                <p>American Farmer</p>
+                                <p>Developer</p>
                             </div>
                             <div class="card-body">
                                 <span class="separator d-block"></span>
-                                <h5 class="card-title">Farmer</h5>
+                                <h5 class="card-title">Backed web developer</h5>
                                 <p class="card-text">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Accusamus ad consequuntur illum itaque maiores minima nam nulla saepe tempora vel.

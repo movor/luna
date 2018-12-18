@@ -18,7 +18,7 @@
             <div class="col-lg-8 offset-lg-2">
                 <h1>Newsletter</h1>
                 <p class="mb-4 pb-4">
-                    Sign up for newsletter
+                    Lorem ipsum dolor sit amet, consectetur adipisicing.
                 </p>
 
                 {{ Form::open() }}

@@ -25,8 +25,8 @@
             <div class="col-lg-8 offset-lg-2">
                 <h1>Contact Us</h1>
                 <p class="mb-4 pb-4">
-                    Feel free to contact us any time using web form below! Don't hesitate,
-                    contact us about everything you want to know.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad, autem enim fuga labore libero
+                    perspiciatis repellat rerum voluptates? Dolorum eligendi nulla similique veniam?
                 </p>
 
                 @if($errors->has('g-recaptcha-response'))
