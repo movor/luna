@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "movor/luna",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Laravel framework packed with tools to get started fast",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "blog"
     ],
     "license": "MIT",
     "require": {
@@ -53,7 +54,7 @@
             "database/factories"
         ],
         "files": [
-          "app/Lib/helpers.php"
+            "app/Lib/helpers.php"
         ]
     },
     "autoload-dev": {
@@ -75,9 +76,9 @@
             "@php artisan key:generate --ansi"
         ],
         "post-update-cmd": [
-          "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-          "php artisan ide-helper:generate",
-          "php artisan ide-helper:meta"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
         ]
     }
 }

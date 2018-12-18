@@ -13,7 +13,6 @@
       <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudServiceProvider.php" />
       <path value="$PROJECT_DIR$/vendor/backpack/crud/src/CrudTrait.php" />
       <path value="$PROJECT_DIR$/vendor/backpack/base/src/app" />
-      <path value="$PROJECT_DIR$/vendor/movor" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
       <path value="$PROJECT_DIR$/vendor/nesbot/carbon/src" />
       <path value="$PROJECT_DIR$/vendor/fzaninotto/faker/src/Faker" />
@@ -58,6 +57,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Providers" />
       <path value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Validation" />
       <path value="$PROJECT_DIR$/vendor/symfony/class-loader" />
+      <path value="$PROJECT_DIR$/vendor/vkovic" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
