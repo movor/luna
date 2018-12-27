@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Events\ArticlePublishedEvent;
 use App\Models\CustomCasts\ArticleFeaturedImageCast;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Parsedown;
 use Vkovic\LaravelCustomCasts\HasCustomCasts;
 use Vkovic\LaravelDbRedirector\Models\RedirectRule;
-use Parsedown;
 
 class Article extends Model
 {
@@ -23,12 +24,23 @@ class Article extends Model
         'commentable' => 'boolean',
     ];
 
+    protected $dispatchesEvents = [
+        'published' => ArticlePublishedEvent::class
+    ];
+
     public static function boot()
     {
         parent::boot();
 
-        // Create 301 redirect when slug changes
+        static::saved(function (Article $article) {
+            // Fire custom event "published", when article is published
+            if ($article->isDirty('published_at')) {
+                $article->fireModelEvent('published');
+            }
+        });
+
         static::updated(function (Article $article) {
+            // Create 301 redirect when slug changes
             if ($article->isDirty('slug')) {
                 RedirectRule::create([
                     'origin' => 'article/' . $article->getOriginal('slug'),
@@ -37,11 +49,12 @@ class Article extends Model
             }
         });
 
-        // Remove redirects when post is deleted
         static::deleted(function (Article $article) {
+            // Remove redirects when post is deleted
             try {
                 RedirectRule::deleteChainedRecursively('article/' . $article->slug);
             } catch (\Exception $e) {
+                // ...
             }
         });
     }

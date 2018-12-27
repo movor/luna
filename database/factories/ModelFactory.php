@@ -41,7 +41,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'title' => title_case($title),
         'slug' => str_slug($title),
         'summary' => rtrim($faker->realText(rand(30, 255)), '.'),
-        'body' => file_get_contents('tests/Mockfiles/markdown.md'),
+        'body' => file_get_contents(base_path('tests/Mockfiles/markdown.md')),
         'featured' => chance(20),
         'featured_image' => fetchImage(),
         'commentable' => chance(70),
