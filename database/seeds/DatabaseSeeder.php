@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Article;
+use App\Models\CustomCasts\ArticleFeaturedImageCast;
+use App\Models\Newsletter;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,24 +21,25 @@ class DatabaseSeeder extends Seeder
         //
 
         // Generate one Movor Dev user and 3 random ones
-        factory(\App\Models\User::class)->create(['name' => 'Movor Dev', 'email' => 'movor@movor.io']);
-        factory(\App\Models\User::class, 3)->create();
+        factory(User::class)->create(['name' => 'Movor Dev', 'email' => 'movor@movor.io']);
+        factory(User::class, 3)->create();
 
         //
         // Tag
         //
 
-        factory(\App\Models\Tag::class, 10)->create();
+        factory(Tag::class, 10)->create();
 
         //
         // Article
         //
 
         // Delete all previous article featured images before seeding
-        $deletePattern = \App\Models\CustomCasts\ArticleFeaturedImageCast::storageDir();
+        $deletePattern = ArticleFeaturedImageCast::storageDir();
         File::delete(File::glob(storage_path_app($deletePattern) . '/*'));
 
-        factory(\App\Models\Article::class, 20)->create();
+        // Disable article model events and create some articles
+        factory(Article::class, 20)->withoutEvents()->create();
 
         //
         // Pivot: Articles and tags (each article should have exactly one primary tag)
@@ -55,6 +61,6 @@ class DatabaseSeeder extends Seeder
         // Newsletter
         //
 
-        factory(App\Models\Newsletter::class, 50)->create();
+        factory(Newsletter::class, 50)->create();
     }
 }
