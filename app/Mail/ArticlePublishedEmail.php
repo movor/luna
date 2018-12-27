@@ -19,7 +19,7 @@ class ArticlePublishedEmail extends GenericMail
         parent::__construct($title, $body);
 
         // Set subject and user address
-        $this->subject = 'Article Published';
+        $this->subject('Article Published');
         $this->to($article->user->email, $article->user->name);
 
         // And than mail custom things
