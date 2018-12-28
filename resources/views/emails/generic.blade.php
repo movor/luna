@@ -1,4 +1,5 @@
-{{-- This template must not have leading empty indents --}}
+{{-- !!! This template must not have leading empty indents !!! --}}
+{{-- @formatter:off --}}
 
 @component('mail::message')
 

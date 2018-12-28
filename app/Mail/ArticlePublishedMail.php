@@ -4,10 +4,12 @@ namespace App\Mail;
 
 use App\Models\Article;
 
-class ArticlePublishedEmail extends GenericMail
+class ArticlePublishedMail extends GenericMail
 {
     /**
      * Create a new message instance.
+     *
+     * @param Article $article
      *
      * @return void
      */

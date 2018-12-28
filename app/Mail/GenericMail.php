@@ -25,11 +25,12 @@ class GenericMail extends Mailable
      * Create a new message instance.
      * Body and title are mandatory
      *
+     * @param string $title
      * @param string $body
      *
      * @return void
      */
-    public function __construct($title = null, $body = null)
+    public function __construct($title, $body)
     {
         $this->title = $title;
         $this->body = $body;
@@ -62,7 +63,8 @@ class GenericMail extends Mailable
     }
 
     /**
-     * @param mixed $button
+     * @param mixed $text
+     * @param mixed $url
      */
     public function setButton($text, $url)
     {

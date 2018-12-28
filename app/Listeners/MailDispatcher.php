@@ -3,12 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\ArticlePublishedEvent;
-use App\Mail\ArticlePublishedEmail;
-use App\Mail\InformStation;
+use App\Mail\ArticlePublishedMail;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Mail;
 
-class EmailDispatcher
+class MailDispatcher
 {
     /**
      * Subscribe to multiple events
@@ -21,10 +20,13 @@ class EmailDispatcher
         $events->listen(ArticlePublishedEvent::class, self::class . '@emailUserAboutPublishedArticle');
     }
 
+    /**
+     * @param ArticlePublishedEvent $articlePublishedEvent
+     */
     public function emailUserAboutPublishedArticle(ArticlePublishedEvent $articlePublishedEvent)
     {
         $article = $articlePublishedEvent->article;
 
-        Mail::send(new ArticlePublishedEmail($article));
+        Mail::send(new ArticlePublishedMail($article));
     }
 }
