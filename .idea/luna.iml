@@ -3,6 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/bootstrap" />
+      <excludeFolder url="file://$MODULE_DIR$/public/css" />
+      <excludeFolder url="file://$MODULE_DIR$/public/js" />
       <excludeFolder url="file://$MODULE_DIR$/public/packages" />
       <excludeFolder url="file://$MODULE_DIR$/public/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/resources/lang" />
